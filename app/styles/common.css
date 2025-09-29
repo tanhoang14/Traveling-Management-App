@@ -1,0 +1,48 @@
+/* styles/forms.css */
+@import "tailwindcss";
+
+.p-datepicker {
+  @apply bg-gray-800 border border-gray-700 text-white;
+}
+
+.component-style {
+  @apply w-full p-3 rounded bg-gray-800 border border-gray-700 
+         focus:outline-none focus:ring-2 focus:ring-blue-500;
+}
+
+.green-button-style{
+  @apply w-full px-6 py-3 rounded-lg text-white font-semibold
+            bg-gradient-to-r from-green-400 via-emerald-600 to-teal-500
+            hover:from-teal-500 hover:via-emerald-600 hover:to-green-400
+            shadow-lg shadow-emerald-500/50
+            transition-all duration-500 ease-in-out
+            hover:scale-105;
+}
+
+.gradient-color-button-style{
+  @apply px-6 py-3 rounded-lg text-white font-semibold
+            bg-gradient-to-r from-cyan-500 via-blue-600 to-purple-600
+            hover:from-purple-600 hover:via-blue-600 hover:to-cyan-500
+            shadow-lg shadow-cyan-500/50
+            transition-all duration-500 ease-in-out
+            hover:scale-105
+}
+
+.google-content-bg{
+  @apply w-full px-6 py-3 rounded-lg text-white font-semibold
+            bg-gradient-to-r from-red-500 via-pink-600 to-purple-600
+            hover:from-purple-600 hover:via-pink-600 hover:to-red-500
+            shadow-lg shadow-red-500/50
+            transition-all duration-500 ease-in-out
+            hover:scale-105 flex items-center justify-center space-x-2
+}
+
+.add-trips-button{
+  @apply px-6 py-3 rounded-lg text-white font-semibold
+            bg-gradient-to-r from-cyan-500 via-blue-600 to-purple-600
+            hover:from-purple-600 hover:via-blue-600 hover:to-cyan-500
+            shadow-lg shadow-cyan-500/50
+            transition-all duration-500 ease-in-out
+            hover:scale-105
+}
+
