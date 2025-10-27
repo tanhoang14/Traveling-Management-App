@@ -7,6 +7,7 @@ import { ProgressSpinner } from "primereact/progressspinner";
 import { Avatar } from "primereact/avatar";
 import { Toast } from "primereact/toast";
 import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
+import { Trip, Traveler, Activity } from "@/app/types/activity"; 
 
 export default function TripOverview() {
   const router = useRouter();
@@ -15,16 +16,15 @@ export default function TripOverview() {
   const tripId = params?.id as string;
   const toast = useRef<Toast>(null);
 
-  const [trip, setTrip] = useState<any>(null);
+const [trip, setTrip] = useState<Trip | null>(null);
+const [activities, setActivities] = useState<
+  { day_number: number; firstActivityName: string; totalAmount: number; dayDate: string }[]
+>([]);
   const [loading, setLoading] = useState(true);
-  const [activities, setActivities] = useState<any[]>([]);
   const [newTravelerEmail, setNewTravelerEmail] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [addingTraveler, setAddingTraveler] = useState(false);
-  const [travelers, setTravelers] = useState<
-    { id: string; name: string; avatar: string }[]
-  >([]);
-
+  const [travelers, setTravelers] = useState<Traveler[]>([]);
     // Fetch trip
   useEffect(() => {
     const fetchTrip = async () => {
@@ -95,7 +95,7 @@ export default function TripOverview() {
           ? acts[0].activity_name
           : "No activities";
         const totalAmount = acts.reduce(
-          (sum: number, a: any) => sum + (a.cost || 0),
+          (sum: number, a: Activity) => sum + (a.cost || 0),
           0
         );
 

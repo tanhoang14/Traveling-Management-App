@@ -1,7 +1,7 @@
 // types/activity.ts
 
 export interface Activity {
-  activity_id:string,
+  activity_id: string;
   startTime: string;
   endTime: string;
   name: string;
@@ -22,11 +22,27 @@ export interface CategoryRow {
 
 // Initial state for a new activity
 export const initialActivityState: Activity = {
-  activity_id:"",
+  activity_id: "",
   startTime: "",
   endTime: "",
   name: "",
   cost: "",
   category_id: "",
-  user_id:"",
+  user_id: "",
 };
+
+export interface Trip {
+  trip_id: string;
+  location: string;
+  trip_start_date: string;
+  trip_end_date: string;
+  trip_duration: number;
+  budget: number;
+  note?: string;
+}
+
+export interface Traveler {
+  id: string;
+  name: string;
+  avatar: string;
+}
