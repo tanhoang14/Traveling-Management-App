@@ -1,20 +1,33 @@
 "use client";
 
-import { useSession } from "next-auth/react";
+import { useSupabaseSession } from "./components/SupabaseProvider";
 import MainPage from "./components/MainPage";
-import LoginPage from "./components/LoginPage";
-import { ProgressSpinner } from 'primereact/progressspinner';
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import { ProgressSpinner } from "primereact/progressspinner";
 
 export default function Home() {
-  const { data: session, status } = useSession();
+  const { session } = useSupabaseSession();
+  const router = useRouter();
 
-  if (status === "loading") {
+  useEffect(() => {
+    if (session === null) {
+      router.push("/login");
+    }
+  }, [session, router]);
+
+  if (session === undefined) {
     return (
       <main className="min-h-screen flex items-center justify-center bg-gray-900 text-white">
-        <ProgressSpinner style={{width: '50px', height: '50px'}} strokeWidth="8" fill="var(--surface-ground)" animationDuration=".5s" />
+        <ProgressSpinner
+          style={{ width: "50px", height: "50px" }}
+          strokeWidth="8"
+          fill="var(--surface-ground)"
+          animationDuration=".5s"
+        />
       </main>
     );
   }
 
-  return session ? <MainPage/> : <LoginPage/>;
+  return <MainPage />;
 }

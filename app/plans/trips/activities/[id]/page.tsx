@@ -1,0 +1,386 @@
+"use client";
+import { useEffect, useState, useMemo, useRef } from "react";
+import { useParams, useRouter } from "next/navigation";
+import { ArrowLeft, ArrowRight, Plus, Save, X, Edit2 } from "lucide-react";
+import { ProgressSpinner } from "primereact/progressspinner";
+import { Toast } from "primereact/toast";
+import { supabase } from "@/lib/supbabaseClient";
+import { useUserId, useUserName } from "../../../../../lib/userUtils";
+import ActivityModal from "../../../../components/ActivityModal";
+import { Activity, initialActivityState } from "../../../../types/activity";
+import { formatTime } from "@/lib/converterMethod";
+
+export default function ActivityPage() {
+  const router = useRouter();
+  const params = useParams();
+  const tripId = params?.id as string;
+
+  const [trip, setTrip] = useState<any>(null);
+  const [currentDay, setCurrentDay] = useState(1);
+  const [activities, setActivities] = useState<Record<number, Activity[]>>({});
+  const [loading, setLoading] = useState(true);
+
+  // Modal & Misc State
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editIndex, setEditIndex] = useState<number | null>(null);
+  const [categories, setCategories] = useState<Record<string, string>>({});
+  const [modalInitialData, setModalInitialData] =
+    useState<Activity>(initialActivityState);
+  const toast = useRef<Toast>(null);
+  const userId = useUserId();
+  const userName = useUserName();
+
+  // 🔹 Fetch Trip Info
+  useEffect(() => {
+    const fetchTrip = async () => {
+      setLoading(true);
+      const { data, error } = await supabase
+        .from("trips")
+        .select("*")
+        .eq("trip_id", tripId)
+        .single();
+
+      if (error) {
+        console.error("Error fetching trip:", error.message);
+        toast.current?.show({
+          severity: "error",
+          summary: "Error",
+          detail: "Failed to load trip details.",
+          life: 3000,
+        });
+      } else {
+        setTrip(data);
+        const days = data.trip_duration || 1;
+        const init: Record<number, Activity[]> = {};
+        for (let i = 1; i <= days; i++) init[i] = [];
+        setActivities(init);
+      }
+      setLoading(false);
+    };
+
+    if (tripId) fetchTrip();
+  }, [tripId]);
+
+  // 🔹 Fetch Categories
+  useEffect(() => {
+    const fetchCategories = async () => {
+      const { data, error } = await supabase
+        .from("activity_category")
+        .select("activity_category_id, category_name");
+
+      if (error)
+        return console.error("Error fetching categories:", error.message);
+
+      const map: Record<string, string> = {};
+      data.forEach((c: any) => (map[c.activity_category_id] = c.category_name));
+      setCategories(map);
+    };
+    fetchCategories();
+  }, []);
+
+  // 🔹 Fetch Activities Grouped by Day
+  useEffect(() => {
+    const fetchActivities = async () => {
+      if (!tripId || !trip) return;
+
+      const { data, error } = await supabase
+        .from("days")
+        .select("day_id, day_number, activities(*)")
+        .eq("trip_id", tripId);
+
+      if (error) {
+        console.error("Error fetching activities:", error.message);
+        toast.current?.show({
+          severity: "error",
+          summary: "Error",
+          detail: "Failed to load activities.",
+          life: 3000,
+        });
+        return;
+      }
+
+      const grouped: Record<number, Activity[]> = {};
+      for (let i = 1; i <= (trip.trip_duration || 1); i++) grouped[i] = [];
+
+      data.forEach((day) => {
+        const list = day.activities || [];
+        if (Array.isArray(list)) {
+          grouped[day.day_number] = list.map((a) => ({
+            activity_id: a.activity_id,
+            name: a.activity_name,
+            startTime: a.start_time,
+            endTime: a.end_time,
+            cost: a.cost,
+            category_id: a.activity_category_id,
+            user_id: a.user_id,
+          }));
+        }
+      });
+
+      setActivities(grouped);
+    };
+
+    fetchActivities();
+  }, [tripId, trip]);
+
+  const totalDays = trip?.trip_duration || 1;
+
+  // --- Modal Handlers ---
+  const handleOpenAddModal = () => {
+    setModalInitialData(initialActivityState);
+    setIsEditing(false);
+    setEditIndex(null);
+    setIsModalOpen(true);
+  };
+
+  const handleOpenEditModal = (index: number) => {
+    const act = activities[currentDay]?.[index];
+    if (act) {
+      setModalInitialData({ ...act, cost: act.cost || "" });
+      setIsEditing(true);
+      setEditIndex(index);
+      setIsModalOpen(true);
+    }
+  };
+
+  const handleCloseModal = () => setIsModalOpen(false);
+
+  // --- SAVE / ADD ACTIVITY ---
+  const handleModalSubmit = async (data: Activity) => {
+    try {
+      const formatted: Activity = {
+        ...data,
+        cost: data.cost === "" ? 0 : Number(data.cost),
+      };
+
+      // 1️⃣ Ensure this day exists in the "days" table
+      let { data: dayRow, error: fetchErr } = await supabase
+        .from("days")
+        .select("day_id")
+        .eq("trip_id", tripId)
+        .eq("day_number", currentDay)
+        .single();
+
+      // if day doesn't exist, create it
+      if (fetchErr && fetchErr.code === "PGRST116") {
+        const { data: insertedDay, error: insertDayErr } = await supabase
+          .from("days")
+          .insert([
+            { trip_id: tripId, day_number: currentDay, user_id: userId },
+          ])
+          .select("day_id")
+          .single();
+
+        if (insertDayErr) throw insertDayErr;
+        dayRow = insertedDay;
+      } else if (fetchErr) {
+        throw fetchErr;
+      }
+
+      // 2️⃣ Insert activity linked to that day
+      const { data: newActivity, error: actErr } = await supabase
+        .from("activities")
+        .insert([
+          {
+            created_by: userName,
+            day_id: dayRow?.day_id,
+            start_time: formatted.startTime,
+            end_time: formatted.endTime,
+            activity_name: formatted.name,
+            cost: formatted.cost,
+            activity_category_id: formatted.category_id,
+            user_id: userId,
+          },
+        ])
+        .select("activity_id")
+        .single();
+
+      if (actErr) throw actErr;
+
+      formatted.activity_id = newActivity.activity_id;
+
+      // 3️⃣ Update local state
+      setActivities((prev) => ({
+        ...prev,
+        [currentDay]: [...(prev[currentDay] || []), formatted],
+      }));
+
+      toast.current?.show({
+        severity: "success",
+        summary: "Activity Added",
+        detail: "Activity successfully saved!",
+        life: 3000,
+      });
+
+      setIsModalOpen(false);
+    } catch (err: any) {
+      console.error("Error saving activity:", err.message);
+      toast.current?.show({
+        severity: "error",
+        summary: "Save Failed",
+        detail: err.message || "Could not save activity.",
+        life: 4000,
+      });
+    }
+  };
+
+  // --- DELETE ACTIVITY ---
+  const handleRemoveActivity = async (day: number, index: number) => {
+    try {
+      const act = activities[day]?.[index];
+      if (!act) return;
+
+      const { error } = await supabase
+        .from("activities")
+        .delete()
+        .eq("activity_id", act.activity_id);
+      if (error) throw error;
+
+      setActivities((prev) => ({
+        ...prev,
+        [day]: prev[day].filter((_, i) => i !== index),
+      }));
+
+      toast.current?.show({
+        severity: "success",
+        summary: "Activity Removed",
+        detail: "Activity successfully deleted!",
+        life: 3000,
+      });
+    } catch (err: any) {
+      console.error("Error deleting activity:", err.message);
+      toast.current?.show({
+        severity: "error",
+        summary: "Delete Failed",
+        detail: err.message || "Could not delete activity.",
+        life: 4000,
+      });
+    }
+  };
+
+  // --- Sort Activities by Start Time ---
+  const sortedActivities = useMemo(() => {
+    const list = activities[currentDay] || [];
+    return [...list].sort((a, b) =>
+      a.startTime < b.startTime ? -1 : a.startTime > b.startTime ? 1 : 0
+    );
+  }, [activities, currentDay]);
+
+  if (loading || !trip) {
+    return (
+      <div className="flex justify-center items-center min-h-screen bg-gray-900 text-white">
+        <ProgressSpinner style={{ width: "50px", height: "50px" }} />
+      </div>
+    );
+  }
+
+  return (
+    <main className="min-h-screen bg-gray-900 text-white p-6">
+      <Toast ref={toast} position="top-right" />
+
+      {/* Header */}
+      <div className="flex justify-between items-center mb-6">
+        <button
+          onClick={() => router.push(`/plans/${tripId}`)}
+          className="flex items-center gap-2 p-2 bg-gray-800 hover:bg-gray-700 rounded-lg"
+        >
+          <ArrowLeft className="w-5 h-5" />
+        </button>
+        <h1 className="text-xl font-bold flex-1 text-center">
+          Activities for {trip.location}
+        </h1>
+      </div>
+
+      {/* Day Navigation */}
+      <div className="flex justify-center items-center gap-4 mb-8">
+        <button
+          onClick={() => setCurrentDay((p) => Math.max(1, p - 1))}
+          disabled={currentDay === 1}
+          className="p-2 bg-gray-800 rounded-full hover:bg-gray-700 disabled:opacity-50"
+        >
+          <ArrowLeft className="w-5 h-5" />
+        </button>
+        <div className="text-center">
+          <h2 className="text-2xl font-semibold mt-7">
+            Day {currentDay} of {totalDays}
+          </h2>
+          {trip?.trip_start_date && (
+            <p className="text-2xl font-semibold">
+              {new Date(
+                new Date(trip.trip_start_date).setDate(
+                  new Date(trip.trip_start_date).getDate() + (currentDay - 1)
+                )
+              ).toLocaleDateString()}
+            </p>
+          )}
+        </div>
+
+        <button
+          onClick={() => setCurrentDay((p) => Math.min(totalDays, p + 1))}
+          disabled={currentDay === totalDays}
+          className="p-2 bg-gray-800 rounded-full hover:bg-gray-700 disabled:opacity-50"
+        >
+          <ArrowRight className="w-5 h-5" />
+        </button>
+      </div>
+
+      {/* Activity Table */}
+      <div className="max-w-4xl mx-auto bg-gray-800 p-6 rounded-lg shadow-lg">
+        {sortedActivities.length ? (
+          sortedActivities.map((act, i) => (
+            <div
+              key={i}
+              className="grid grid-cols-[2fr_3fr_1.5fr_1.5fr_1fr] gap-4 py-2 border-b border-gray-700 items-center"
+            >
+              <p>
+                {formatTime(act.startTime)} - {formatTime(act.endTime)}
+              </p>
+              <p>{act.name}</p>
+              <p>${Number(act.cost || 0).toFixed(2)}</p>
+              <p>{categories[act.category_id] || "N/A"}</p>
+              <div className="flex justify-end gap-2">
+                <button
+                  onClick={() => handleOpenEditModal(i)}
+                  className="p-2 bg-blue-600 hover:bg-blue-500 rounded-lg"
+                >
+                  <Edit2 className="w-4 h-4" />
+                </button>
+                <button
+                  onClick={() => handleRemoveActivity(currentDay, i)}
+                  className="p-2 bg-red-600 hover:bg-red-500 rounded-lg"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+          ))
+        ) : (
+          <p className="text-center text-gray-400">
+            No activities for this day.
+          </p>
+        )}
+
+        {/* Add Button */}
+        <div className="flex justify-end mt-4">
+          <button
+            onClick={handleOpenAddModal}
+            className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-500 rounded-lg"
+          >
+            <Plus className="w-4 h-4" /> Add Activity
+          </button>
+        </div>
+      </div>
+
+      {/* Modal */}
+      <ActivityModal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        activityData={modalInitialData}
+        onSubmit={handleModalSubmit}
+        isEdit={isEditing}
+        editIndex={editIndex}
+      />
+    </main>
+  );
+}

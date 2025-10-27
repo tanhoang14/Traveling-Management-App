@@ -22,13 +22,143 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font: normal .85em "PT Mono", arial, sans-serif;
+  font-size:25px;
 }
 
-.bg-animated {
-  background: linear-gradient(-45deg, #0f172a, #1e3a8a, #9333ea, #3b82f6);
-  background-size: 400% 400%;
-  animation: gradientShift 15s ease infinite;
+.paper {
+  font: normal .85em "PT Mono", arial, sans-serif;
+  margin: 2em auto 1em auto;
+  padding: 1.2em .5em .5em 2.5em;
+  position: relative;
+  color: #444;
+  border: 0px solid #d2d2d2;
+  background: #FDF3B6;
+  background: -webkit-gradient(linear, 0 0, 0 100%, from(#d9eaf3), color-stop(4%, #FDF3B6)) 0 4px;
+  background: -webkit-linear-gradient(top, #d9eaf3 0%, #FDF3B6 8%) 10px 4px;
+  background: -moz-linear-gradient(top, #d9eaf3 0%, #FDF3B6 8%) 0 4px;
+  background: -ms-linear-gradient(top, #d9eaf3 0%, #FDF3B6 8%) 0 4px;
+  background: -o-linear-gradient(top, #d9eaf3 0%, #FDF3B6 8%) 0 4px;
+  background: linear-gradient(top, #d9eaf3 0%, #FDF3B6 8%) 0 4px;
+  background-size: 100% 20px;
+  border-radius: 3px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
+}
+
+.paper::before {
+  content: '';
+  position: absolute;
+  width: 1px;
+  top: 0;
+  left: 2em;
+  bottom: 0;
+  border: 1px solid;
+  border-color: transparent #efe4e4;
+}
+
+.paper p {
+  margin: 0 0 2em 0;
+}
+
+.paper p:last-child {
+  margin: 0;
+}
+
+.paper ul {
+  margin: 0 2em 1em 0;
+  text-align: left;
+  position: relative;
+  float: left;
+  clear: both;
+}
+
+.paper h2 {
+  font-family: Covered By Your Grace;
+  font-size: 2em;
+  margin-left: -.1em;
+  border: 1px solid black;
+    border-right-width: 3px;
+  padding: .2em;
+  display: inline;
+  position: relative;
+  text-align: left;
+  float: left;
+}
+
+.paper ul li mark {
+  line-height: 2.25em;
+  letter-spacing: -.07em;
+  -ms-transform: rotate(-.4deg);
+  /* IE 9 */
+  
+  -webkit-transform: rotate(-.4deg);
+  /* Safari */
+  
+  transform: rotate(-.4deg);
+  padding: .5em 1em;
+}
+
+.paper ul {
+  padding: 1em;
+  margin: .6em 1em;
+  list-style-position: inside;
+}
+
+.paper li {
+  position: relative;
+  list-style-type: none;
+  text-indent: .66em;
+  list-style-position: inside;
+}
+
+.paper ul li:before {
+  content: ".";
+  display: block;
+  position: absolute;
+  height: 100%;
+  width: 10px;
+  margin-left: .25em;
+  z-index: 999;
+}
+
+.paper-pink{
+  background-color:#FFCBE3;
+}
+
+.paper-cyan{
+  background-color: #CCFFFE;
+}
+
+.paper-light-green{
+  background-color: #C8FFC7;
+}
+
+.paper-light-yellow{
+  background-color:#FDF3B6;
+}
+
+.paper ul li {
+  margin-left: -1em;
+}
+
+.paper ul li:nth-of-type(1) mark {
+  background-color: #FFFF80;
+}
+
+.paper ul li:nth-of-type(3) mark {
+  background-color: #CCFFFE;
+}
+
+.paper ul li:nth-of-type(2) mark {
+  background-color: #FFCBE3;
+}
+
+.paper ul li:nth-of-type(4) mark {
+  background-color: #C8FFC7;
+}
+
+.paper ul li:nth-of-type(5) mark {
+  background-color: #C3C4F0;
 }
 
 @keyframes gradientShift {
