@@ -3,7 +3,6 @@
 export interface Activity {
   activity_id: string;
   startTime: string;
-  endTime: string;
   name: string;
   cost: number | "";
   category_id: string;
@@ -24,7 +23,6 @@ export interface CategoryRow {
 export const initialActivityState: Activity = {
   activity_id: "",
   startTime: "",
-  endTime: "",
   name: "",
   cost: "",
   category_id: "",

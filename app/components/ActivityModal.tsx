@@ -62,9 +62,9 @@ export default function ActivityModal({
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!formData.startTime || !formData.endTime) {
+    if (!formData.startTime) {
       toast.current?.show({
-        detail: "Please enter both start and end times.",
+        detail: "Please enter start times.",
         life: 2500,
       });
       return;
@@ -92,7 +92,7 @@ export default function ActivityModal({
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-5">
 
-          {/* Start & End Time */}
+          {/* Start*/}
           <div className="flex gap-4">
             <div className="flex-1">
               <label className="block text-sm font-medium text-gray-300 mb-1">
@@ -104,29 +104,6 @@ export default function ActivityModal({
                   setFormData((prev) => ({
                     ...prev,
                     startTime: e.value
-                      ? e.value.toLocaleTimeString([], {
-                          hour: "2-digit",
-                          minute: "2-digit",
-                        })
-                      : "",
-                  }))
-                }
-                timeOnly
-                hourFormat="12"
-                className="w-full"
-              />
-            </div>
-
-            <div className="flex-1">
-              <label className="block text-sm font-medium text-gray-300 mb-1">
-                End Time
-              </label>
-              <Calendar
-                value={toDateFromTimeString(formData.endTime)}
-                onChange={(e) =>
-                  setFormData((prev) => ({
-                    ...prev,
-                    endTime: e.value
                       ? e.value.toLocaleTimeString([], {
                           hour: "2-digit",
                           minute: "2-digit",

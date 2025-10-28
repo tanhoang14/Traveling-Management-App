@@ -110,7 +110,6 @@ export default function ActivityPage() {
             activity_id: a.activity_id,
             name: a.activity_name,
             startTime: a.start_time,
-            endTime: a.end_time,
             cost: a.cost,
             category_id: a.activity_category_id,
             user_id: a.user_id,
@@ -186,7 +185,6 @@ export default function ActivityPage() {
             created_by: userName,
             day_id: dayRow?.day_id,
             start_time: formatted.startTime,
-            end_time: formatted.endTime,
             activity_name: formatted.name,
             cost: formatted.cost,
             activity_category_id: formatted.category_id,
@@ -346,16 +344,16 @@ export default function ActivityPage() {
     className="grid grid-cols-4 sm:grid-cols-4 border-b border-gray-700 py-4 text-sm sm:text-base font-semibold"
   >
     {/* Time */}
-    <div className="truncate">{formatTime(act.startTime)}</div>
+    <div>{formatTime(act.startTime)}</div>
 
     {/* Activity */}
-    <div className="truncate">{act.name}</div>
+    <div>{act.name}</div>
 
     {/* Cost */}
     <div className="text-green-400">${Number(act.cost || 0).toFixed(2)}</div>
 
     {/* Category + Actions underneath */}
-<div className="text-gray-300 truncate flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+<div className="text-gray-300 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
       <span>{categories[act.category_id] || "N/A"}</span>
       <div className="flex gap-2 sm:gap-3">
         <button
