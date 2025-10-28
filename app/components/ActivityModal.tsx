@@ -172,7 +172,9 @@ export default function ActivityModal({
                 className="w-full"
               />
             </div>
+          </div>
 
+          <div className="flex gap-4">
             <div className="flex-1">
               <label className="block text-sm font-medium text-gray-300 mb-1">
                 Category
@@ -184,7 +186,7 @@ export default function ActivityModal({
                 }
                 options={categoryOptions}
                 placeholder="Select Category"
-                className="w-full"
+                className="w-full text-base"
                 panelClassName="bg-gray-800 text-white border border-gray-700 shadow-lg"
               />
             </div>

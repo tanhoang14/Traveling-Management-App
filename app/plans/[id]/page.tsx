@@ -372,11 +372,11 @@ const [activities, setActivities] = useState<
           {/* Left Column */}
           <div className="flex flex-col gap-4">
             {/* Overview */}
-            <div className="text-sm border border-gray-600 rounded-lg p-4">
+            <div className="text-sm border border-gray-600 rounded-lg p-4 text-nowrap">
               <p className="font-semibold">
-                🗓️ Start: {new Date(trip.trip_start_date).toLocaleDateString()}
+                Start:{new Date(trip.trip_start_date).toLocaleDateString()}
               </p>
-              <p className="font-semibold">📅 End: {new Date(trip.trip_end_date).toLocaleDateString()}</p>
+              <p className="font-semibold">End:{new Date(trip.trip_end_date).toLocaleDateString()}</p>
               <p className="font-semibold">⏱ {trip.trip_duration} days</p>
               <p className="font-semibold">💰 Budget: ${trip.budget}</p>
             </div>
@@ -384,7 +384,7 @@ const [activities, setActivities] = useState<
             {/* Travelers */}
             <div className="border border-gray-600 rounded-lg p-4 flex-1">
               <div className="flex justify-between items-center mb-2">
-                <h3 className="font-semibold">Travelers</h3>
+                <h3 className="font-semibold text-base">Travelers</h3>
                 <button onClick={() => setIsModalOpen(true)}>
                   <Plus className="w-4 h-4 text-white" />
                 </button>
@@ -451,8 +451,17 @@ const [activities, setActivities] = useState<
 
           {/* Right Column: Activity */}
           <div className="border border-gray-600 rounded-lg p-4">
+            <h3 className="font-semibold text-base mb-2">Notes</h3>
+            <p className="text-sm text-gray-300">
+              {trip.note || "No notes yet."}
+            </p> 
+          </div>
+        </div>
+
+        {/* Notes */}
+        <div className="border border-gray-600 rounded-lg p-4 mt-4">
             <div className="flex justify-between items-center mb-2">
-              <h3 className="font-semibold">Activity</h3>
+              <h3 className="font-semibold text-base">Activity</h3>
               <button
                 onClick={() => router.push(`/plans/trips/activities/${tripId}`)}
               >
@@ -465,8 +474,8 @@ const [activities, setActivities] = useState<
                   {activities.map((act) => (
                     <li key={act.day_number} className="flex justify-between">
                       <span>
-                        <span className="font-medium text-white font-semibold">
-                          Day {act.day_number} ({act.dayDate}):
+                        <span className="font-medium text-white font-semibold text-nowrap">
+                          Day {act.day_number} ({act.dayDate})  
                         </span>{" "}
                         {act.firstActivityName}
                       </span>
@@ -482,16 +491,7 @@ const [activities, setActivities] = useState<
               ) : (
                 <p className="text-sm text-gray-400">No activities yet.</p>
               )}
-            </div>
-          </div>
-        </div>
-
-        {/* Notes */}
-        <div className="border border-gray-600 rounded-lg p-4 mt-4">
-          <h3 className="font-semibold mb-2">Notes</h3>
-          <p className="text-sm text-gray-300">
-            {trip.note || "No notes yet."}
-          </p>
+            </div>  
         </div>
       </div>
     </main>
