@@ -32,6 +32,7 @@ export default function MainPage() {
       if (!existingUser) {
         // 2️⃣ Insert new user if it doesn't exist
         const { error: insertError } = await supabase.from("users").insert({
+          user_id: session.user.id,
           email,
           name: session.user.user_metadata.full_name,
           image_url:
