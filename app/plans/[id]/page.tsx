@@ -404,7 +404,8 @@ export default function TripOverview() {
                       className="flex items-center justify-between gap-2 text-sm text-gray-300"
                     >
                       <div className="flex items-center gap-2">
-                        <Avatar image={t.avatar} size="large" shape="circle" />
+                        <Avatar image={t.avatar} size="large" shape="circle" 
+                        className="flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14" />
                         {t.name}
                       </div>
                       <button
@@ -455,7 +456,7 @@ export default function TripOverview() {
             </div>
           </div>
 
-          {/* Right Column: Activity */}
+          {/* Right Column: Notes */}
           <div className="border border-gray-600 rounded-lg p-4">
             <h3 className="font-semibold text-base mb-2">Notes</h3>
             <p className="text-sm text-gray-300">
@@ -464,7 +465,7 @@ export default function TripOverview() {
           </div>
         </div>
 
-        {/* Notes */}
+        {/* Activity */}
         <div className="border border-gray-600 rounded-lg p-4 mt-4">
           <div className="flex justify-between items-center mb-2">
             <h3 className="font-semibold text-base">Activity</h3>
@@ -479,11 +480,13 @@ export default function TripOverview() {
               <ul className="space-y-1">
                 {activities.map((act) => (
                   <li key={act.day_number} className="flex justify-between">
-                    <span>
-                      <span className="font-medium text-white font-semibold text-nowrap">
+                    <span className="text-white">
+                      <span className="font-medium font-semibold text-nowrap sm:inline block">
                         Day {act.day_number} ({act.dayDate})
                       </span>{" "}
-                      {act.firstActivityName}
+                      <span className="text-gray-300 sm:inline block">
+                        {act.firstActivityName}
+                      </span>
                     </span>
                     <span className="text-gray-300">
                       Total Cost:{" "}
