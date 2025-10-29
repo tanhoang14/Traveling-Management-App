@@ -401,7 +401,7 @@ export default function TripOverview() {
                   travelers.map((t) => (
                     <li
                       key={t.id}
-                      className="flex items-center justify-between gap-2 text-sm text-gray-300"
+                      className="flex items-center justify-between gap-2 text-sm text-white-300"
                     >
                       <div className="flex items-center gap-2">
                         <Avatar image={t.avatar} size="large" shape="circle" 
@@ -417,7 +417,7 @@ export default function TripOverview() {
                     </li>
                   ))
                 ) : (
-                  <p className="text-sm text-gray-400">No travelers added</p>
+                  <p className="text-sm text-white-400">No travelers added</p>
                 )}
               </ul>
 
@@ -459,7 +459,7 @@ export default function TripOverview() {
           {/* Right Column: Notes */}
           <div className="border border-gray-600 rounded-lg p-4">
             <h3 className="font-semibold text-base mb-2">Notes</h3>
-            <p className="text-sm text-gray-300">
+            <p className="text-sm text-white-300">
               {trip.note || "No notes yet."}
             </p>
           </div>
@@ -475,7 +475,7 @@ export default function TripOverview() {
               <Pencil className="w-4 h-4 text-white" />
             </button>
           </div>
-          <div className="text-sm text-gray-300">
+          <div className="text-sm text-white-300">
             {activities.length ? (
               <ul className="space-y-1">
                 {activities.map((act) => (
@@ -484,11 +484,11 @@ export default function TripOverview() {
                       <span className="font-medium font-semibold text-nowrap sm:inline block">
                         Day {act.day_number} ({act.dayDate})
                       </span>{" "}
-                      <span className="text-gray-300 sm:inline block">
+                      <span className="text-white-300 sm:inline block">
                         {act.firstActivityName}
                       </span>
                     </span>
-                    <span className="text-gray-300">
+                    <span className="text-white-300">
                       Total Cost:{" "}
                       <span className="font-semibold text-green-400">
                         ${Number(act.totalAmount || 0).toFixed(2)}
@@ -498,7 +498,7 @@ export default function TripOverview() {
                 ))}
               </ul>
             ) : (
-              <p className="text-sm text-gray-400">No activities yet.</p>
+              <p className="text-sm text-white-400">No activities yet.</p>
             )}
           </div>
         </div>

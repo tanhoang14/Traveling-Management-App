@@ -84,7 +84,7 @@ export default function ActivityModal({
           </h3>
           <button
             onClick={onClose}
-            className="p-1 text-gray-400 hover:text-white"
+            className="p-1 text-white-400 hover:text-white"
           >
             <X className="w-5 h-5" />
           </button>
@@ -95,7 +95,7 @@ export default function ActivityModal({
           {/* Start Time */}
           <div className="flex gap-4">
             <div className="flex-1">
-              <label className="block text-sm font-medium text-gray-300 mb-1">
+              <label className="block text-sm font-medium text-white-300 mb-1">
                 Start Time
               </label>
               <input
@@ -114,7 +114,7 @@ export default function ActivityModal({
 
           {/* Activity Name */}
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-1">
+            <label className="block text-sm font-medium text-white-300 mb-1">
               Activity Name
             </label>
             <InputText
@@ -129,7 +129,7 @@ export default function ActivityModal({
           {/* Cost & Category */}
           <div className="flex gap-4">
             <div className="flex-1">
-              <label className="block text-sm font-medium text-gray-300 mb-1">
+              <label className="block text-sm font-medium text-white-300 mb-1">
                 Cost
               </label>
               <InputNumber
@@ -147,7 +147,7 @@ export default function ActivityModal({
 
           <div className="flex gap-4">
             <div className="flex-1">
-              <label className="block text-sm font-medium text-gray-300 mb-1">
+              <label className="block text-sm font-medium text-white-300 mb-1">
                 Category
               </label>
               <Dropdown

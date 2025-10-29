@@ -73,7 +73,7 @@ export default function TripsPage() {
                   />
           ) : trips.length === 0 && (
             <div>
-              <p className="text-lg text-gray-400 mb-4 text-center">
+              <p className="text-lg text-white-400 mb-4 text-center">
                     You don’t have any trips yet.
               </p>
           </div>

@@ -305,7 +305,7 @@ export default function ActivityPage() {
             Day {currentDay} of {totalDays}
           </h2>
           {trip?.trip_start_date && (
-            <p className="text-base sm:text-lg text-gray-300">
+            <p className="text-base sm:text-lg text-white-300">
               {new Date(
                 new Date(`${trip.trip_start_date}T00:00:00Z`).setUTCDate(
                   new Date(`${trip.trip_start_date}T00:00:00Z`).getUTCDate() +
@@ -356,7 +356,7 @@ export default function ActivityPage() {
                 </div>
 
                 {/* Category */}
-                <div className="text-gray-300 break-words">
+                <div className="text-white-300 break-words">
                   {categories[act.category_id] || "N/A"}
                 </div>
 
@@ -379,7 +379,7 @@ export default function ActivityPage() {
             ))}
           </>
         ) : (
-          <p className="text-center text-gray-400">No activities yet.</p>
+          <p className="text-center text-white-400">No activities yet.</p>
         )}
         {/* Add Button */}
         <div className="flex justify-end mt-5">
