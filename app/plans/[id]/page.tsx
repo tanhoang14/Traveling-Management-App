@@ -7,7 +7,8 @@ import { ProgressSpinner } from "primereact/progressspinner";
 import { Avatar } from "primereact/avatar";
 import { Toast } from "primereact/toast";
 import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
-import { Trip, Traveler, Activity } from "@/app/types/activity"; 
+import { Trip, Traveler, Activity } from "@/app/types/activity";
+import { getTripDayUTC, formatUTCDate } from "@/lib/converterMethod";
 
 export default function TripOverview() {
   const router = useRouter();
@@ -16,16 +17,21 @@ export default function TripOverview() {
   const tripId = params?.id as string;
   const toast = useRef<Toast>(null);
 
-const [trip, setTrip] = useState<Trip | null>(null);
-const [activities, setActivities] = useState<
-  { day_number: number; firstActivityName: string; totalAmount: number; dayDate: string }[]
->([]);
+  const [trip, setTrip] = useState<Trip | null>(null);
+  const [activities, setActivities] = useState<
+    {
+      day_number: number;
+      firstActivityName: string;
+      totalAmount: number;
+      dayDate: string;
+    }[]
+  >([]);
   const [loading, setLoading] = useState(true);
   const [newTravelerEmail, setNewTravelerEmail] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [addingTraveler, setAddingTraveler] = useState(false);
   const [travelers, setTravelers] = useState<Traveler[]>([]);
-    // Fetch trip
+  // Fetch trip
   useEffect(() => {
     const fetchTrip = async () => {
       setLoading(true);
@@ -51,7 +57,7 @@ const [activities, setActivities] = useState<
 
     if (tripId) fetchTrip();
   }, [tripId]);
-  
+
   // Fetch activities
   useEffect(() => {
     const fetchActivities = async () => {
@@ -100,14 +106,12 @@ const [activities, setActivities] = useState<
         );
 
         // Calculate exact date for this day
-        const dayDate = new Date(startDate);
-        dayDate.setDate(startDate.getDate() + (day.day_number - 1));
-
+        const dayDate = getTripDayUTC(trip.trip_start_date, day.day_number);
         return {
           day_number: day.day_number,
           firstActivityName,
           totalAmount,
-          dayDate: dayDate.toLocaleDateString(), // store formatted date
+          dayDate, // store formatted date
         };
       });
 
@@ -115,7 +119,7 @@ const [activities, setActivities] = useState<
     };
 
     fetchActivities();
-  }, [tripId,trip]);
+  }, [tripId, trip]);
 
   // Fetch travelers
   useEffect(() => {
@@ -374,9 +378,11 @@ const [activities, setActivities] = useState<
             {/* Overview */}
             <div className="text-sm border border-gray-600 rounded-lg p-4 text-nowrap">
               <p className="font-semibold">
-                Start:{new Date(trip.trip_start_date).toLocaleDateString()}
+                Start: {formatUTCDate(trip.trip_start_date)}
               </p>
-              <p className="font-semibold">End:{new Date(trip.trip_end_date).toLocaleDateString()}</p>
+              <p className="font-semibold">
+                End: {formatUTCDate(trip.trip_end_date)}
+              </p>
               <p className="font-semibold">⏱ {trip.trip_duration} days</p>
               <p className="font-semibold">💰 Budget: ${trip.budget}</p>
             </div>
@@ -454,44 +460,44 @@ const [activities, setActivities] = useState<
             <h3 className="font-semibold text-base mb-2">Notes</h3>
             <p className="text-sm text-gray-300">
               {trip.note || "No notes yet."}
-            </p> 
+            </p>
           </div>
         </div>
 
         {/* Notes */}
         <div className="border border-gray-600 rounded-lg p-4 mt-4">
-            <div className="flex justify-between items-center mb-2">
-              <h3 className="font-semibold text-base">Activity</h3>
-              <button
-                onClick={() => router.push(`/plans/trips/activities/${tripId}`)}
-              >
-                <Pencil className="w-4 h-4 text-white" />
-              </button>
-            </div>
-            <div className="text-sm text-gray-300">
-              {activities.length ? (
-                <ul className="space-y-1">
-                  {activities.map((act) => (
-                    <li key={act.day_number} className="flex justify-between">
-                      <span>
-                        <span className="font-medium text-white font-semibold text-nowrap">
-                          Day {act.day_number} ({act.dayDate})  
-                        </span>{" "}
-                        {act.firstActivityName}
+          <div className="flex justify-between items-center mb-2">
+            <h3 className="font-semibold text-base">Activity</h3>
+            <button
+              onClick={() => router.push(`/plans/trips/activities/${tripId}`)}
+            >
+              <Pencil className="w-4 h-4 text-white" />
+            </button>
+          </div>
+          <div className="text-sm text-gray-300">
+            {activities.length ? (
+              <ul className="space-y-1">
+                {activities.map((act) => (
+                  <li key={act.day_number} className="flex justify-between">
+                    <span>
+                      <span className="font-medium text-white font-semibold text-nowrap">
+                        Day {act.day_number} ({act.dayDate})
+                      </span>{" "}
+                      {act.firstActivityName}
+                    </span>
+                    <span className="text-gray-300">
+                      Total Cost:{" "}
+                      <span className="font-semibold text-green-400">
+                        ${Number(act.totalAmount || 0).toFixed(2)}
                       </span>
-                      <span className="text-gray-300">
-                        Total Cost:{" "}
-                        <span className="font-semibold text-green-400">
-                          ${Number(act.totalAmount || 0).toFixed(2)}
-                        </span>
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              ) : (
-                <p className="text-sm text-gray-400">No activities yet.</p>
-              )}
-            </div>  
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className="text-sm text-gray-400">No activities yet.</p>
+            )}
+          </div>
         </div>
       </div>
     </main>

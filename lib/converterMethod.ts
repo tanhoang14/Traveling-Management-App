@@ -43,3 +43,18 @@ export function toDateFromTimeString(
   d.setHours(hours, minutes, 0, 0);
   return d;
 }
+
+// ✅ Helper functions
+export function formatUTCDate(dateStr: string): string {
+  if (!dateStr) return "";
+  return new Date(`${dateStr}T00:00:00Z`).toLocaleDateString("en-US", {
+    timeZone: "UTC",
+  });
+}
+
+export function getTripDayUTC(startDateStr: string, dayOffset: number): string {
+  if (!startDateStr) return "";
+  const date = new Date(`${startDateStr}T00:00:00Z`);
+  date.setUTCDate(date.getUTCDate() + (dayOffset - 1));
+  return date.toLocaleDateString("en-US", { timeZone: "UTC" });
+}

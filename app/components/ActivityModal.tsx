@@ -1,6 +1,5 @@
 "use client";
 import React, { useEffect, useState, useRef } from "react";
-import { Calendar } from "primereact/calendar";
 import { InputText } from "primereact/inputtext";
 import { InputNumber } from "primereact/inputnumber";
 import { Dropdown } from "primereact/dropdown";
@@ -8,7 +7,6 @@ import { Save, X } from "lucide-react";
 import { Toast } from "primereact/toast";
 import { supabase } from "@/lib/supbabaseClient";
 import { Activity, CategoryOption, CategoryRow } from "../types/activity";
-import { toDateFromTimeString } from "@/lib/converterMethod";
 
 interface ActivityModalProps {
   isOpen: boolean;
@@ -84,36 +82,32 @@ export default function ActivityModal({
           <h3 className="text-xl font-bold">
             {isEdit ? "Edit Activity" : "Add New Activity"}
           </h3>
-          <button onClick={onClose} className="p-1 text-gray-400 hover:text-white">
+          <button
+            onClick={onClose}
+            className="p-1 text-gray-400 hover:text-white"
+          >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-5">
-
-          {/* Start*/}
+          {/* Start Time */}
           <div className="flex gap-4">
             <div className="flex-1">
               <label className="block text-sm font-medium text-gray-300 mb-1">
                 Start Time
               </label>
-              <Calendar
-                value={toDateFromTimeString(formData.startTime)}
+              <input
+                type="time"
+                value={formData.startTime || ""}
                 onChange={(e) =>
                   setFormData((prev) => ({
                     ...prev,
-                    startTime: e.value
-                      ? e.value.toLocaleTimeString([], {
-                          hour: "2-digit",
-                          minute: "2-digit",
-                        })
-                      : "",
+                    startTime: e.target.value,
                   }))
                 }
-                timeOnly
-                hourFormat="12"
-                className="w-full"
+                className="w-full p-2 rounded bg-gray-700 text-white"
               />
             </div>
           </div>

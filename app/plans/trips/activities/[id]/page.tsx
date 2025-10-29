@@ -274,134 +274,133 @@ export default function ActivityPage() {
   }
 
   return (
-  <main className="min-h-screen bg-gray-900 text-white p-4 sm:p-6">
-    <Toast ref={toast} position="top-right" />
+    <main className="min-h-screen bg-gray-900 text-white p-4 sm:p-6">
+      <Toast ref={toast} position="top-right" />
 
-    {/* Header */}
-    <div className="flex justify-between items-center mb-6 flex-wrap gap-2">
-      <button
-        onClick={() => router.push(`/plans/${tripId}`)}
-        className="flex items-center gap-2 p-2 sm:p-3 bg-gray-800 hover:bg-gray-700 rounded-lg transition-all active:scale-95"
-      >
-        <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5" />
-      </button>
-      <h1 className="text-xl sm:text-2xl font-bold flex-1 text-center text-white">
-        Activities for {trip.location}
-      </h1>
-    </div>
-
-    {/* Day Navigation */}
-    <div className="flex justify-center items-center gap-3 sm:gap-4 mb-8">
-      <button
-        onClick={() => setCurrentDay((p) => Math.max(1, p - 1))}
-        disabled={currentDay === 1}
-        className="p-2 sm:p-3 bg-gray-800 rounded-full hover:bg-gray-700 disabled:opacity-50 active:scale-95 transition-transform"
-      >
-        <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5" />
-      </button>
-
-      <div className="text-center">
-        <h2 className="text-xl sm:text-2xl font-semibold text-white">
-          Day {currentDay} of {totalDays}
-        </h2>
-        {trip?.trip_start_date && (
-          <p className="text-base sm:text-lg text-gray-300">
-            {new Date(
-              new Date(trip.trip_start_date).setDate(
-                new Date(trip.trip_start_date).getDate() + (currentDay - 1)
-              )
-            ).toLocaleDateString()}
-          </p>
-        )}
-      </div>
-
-      <button
-        onClick={() => setCurrentDay((p) => Math.min(totalDays, p + 1))}
-        disabled={currentDay === totalDays}
-        className="p-2 sm:p-3 bg-gray-800 rounded-full hover:bg-gray-700 disabled:opacity-50 active:scale-95 transition-transform"
-      >
-        <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
-      </button>
-    </div>
-
-    {/* Activity Table */}
-   <div className="max-w-4xl mx-auto bg-gray-800 p-4 sm:p-6 rounded-lg shadow-lg text-white">
-  {sortedActivities.length ? (
-    <>
       {/* Header */}
-      <div className="grid grid-cols-4 sm:grid-cols-5 font-bold text-sm sm:text-base border-b border-gray-700 pb-2 mb-2">
-        <div>Time</div>
-        <div>Activity</div>
-        <div>Cost</div>
-        <div>Category</div>
-        <div className="hidden sm:block text-right">Actions</div>
+      <div className="flex justify-between items-center mb-6 flex-wrap gap-2">
+        <button
+          onClick={() => router.push(`/plans/${tripId}`)}
+          className="flex items-center gap-2 p-2 sm:p-3 bg-gray-800 hover:bg-gray-700 rounded-lg transition-all active:scale-95"
+        >
+          <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5" />
+        </button>
+        <h1 className="text-xl sm:text-2xl font-bold flex-1 text-center text-white">
+          Activities for {trip.location}
+        </h1>
       </div>
 
-      {/* Rows */}
-      {sortedActivities.map((act, i) => (
-  <div
-    key={i}
-    className="grid grid-cols-4 sm:grid-cols-4 border-b border-gray-700 py-4 text-sm sm:text-base font-semibold"
-  >
-    {/* Time */}
-    <div>{formatTime(act.startTime)}</div>
-
-    {/* Activity */}
-    <div>{act.name}</div>
-
-    {/* Cost */}
-    <div className="text-green-400">${Number(act.cost || 0).toFixed(2)}</div>
-
-    {/* Category + Actions underneath */}
-<div className="text-gray-300 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-      <span>{categories[act.category_id] || "N/A"}</span>
-      <div className="flex gap-2 sm:gap-3">
+      {/* Day Navigation */}
+      <div className="flex justify-center items-center gap-3 sm:gap-4 mb-8">
         <button
-          onClick={() => handleOpenEditModal(i)}
-          className="p-2 bg-blue-600 hover:bg-blue-500 rounded-lg transition active:scale-95"
+          onClick={() => setCurrentDay((p) => Math.max(1, p - 1))}
+          disabled={currentDay === 1}
+          className="p-2 sm:p-3 bg-gray-800 rounded-full hover:bg-gray-700 disabled:opacity-50 active:scale-95 transition-transform"
         >
-          <Edit2 className="w-4 h-4 sm:w-5 sm:h-5" />
+          <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5" />
         </button>
+
+        <div className="text-center">
+          <h2 className="text-xl sm:text-2xl font-semibold text-white">
+            Day {currentDay} of {totalDays}
+          </h2>
+          {trip?.trip_start_date && (
+            <p className="text-base sm:text-lg text-gray-300">
+              {new Date(
+                new Date(`${trip.trip_start_date}T00:00:00Z`).setUTCDate(
+                  new Date(`${trip.trip_start_date}T00:00:00Z`).getUTCDate() +
+                    (currentDay - 1)
+                )
+              ).toLocaleDateString("en-US", { timeZone: "UTC" })}
+            </p>
+          )}
+        </div>
+
         <button
-          onClick={() => handleRemoveActivity(currentDay, i)}
-          className="p-2 bg-red-600 hover:bg-red-500 rounded-lg transition active:scale-95"
+          onClick={() => setCurrentDay((p) => Math.min(totalDays, p + 1))}
+          disabled={currentDay === totalDays}
+          className="p-2 sm:p-3 bg-gray-800 rounded-full hover:bg-gray-700 disabled:opacity-50 active:scale-95 transition-transform"
         >
-          <X className="w-4 h-4 sm:w-5 sm:h-5" />
+          <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
         </button>
       </div>
-    </div>
-  </div>
-))}
 
-    </>
-  ) : (
-    <p className="text-center text-gray-400 text-sm sm:text-base py-4">
-      No activities for this day.
-    </p>
-  )}
+      {/* Activity Table */}
+      <div className="max-w-4xl mx-auto bg-gray-800 p-4 sm:p-6 rounded-lg shadow-lg text-white">
+        {sortedActivities.length ? (
+          <>
+            {/* Header */}
+            <div className="grid grid-cols-4 sm:grid-cols-[1fr_2fr_1fr_1fr_1fr] font-bold text-sm sm:text-base border-b border-gray-700 pb-2 mb-2">
+              <div>Time</div>
+              <div>Activity</div>
+              <div>Cost</div>
+              <div>Category</div>
+              <div className="hidden sm:block text-right">Actions</div>
+            </div>
 
-  {/* Add Button */}
-  <div className="flex justify-end mt-5">
-    <button
-      onClick={handleOpenAddModal}
-      className="flex items-center gap-2 px-4 py-2 sm:py-2.5 bg-blue-600 hover:bg-blue-500 rounded-lg text-sm sm:text-base font-semibold text-white transition active:scale-95"
-    >
-      <Plus className="w-4 h-4 sm:w-5 sm:h-5" /> Add Activity
-    </button>
-  </div>
-</div>
+            {/* Rows */}
+            {sortedActivities.map((act, i) => (
+              <div
+                key={i}
+                className="grid grid-cols-4 sm:grid-cols-[1fr_2fr_1fr_1fr_1fr] border-b border-gray-700 py-4 text-sm sm:text-base font-semibold items-start"
+              >
+                {/* Time */}
+                <div>{formatTime(act.startTime)}</div>
 
+                {/* Activity */}
+                <div className="break-words">{act.name}</div>
 
-    {/* Modal */}
-    <ActivityModal
-      isOpen={isModalOpen}
-      onClose={handleCloseModal}
-      activityData={modalInitialData}
-      onSubmit={handleModalSubmit}
-      isEdit={isEditing}
-      editIndex={editIndex}
-    />
-  </main>
-);
+                {/* Cost */}
+                <div className="text-green-400">
+                  ${Number(act.cost || 0).toFixed(2)}
+                </div>
 
+                {/* Category */}
+                <div className="text-gray-300 break-words">
+                  {categories[act.category_id] || "N/A"}
+                </div>
+
+                {/* Actions */}
+                <div className="flex gap-2 sm:gap-3 sm:justify-end mt-2 sm:mt-0">
+                  <button
+                    onClick={() => handleOpenEditModal(i)}
+                    className="p-2 bg-blue-600 hover:bg-blue-500 rounded-lg transition active:scale-95"
+                  >
+                    <Edit2 className="w-4 h-4 sm:w-5 sm:h-5" />
+                  </button>
+                  <button
+                    onClick={() => handleRemoveActivity(currentDay, i)}
+                    className="p-2 bg-red-600 hover:bg-red-500 rounded-lg transition active:scale-95"
+                  >
+                    <X className="w-4 h-4 sm:w-5 sm:h-5" />
+                  </button>
+                </div>
+              </div>
+            ))}
+          </>
+        ) : (
+          <p className="text-center text-gray-400">No activities yet.</p>
+        )}
+        {/* Add Button */}
+        <div className="flex justify-end mt-5">
+          <button
+            onClick={handleOpenAddModal}
+            className="flex items-center gap-2 px-4 py-2 sm:py-2.5 bg-blue-600 hover:bg-blue-500 rounded-lg text-sm sm:text-base font-semibold text-white transition active:scale-95"
+          >
+            <Plus className="w-4 h-4 sm:w-5 sm:h-5" /> Add Activity
+          </button>
+        </div>
+      </div>
+
+      {/* Modal */}
+      <ActivityModal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        activityData={modalInitialData}
+        onSubmit={handleModalSubmit}
+        isEdit={isEditing}
+        editIndex={editIndex}
+      />
+    </main>
+  );
 }
