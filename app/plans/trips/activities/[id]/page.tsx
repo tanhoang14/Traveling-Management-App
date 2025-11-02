@@ -149,7 +149,6 @@ export default function ActivityPage() {
     // Determine if we are updating by checking for the activity_id
     // If data.activity_id is a string (a UUID), isUpdating will be true.
     const isUpdating = !!data.activity_id;
-    debugger;
 
     try {
       const formatted: Activity = {
