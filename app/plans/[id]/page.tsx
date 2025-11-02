@@ -5,6 +5,7 @@ import { ArrowLeft, Pencil, Plus } from "lucide-react";
 import { supabase } from "@/lib/supbabaseClient";
 import { ProgressSpinner } from "primereact/progressspinner";
 import { Avatar } from "primereact/avatar";
+import { ExternalLink } from "lucide-react";
 import { Toast } from "primereact/toast";
 import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
 import { Trip, Traveler, Activity } from "@/app/types/activity";
@@ -31,6 +32,20 @@ export default function TripOverview() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [addingTraveler, setAddingTraveler] = useState(false);
   const [travelers, setTravelers] = useState<Traveler[]>([]);
+  const [showTripCodePopup, setShowTripCodePopup] = useState(false);
+
+  const handleCopyTripCode = () => {
+    if (!trip?.trip_code) return;
+    navigator.clipboard.writeText(trip.trip_code).then(() => {
+      toast.current?.show({
+        severity: "success",
+        summary: "Copied!",
+        detail: `Trip code "${trip.trip_code}" copied to clipboard.`,
+        life: 2000,
+      });
+    });
+  };
+
   // Fetch trip
   useEffect(() => {
     const fetchTrip = async () => {
@@ -338,6 +353,31 @@ export default function TripOverview() {
     );
   }
 
+  const handleShareOverview = () => {
+    if (!trip?.trip_code) return;
+
+    // Copy trip code to clipboard
+    navigator.clipboard
+      .writeText(trip.trip_code)
+      .then(() => {
+        toast.current?.show({
+          severity: "success",
+          summary: "Copied!",
+          detail: `Trip code "${trip.trip_code}" copied to clipboard.`,
+          life: 2000,
+        });
+      })
+      .catch((err) => {
+        console.error("Failed to copy trip code:", err);
+        toast.current?.show({
+          severity: "error",
+          summary: "Error",
+          detail: "Failed to copy trip code.",
+          life: 2000,
+        });
+      });
+  };
+
   return (
     <main className="min-h-screen   p-8">
       <Toast ref={toast} position="top-right" />
@@ -371,7 +411,35 @@ export default function TripOverview() {
       </div>
 
       <div className="bg-brown-700  rounded-xl shadow-lg p-6">
-        <h2 className="text-xl font-semibold mb-4">Overview</h2>
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-xl font-semibold">Overview</h2>
+          <div className="relative">
+            <button
+              onClick={() => setShowTripCodePopup((prev) => !prev)}
+              className="rounded-full transition"
+              title="Show Trip Code"
+            >
+              <ExternalLink className="w-5 h-5 text-black" />
+            </button>
+
+            {showTripCodePopup && (
+              <div className="absolute right-0 mt-2 w-48 p-3 bg-white border border-gray-300 rounded shadow-lg z-50">
+                <div className="flex justify-between items-center">
+                  <span className="font-semibold break-all">
+                    {trip?.trip_code}
+                  </span>
+                  <button
+                    onClick={handleCopyTripCode}
+                    className="ml-2 px-2 py-1 bg-gray-700 text-white rounded hover:bg-gray-600 transition"
+                  >
+                    Copy
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+
         <div className="grid grid-cols-2 gap-4">
           {/* Left Column */}
           <div className="flex flex-col gap-4">
@@ -404,8 +472,12 @@ export default function TripOverview() {
                       className="flex items-center justify-between gap-2 text-sm -300"
                     >
                       <div className="flex items-center gap-2">
-                        <Avatar image={t.avatar} size="large" shape="circle" 
-                        className="flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14" />
+                        <Avatar
+                          image={t.avatar}
+                          size="large"
+                          shape="circle"
+                          className="flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14"
+                        />
                         {t.name}
                       </div>
                       <button
@@ -459,9 +531,7 @@ export default function TripOverview() {
           {/* Right Column: Notes */}
           <div className="border border-gray-600 rounded-lg p-4">
             <h3 className="font-semibold text-base mb-2">Notes</h3>
-            <p className="text-sm -300">
-              {trip.note || "No notes yet."}
-            </p>
+            <p className="text-sm -300">{trip.note || "No notes yet."}</p>
           </div>
         </div>
 

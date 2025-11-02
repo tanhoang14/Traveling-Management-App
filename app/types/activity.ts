@@ -37,6 +37,7 @@ export interface Trip {
   trip_duration: number;
   budget: number;
   note?: string;
+  trip_code: string;
 }
 
 export interface Traveler {

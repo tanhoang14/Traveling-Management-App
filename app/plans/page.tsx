@@ -1,10 +1,13 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { ArrowLeft, Plus } from "lucide-react";
 import { ProgressSpinner } from "primereact/progressspinner";
 import { supabase } from "@/lib/supbabaseClient";
 import { Card } from "primereact/card";
+import { Dialog } from "primereact/dialog";
+import { InputText } from "primereact/inputtext";
+import { Toast } from "primereact/toast";
 import { useSupabaseSession } from "../components/SupabaseProvider";
 
 export default function TripsPage() {
@@ -12,6 +15,9 @@ export default function TripsPage() {
   const { session } = useSupabaseSession();
   const [trips, setTrips] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [joinVisible, setJoinVisible] = useState(false);
+  const [tripCode, setTripCode] = useState("");
+  const toast = useRef<Toast>(null);
 
   useEffect(() => {
     const fetchTrips = async () => {
@@ -47,6 +53,60 @@ export default function TripsPage() {
 
     fetchTrips();
   }, [session]);
+
+  const handleJoinTrip = async () => {
+    if (!tripCode || !session?.user) {
+      toast.current?.show({ severity: "warn", summary: "Enter a valid code" });
+      return;
+    }
+
+    // 1️⃣ Find trip by code
+    const { data: tripData, error: tripError } = await supabase
+      .from("trips")
+      .select("trip_id")
+      .eq("trip_code", tripCode.trim())
+      .single();
+
+    if (tripError || !tripData) {
+      toast.current?.show({ severity: "error", summary: "Trip not found" });
+      return;
+    }
+
+    const tripId = tripData.trip_id;
+
+    // 2️⃣ Check if user is already part of trip
+    const { data: existing, error: checkError } = await supabase
+      .from("trip_users")
+      .select("trip_user_id")
+      .eq("trip_id", tripId)
+      .eq("user_id", session.user.id)
+      .maybeSingle();
+
+    if (checkError) {
+      alert("Error checking membership");
+      return;
+    }
+
+    if (existing) {
+      alert("You already in this trip");
+      return;
+    }
+
+    // 3️⃣ Add user to trip
+    const { error: insertError } = await supabase
+      .from("trip_users")
+      .insert([{ trip_id: tripId, user_id: session.user.id }]);
+
+    if (insertError) {
+      alert("Could not join trip" );
+    } else {
+      toast.current?.show({ severity: "success", summary: "Joined trip successfully!" });
+      setJoinVisible(false);
+      setTripCode("");
+      // Refresh trips list
+      setTimeout(() => window.location.reload(), 1000);
+    }
+  };
 
   return (
     <main className="min-h-screen p-8 mb-4">
@@ -109,11 +169,40 @@ export default function TripsPage() {
   </Card>
       </div>
   </div>
-      <button className="fixed bottom-6 right-6 flex items-center gap-2 px-5 py-3 rounded-full bg-neo-moss hover:bg-blue-500 shadow-lg transition-colors"
-          aria-label="Add an existing trip">
-          <Plus className="w-5 h-5 " />
-          <span className=" font-medium">Add an existing trip</span>
+        <button
+        className="fixed bottom-6 right-6 flex items-center gap-2 px-5 py-3 rounded-full bg-neo-moss hover:bg-blue-500 shadow-lg transition-colors"
+        aria-label="Add an existing trip"
+        onClick={() => setJoinVisible(true)}
+      >
+        <Plus className="w-5 h-5" />
+        <span className="font-medium">Add an existing trip</span>
       </button>
+
+      {/* Join Trip Dialog */}
+      <Dialog
+        header="Join Existing Trip"
+        visible={joinVisible}
+        style={{ width: "400px", padding:"10px", backgroundColor:"#ebcbae"}}
+        onHide={() => setJoinVisible(false)}
+      >
+        <div className="flex flex-col gap-4">
+          <span className="p-float-label">
+            <InputText
+              id="tripCode"
+              value={tripCode}
+              onChange={(e) => setTripCode(e.target.value)}
+              placeholder="Enter trip code"
+              className="w-full border-2 border-black-500"
+            />
+          </span>
+
+          <button
+            onClick={handleJoinTrip}
+            className="w-full text-black bg-[#4f9da6] py-2 rounded-lg font-semibold transition-colors">
+            Join Trip
+          </button>
+        </div>
+      </Dialog>
     </main>
   );
 }
