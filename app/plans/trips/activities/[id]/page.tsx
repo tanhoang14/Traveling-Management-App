@@ -127,96 +127,150 @@ export default function ActivityPage() {
 
   // --- Modal Handlers ---
   const handleOpenAddModal = () => {
+    // Always start with a clean slate for new activity
     setModalInitialData(initialActivityState);
-    setIsEditing(false);
-    setEditIndex(null);
     setIsModalOpen(true);
   };
 
   const handleOpenEditModal = (index: number) => {
     const act = activities[currentDay]?.[index];
     if (act) {
+      // Pass the full activity data, including the necessary activity_id
       setModalInitialData({ ...act, cost: act.cost || "" });
-      setIsEditing(true);
-      setEditIndex(index);
       setIsModalOpen(true);
     }
+    // You can remove setIsEditing(true) and setEditIndex(index) entirely
   };
 
   const handleCloseModal = () => setIsModalOpen(false);
 
   // --- SAVE / ADD ACTIVITY ---
   const handleModalSubmit = async (data: Activity) => {
+    // Determine if we are updating by checking for the activity_id
+    // If data.activity_id is a string (a UUID), isUpdating will be true.
+    const isUpdating = !!data.activity_id;
+    debugger;
+
     try {
       const formatted: Activity = {
         ...data,
         cost: data.cost === "" ? 0 : Number(data.cost),
       };
 
-      // 1️⃣ Ensure this day exists in the "days" table
-      let { data: dayRow, error: fetchErr } = await supabase
-        .from("days")
-        .select("day_id")
-        .eq("trip_id", tripId)
-        .eq("day_number", currentDay)
-        .single();
+      if (isUpdating) {
+        // ===============================================
+        // 🚨 UPDATE LOGIC 🚨
+        // ===============================================
 
-      // if day doesn't exist, create it
-      if (fetchErr && fetchErr.code === "PGRST116") {
-        const { data: insertedDay, error: insertDayErr } = await supabase
-          .from("days")
-          .insert([
-            { trip_id: tripId, day_number: currentDay, user_id: userId },
-          ])
-          .select("day_id")
-          .single();
-
-        if (insertDayErr) throw insertDayErr;
-        dayRow = insertedDay;
-      } else if (fetchErr) {
-        throw fetchErr;
-      }
-
-      // 2️⃣ Insert activity linked to that day
-      const { data: newActivity, error: actErr } = await supabase
-        .from("activities")
-        .insert([
-          {
-            created_by: userName,
-            day_id: dayRow?.day_id,
+        const { error: updateErr } = await supabase
+          .from("activities")
+          .update({
             start_time: formatted.startTime,
             activity_name: formatted.name,
             cost: formatted.cost,
             activity_category_id: formatted.category_id,
-            user_id: userId,
-          },
-        ])
-        .select("activity_id")
-        .single();
+          })
+          // CRITICAL: Filter by the ID from the submitted data
+          .eq("activity_id", formatted.activity_id);
 
-      if (actErr) throw actErr;
+        if (updateErr) throw updateErr;
 
-      formatted.activity_id = newActivity.activity_id;
+        // Update local state by finding and replacing the existing activity
+        setActivities((prev) => {
+          const dayActivities = prev[currentDay];
+          const activityIndex = dayActivities.findIndex(
+            (act) => act.activity_id === formatted.activity_id
+          );
 
-      // 3️⃣ Update local state
-      setActivities((prev) => ({
-        ...prev,
-        [currentDay]: [...(prev[currentDay] || []), formatted],
-      }));
+          if (activityIndex > -1) {
+            const newDayActivities = [...dayActivities];
+            newDayActivities[activityIndex] = formatted;
+            return { ...prev, [currentDay]: newDayActivities };
+          }
+          return prev;
+        });
 
-      toast.current?.show({
-        severity: "success",
-        summary: "Activity Added",
-        detail: "Activity successfully saved!",
-        life: 3000,
-      });
+        toast.current?.show({
+          severity: "success",
+          summary: "Activity Updated",
+          detail: "Activity successfully modified!",
+          life: 3000,
+        });
+      } else {
+        // ===============================================
+        // 🚀 INSERT LOGIC (Only runs if activity_id is missing) 🚀
+        // ===============================================
 
+        // 1️⃣ Ensure this day exists in the "days" table
+        let { data: dayRow, error: fetchErr } = await supabase
+          .from("days")
+          .select("day_id")
+          .eq("trip_id", tripId)
+          .eq("day_number", currentDay)
+          .single();
+
+        // if day doesn't exist, create it
+        if (fetchErr && fetchErr.code === "PGRST116") {
+          const { data: insertedDay, error: insertDayErr } = await supabase
+            .from("days")
+            .insert([
+              { trip_id: tripId, day_number: currentDay, user_id: userId },
+            ])
+            .select("day_id")
+            .single();
+
+          if (insertDayErr) throw insertDayErr;
+          dayRow = insertedDay;
+        } else if (fetchErr) {
+          throw fetchErr;
+        }
+
+        // 2️⃣ Insert activity linked to that day
+        const { data: newActivity, error: actErr } = await supabase
+          .from("activities")
+          .insert([
+            {
+              created_by: userName,
+              day_id: dayRow?.day_id,
+              start_time: formatted.startTime,
+              activity_name: formatted.name,
+              cost: formatted.cost,
+              activity_category_id: formatted.category_id,
+              user_id: userId,
+            },
+          ])
+          .select("activity_id")
+          .single();
+
+        if (actErr) throw actErr;
+
+        formatted.activity_id = newActivity.activity_id;
+        formatted.user_id = userId as string; // Add user_id to the local state for delete permissions
+
+        // 3️⃣ Update local state
+        setActivities((prev) => ({
+          ...prev,
+          [currentDay]: [...(prev[currentDay] || []), formatted],
+        }));
+
+        toast.current?.show({
+          severity: "success",
+          summary: "Activity Added",
+          detail: "Activity successfully saved!",
+          life: 3000,
+        });
+      }
+
+      // Close modal after successful operation (for both insert and update)
       setIsModalOpen(false);
     } catch (err: any) {
-      console.error("Error saving activity:", err.message);
+      console.error(
+        `Error ${isUpdating ? "updating" : "saving"} activity:`,
+        err.message
+      );
       toast.current?.show({
         severity: "error",
-        summary: "Save Failed",
+        summary: `${isUpdating ? "Update" : "Save"} Failed`,
         detail: err.message || "Could not save activity.",
         life: 4000,
       });
@@ -387,7 +441,7 @@ export default function ActivityPage() {
             onClick={handleOpenAddModal}
             className="flex items-center gap-2 px-4 py-2 sm:py-2.5 bg-neo-moss hover:bg-blue-500 rounded-lg text-sm sm:text-base font-semibold  transition active:scale-95"
           >
-            <Plus className="w-4 h-4 sm:w-5 sm:h-5 text-white font-bold"/> 
+            <Plus className="w-4 h-4 sm:w-5 sm:h-5 text-white font-bold" />
             <span className="text-white font-bold"> Add Activity</span>
           </button>
         </div>
