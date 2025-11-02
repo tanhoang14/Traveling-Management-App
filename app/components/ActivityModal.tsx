@@ -68,6 +68,26 @@ export default function ActivityModal({
       return;
     }
 
+      if (!formData.name || formData.name.trim().length === 0) {
+      toast.current?.show({
+        severity: "warn",
+        summary: "Missing Field",
+        detail: "Please enter an activity name.",
+        life: 2500,
+      });
+      return;
+    }
+
+    if (!formData.category_id) {
+      toast.current?.show({
+        severity: "warn",
+        summary: "Missing Field",
+        detail: "Please select a category.",
+        life: 2500,
+      });
+      return;
+    }
+
     onSubmit(formData, isEdit, editIndex);
   };
 
@@ -76,7 +96,7 @@ export default function ActivityModal({
   return (
     <div className="fixed inset-0 bg-black/20 backdrop-blur-sm z-50 flex justify-center items-center p-4">
       <Toast ref={toast} position="top-right" />
-      <div className="bg-gray-800/50 backdrop-blur-md p-6 rounded-xl shadow-2xl w-full max-w-md border border-gray-700/50">
+      <div className="bg-brown-700 backdrop-blur-md p-6 rounded-xl shadow-2xl w-full max-w-md border border-gray-700/50">
         {/* Header */}
         <div className="flex justify-between items-center mb-4 border-b border-gray-700 pb-3">
           <h3 className="text-xl font-bold">
@@ -84,7 +104,7 @@ export default function ActivityModal({
           </h3>
           <button
             onClick={onClose}
-            className="p-1 text-white-400 hover:text-white"
+            className="p-1 -400 hover:"
           >
             <X className="w-5 h-5" />
           </button>
@@ -95,7 +115,7 @@ export default function ActivityModal({
           {/* Start Time */}
           <div className="flex gap-4">
             <div className="flex-1">
-              <label className="block text-sm font-medium text-white-300 mb-1">
+              <label className="block text-sm font-medium -300 mb-1">
                 Start Time
               </label>
               <input
@@ -107,14 +127,14 @@ export default function ActivityModal({
                     startTime: e.target.value,
                   }))
                 }
-                className="w-full p-2 rounded bg-gray-700 text-white"
+                className="w-full p-2 rounded"
               />
             </div>
           </div>
 
           {/* Activity Name */}
           <div>
-            <label className="block text-sm font-medium text-white-300 mb-1">
+            <label className="block text-sm font-medium -300 mb-1">
               Activity Name
             </label>
             <InputText
@@ -129,7 +149,7 @@ export default function ActivityModal({
           {/* Cost & Category */}
           <div className="flex gap-4">
             <div className="flex-1">
-              <label className="block text-sm font-medium text-white-300 mb-1">
+              <label className="block text-sm font-medium -300 mb-1">
                 Cost
               </label>
               <InputNumber
@@ -147,7 +167,7 @@ export default function ActivityModal({
 
           <div className="flex gap-4">
             <div className="flex-1">
-              <label className="block text-sm font-medium text-white-300 mb-1">
+              <label className="block text-sm font-medium -300 mb-1">
                 Category
               </label>
               <Dropdown
@@ -158,7 +178,7 @@ export default function ActivityModal({
                 options={categoryOptions}
                 placeholder="Select Category"
                 className="w-full text-base"
-                panelClassName="bg-gray-800 text-white border border-gray-700 shadow-lg"
+                panelClassName="bg-brown-700 border border-gray-700 shadow-lg"
               />
             </div>
           </div>
@@ -166,7 +186,7 @@ export default function ActivityModal({
           {/* Submit Button */}
           <button
             type="submit"
-            className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-500 rounded-lg font-semibold transition-colors mt-6"
+            className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-neo-moss hover:bg-blue-500 rounded-lg font-semibold transition-colors mt-6 text-white font-bold"
           >
             <Save className="w-5 h-5" />
             {isEdit ? "Update Activity" : "Add Activity"}

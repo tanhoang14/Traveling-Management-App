@@ -318,7 +318,7 @@ export default function TripOverview() {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center min-h-screen bg-gray-900 text-white">
+      <div className="flex justify-center items-center min-h-screen  ">
         <ProgressSpinner style={{ width: "50px", height: "50px" }} />
       </div>
     );
@@ -326,7 +326,7 @@ export default function TripOverview() {
 
   if (!trip) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-white">
+      <div className="flex flex-col items-center justify-center min-h-screen  ">
         <p className="text-lg">Trip not found</p>
         <button
           onClick={() => router.back()}
@@ -339,12 +339,12 @@ export default function TripOverview() {
   }
 
   return (
-    <main className="min-h-screen bg-gray-900 text-white p-8">
+    <main className="min-h-screen   p-8">
       <Toast ref={toast} position="top-right" />
       <ConfirmDialog
-        className="bg-gray-800 text-white border border-gray-700 rounded-xl shadow-xl"
-        contentClassName="bg-gray-800 text-white"
-        headerClassName="bg-gray-900 text-white border-b border-gray-700"
+        className="bg-brown-700  border border-gray-700 rounded-xl shadow-xl"
+        contentClassName="bg-brown-700 "
+        headerClassName="  border-b border-gray-700"
         pt={{
           footer: {
             className: "flex justify-center gap-3",
@@ -355,22 +355,22 @@ export default function TripOverview() {
       <div className="flex items-center justify-between mb-6">
         <button
           onClick={() => router.push(`/plans`)}
-          className="flex items-center gap-2 p-2 rounded-full bg-gray-800 hover:bg-gray-700 transition-colors"
+          className="flex items-center gap-2 p-2 rounded-full bg-brown-700 hover:bg-gray-700 transition-colors"
         >
-          <ArrowLeft className="w-6 h-6 text-white" />
+          <ArrowLeft className="w-6 h-6 " />
         </button>
         <h1 className="text-3xl font-bold flex-1 text-center">
           🧳 {trip.location}
         </h1>
         <button
-          className="flex items-center gap-2 p-2 rounded-full bg-gray-800 hover:bg-gray-700 transition-colors"
+          className="flex items-center gap-2 p-2 rounded-full bg-brown-700 hover:bg-gray-700 transition-colors"
           onClick={() => router.push(`/plans/trips/edit/${tripId}`)}
         >
           <Pencil className="w-5 h-5" />
         </button>
       </div>
 
-      <div className="bg-gray-800 text-white rounded-xl shadow-lg p-6">
+      <div className="bg-brown-700  rounded-xl shadow-lg p-6">
         <h2 className="text-xl font-semibold mb-4">Overview</h2>
         <div className="grid grid-cols-2 gap-4">
           {/* Left Column */}
@@ -392,7 +392,7 @@ export default function TripOverview() {
               <div className="flex justify-between items-center mb-2">
                 <h3 className="font-semibold text-base">Travelers</h3>
                 <button onClick={() => setIsModalOpen(true)}>
-                  <Plus className="w-4 h-4 text-white" />
+                  <Plus className="w-4 h-4 " />
                 </button>
               </div>
 
@@ -401,7 +401,7 @@ export default function TripOverview() {
                   travelers.map((t) => (
                     <li
                       key={t.id}
-                      className="flex items-center justify-between gap-2 text-sm text-white-300"
+                      className="flex items-center justify-between gap-2 text-sm -300"
                     >
                       <div className="flex items-center gap-2">
                         <Avatar image={t.avatar} size="large" shape="circle" 
@@ -417,15 +417,15 @@ export default function TripOverview() {
                     </li>
                   ))
                 ) : (
-                  <p className="text-sm text-white-400">No travelers added</p>
+                  <p className="text-sm -400">No travelers added</p>
                 )}
               </ul>
 
               {/* Add Traveler Modal */}
               {isModalOpen && (
                 <div className="fixed inset-0 bg-black/50 flex justify-center items-center z-50">
-                  <div className="bg-gray-800 rounded-xl p-6 w-full max-w-sm relative">
-                    <h3 className="text-lg font-semibold mb-4 text-white">
+                  <div className="bg-brown-700 rounded-xl p-6 w-full max-w-sm relative">
+                    <h3 className="text-lg font-semibold mb-4 ">
                       Add Traveler
                     </h3>
                     <input
@@ -433,19 +433,19 @@ export default function TripOverview() {
                       placeholder="Please enter their email"
                       value={newTravelerEmail}
                       onChange={(e) => setNewTravelerEmail(e.target.value)}
-                      className="w-full p-2 mb-4 rounded bg-gray-700 text-sm text-white"
+                      className="w-full p-2 mb-4 rounded bg-white text-sm "
                     />
                     <div className="flex justify-end gap-2">
                       <button
                         onClick={() => setIsModalOpen(false)}
-                        className="px-4 py-2 bg-gray-600 hover:bg-gray-500 rounded text-white"
+                        className="px-4 py-2 bg-gray-600 hover:bg-gray-500 rounded "
                       >
                         Cancel
                       </button>
                       <button
                         onClick={handleAddTraveler}
                         disabled={addingTraveler}
-                        className="px-4 py-2 bg-green-600 hover:bg-green-500 rounded text-white"
+                        className="px-4 py-2 bg-white rounded "
                       >
                         {addingTraveler ? "Adding..." : "Add"}
                       </button>
@@ -459,7 +459,7 @@ export default function TripOverview() {
           {/* Right Column: Notes */}
           <div className="border border-gray-600 rounded-lg p-4">
             <h3 className="font-semibold text-base mb-2">Notes</h3>
-            <p className="text-sm text-white-300">
+            <p className="text-sm -300">
               {trip.note || "No notes yet."}
             </p>
           </div>
@@ -472,25 +472,25 @@ export default function TripOverview() {
             <button
               onClick={() => router.push(`/plans/trips/activities/${tripId}`)}
             >
-              <Pencil className="w-4 h-4 text-white" />
+              <Pencil className="w-4 h-4 " />
             </button>
           </div>
-          <div className="text-sm text-white-300">
+          <div className="text-sm -300">
             {activities.length ? (
               <ul className="space-y-1">
                 {activities.map((act) => (
                   <li key={act.day_number} className="flex justify-between">
-                    <span className="text-white">
+                    <span className="">
                       <span className="font-medium font-semibold text-nowrap sm:inline block">
                         Day {act.day_number} ({act.dayDate})
                       </span>{" "}
-                      <span className="text-white-300 sm:inline block">
+                      <span className="-300 sm:inline block">
                         {act.firstActivityName}
                       </span>
                     </span>
-                    <span className="text-white-300">
+                    <span className="-300">
                       Total Cost:{" "}
-                      <span className="font-semibold text-green-400">
+                      <span className="font-semibold text-green-600">
                         ${Number(act.totalAmount || 0).toFixed(2)}
                       </span>
                     </span>
@@ -498,7 +498,7 @@ export default function TripOverview() {
                 ))}
               </ul>
             ) : (
-              <p className="text-sm text-white-400">No activities yet.</p>
+              <p className="text-sm -400">No activities yet.</p>
             )}
           </div>
         </div>

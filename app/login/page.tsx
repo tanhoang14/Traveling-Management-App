@@ -20,17 +20,16 @@ export default function LoginPage() {
 };
 
   return (
-    <main className="min-h-screen flex items-center justify-center bg-gray-900 text-white">
-      <div className="bg-gray-800 p-8 rounded-2xl shadow-lg w-full max-w-sm text-center">
+    <main className="min-h-screen flex items-center justify-center  ">
+      <div className="bg-brown-700 p-8 rounded-2xl shadow-lg w-full max-w-sm text-center">
         <h1 className="text-2xl font-bold mb-6">🌍 Travel App Login</h1>
 
-        <button
-          onClick={signInWithGoogle}
-          className="google-content-bg w-full flex items-center justify-center gap-2 p-3 rounded-lg hover:opacity-90"
-        >
-          <span>🔑</span>
-          <span>Login with Google</span>
+        <div className="flex items-center justify-center">
+        <button onClick={signInWithGoogle}
+              className="flex items-center bg-white border border-gray-300 rounded-lg shadow-md px-6 py-2 text-sm font-medium text-gray-800 dark:text-white hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+            <span className="text-black">Continue with Google</span>
         </button>
+</div>
       </div>
     </main>
   );

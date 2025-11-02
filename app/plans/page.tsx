@@ -49,15 +49,15 @@ export default function TripsPage() {
   }, [session]);
 
   return (
-    <main className="min-h-screen bg-gray-900 text-white p-8 mb-4">
+    <main className="min-h-screen p-8 mb-4">
       {/* Back Button */}
       <div className="flex items-center mb-6">
         <button
           onClick={() => router.push("/")}
-          className="p-2 rounded-full bg-gray-800 hover:bg-gray-700 transition-colors"
+          className="p-2 rounded-full bg-brown-700 hover:bg-gray-700 transition-colors"
           aria-label="Go back"
         >
-          <ArrowLeft className="w-6 h-6 text-white" />
+          <ArrowLeft className="w-6 h-6 " />
         </button>
       </div>
 
@@ -73,7 +73,7 @@ export default function TripsPage() {
                   />
           ) : trips.length === 0 && (
             <div>
-              <p className="text-lg text-white-400 mb-4 text-center">
+              <p className="text-lg -400 mb-4 text-center">
                     You don’t have any trips yet.
               </p>
           </div>
@@ -89,8 +89,8 @@ export default function TripsPage() {
                 ).toLocaleDateString()}`}           
             onClick={() => router.push(`/plans/${trip.trip_id}`)}
             className="
-                  px-6 py-4 rounded-lg text-white font-semibold
-                  bg-gray-800
+                  px-6 py-4 rounded-lg  font-semibold
+                  bg-brown-700
                   mb-2
                   cursor-pointer
                   w-full"
@@ -102,17 +102,17 @@ export default function TripsPage() {
          <Card onClick={() => router.push("/plans/trips/create")}
               className="flex flex-col items-center justify-center cursor-pointer 
                border-2 border-dashed border-gray-500 mt-2 mb-2
-               px-6 py-10 rounded-lg text-white font-semibold 
-               hover:bg-gray-800 transition w-full"
+               px-6 py-10 rounded-lg  font-semibold 
+               hover:bg-brown-700 transition w-full"
           >
           <p>Create New Trip</p>
   </Card>
       </div>
   </div>
-      <button className="fixed bottom-6 right-6 flex items-center gap-2 px-5 py-3 rounded-full bg-blue-600 hover:bg-blue-500 shadow-lg transition-colors"
+      <button className="fixed bottom-6 right-6 flex items-center gap-2 px-5 py-3 rounded-full bg-neo-moss hover:bg-blue-500 shadow-lg transition-colors"
           aria-label="Add an existing trip">
-          <Plus className="w-5 h-5 text-white" />
-          <span className="text-white font-medium">Add an existing trip</span>
+          <Plus className="w-5 h-5 " />
+          <span className=" font-medium">Add an existing trip</span>
       </button>
     </main>
   );

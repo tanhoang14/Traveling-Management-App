@@ -18,7 +18,7 @@ export default function Home() {
 
   if (session === undefined) {
     return (
-      <main className="min-h-screen flex items-center justify-center bg-gray-900 text-white">
+      <main className="min-h-screen flex items-center justify-center  ">
         <ProgressSpinner
           style={{ width: "50px", height: "50px" }}
           strokeWidth="8"

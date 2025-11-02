@@ -14,16 +14,14 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #ffd6b6;
+    --foreground: black;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font: normal .85em "PT Mono", arial, sans-serif;
-  font-size:25px;
 }
 
 .paper {
@@ -164,9 +162,25 @@ body {
   100% { background-position: 0% 50%; }
 }
 
-  ::-webkit-calendar-picker-indicator {
+  /* ::-webkit-calendar-picker-indicator {
     filter: invert(1)
             brightness(50%)
             sepia(100%)
             hue-rotate(180deg)
+} */
+
+.bg-brown-700{
+  background-color: #ebcbae;
+}
+
+.p-datepicker-group-container{
+  background-color: beige;
+}
+
+.bg-neo-moss{ 
+	background-color: #4d727e; 
+}
+
+.bg-red-rum{
+  background-color: #b32c50;
 }

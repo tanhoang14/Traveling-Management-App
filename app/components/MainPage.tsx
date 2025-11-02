@@ -58,7 +58,7 @@ export default function MainPage() {
   };
 
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center p-8 paper text-white">
+    <main className="min-h-screen flex flex-col items-center justify-center p-8 paper ">
       <h1 className="text-3xl font-bold mb-10 text-center">
         🌍 Travel App Management
       </h1>
@@ -90,7 +90,7 @@ export default function MainPage() {
 
         <button
           onClick={handleLogout}
-          className="w-full px-6 py-3 mt-4 rounded-lg text-white font-semibold
+          className="w-full px-6 text-white py-3 mt-4 rounded-lg  font-semibold
             bg-gradient-to-r from-gray-600 via-gray-700 to-gray-800
             hover:from-gray-800 hover:via-gray-700 hover:to-gray-600
             shadow-lg shadow-gray-700/50 transition-all duration-500 ease-in-out hover:scale-105"

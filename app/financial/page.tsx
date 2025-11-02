@@ -36,13 +36,13 @@ const FinancialPage: React.FC = () => {
   }, [startDate, endDate, dailyAmount]);
 
   return (
-    <main className="min-h-screen bg-gray-900 text-white p-8">
+    <main className="min-h-screen   p-8">
       <div className="flex items-center mb-6">
         <button
           onClick={() => router.back()}
-          className="p-2 rounded-full bg-gray-800 hover:bg-gray-700 transition-colors"
+          className="p-2 rounded-full bg-brown-700 hover:bg-gray-700 transition-colors"
         >
-          <ArrowLeft className="w-6 h-6 text-white" />
+          <ArrowLeft className="w-6 h-6 " />
         </button>
       </div>
 

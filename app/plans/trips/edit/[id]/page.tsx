@@ -117,22 +117,22 @@ export default function EditTripPage() {
 
   if (!trip) {
     return (
-      <div className="flex justify-center items-center min-h-screen text-white bg-gray-900">
+      <div className="flex justify-center items-center min-h-screen  ">
         Loading trip details...
       </div>
     );
   }
 
   return (
-    <main className="min-h-screen bg-gray-900 text-white p-8">
+    <main className="min-h-screen   p-8">
       <Toast ref={toast} />
 
       <div className="flex items-center mb-6">
         <button
           onClick={() => router.back()}
-          className="p-2 rounded-full bg-gray-800 hover:bg-gray-700 transition-colors"
+          className="p-2 rounded-full bg-brown-700 hover:bg-gray-700 transition-colors"
         >
-          <ArrowLeft className="w-6 h-6 text-white" />
+          <ArrowLeft className="w-6 h-6 " />
         </button>
       </div>
 
@@ -140,7 +140,7 @@ export default function EditTripPage() {
 
       <form
         onSubmit={handleSubmit}
-        className="space-y-6 max-w-md mx-auto bg-gray-800 p-6 rounded-lg shadow-lg"
+        className="space-y-6 max-w-md mx-auto bg-brown-700 p-6 rounded-lg shadow-lg"
       >
         <div>
           <label className="block text-sm mb-2">Trip Location</label>
@@ -197,9 +197,11 @@ export default function EditTripPage() {
           />
         </div>
 
+       <div className="flex justify-center mt-6">
         <button type="submit" className="green-button-style">
           💾 Save Changes
         </button>
+       </div>
       </form>
     </main>
   );

@@ -121,16 +121,16 @@ const handleCreateTrip = async () => {
   };
 
   return (
-    <main className="min-h-screen bg-gray-900 text-white p-8">
+    <main className="min-h-screen   p-8">
       <Toast ref={toast} />
 
       <div className="flex items-center mb-6">
         <button
           onClick={() => router.back()}
-          className="p-2 rounded-full bg-gray-800 hover:bg-gray-700 transition-colors"
+          className="p-2 rounded-full bg-brown-700 hover:bg-gray-700 transition-colors"
           aria-label="Go back"
         >
-          <ArrowLeft className="w-6 h-6 text-white" />
+          <ArrowLeft className="w-6 h-6 " />
         </button>
       </div>
 
@@ -138,7 +138,7 @@ const handleCreateTrip = async () => {
 
       <form
         onSubmit={handleSubmit}
-        className="space-y-6 max-w-md mx-auto bg-gray-800 p-6 rounded-lg shadow-lg"
+        className="space-y-6 max-w-md mx-auto bg-brown-700 p-6 rounded-lg shadow-lg"
       >
         {/* Trip Location */}
         <div>
@@ -202,9 +202,15 @@ const handleCreateTrip = async () => {
         </div>
 
         {/* Submit Button */}
-        <button type="submit" className="green-button-style">
-          ✅ Create Trip
+       <div className="flex justify-center mt-6">
+        <button
+          type="submit"
+          className="green-button-style"
+        >
+          Create Trip
         </button>
+      </div>
+
       </form>
     </main>
   );
