@@ -44,3 +44,9 @@ export interface Traveler {
   name: string;
   avatar: string;
 }
+
+export interface CategoryData {
+  name: string;
+  value: number;
+  [key: string]: any;
+}
