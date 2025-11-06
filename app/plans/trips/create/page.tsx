@@ -4,6 +4,7 @@ import { ArrowLeft } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { Calendar } from "primereact/calendar";
 import { InputText } from "primereact/inputtext";
+import { InputTextarea } from "primereact/inputtextarea";
 import { InputNumber } from 'primereact/inputnumber';
 import { Toast } from "primereact/toast";
 import { supabase } from "../../../../lib/supbabaseClient";
@@ -193,11 +194,12 @@ const handleCreateTrip = async () => {
          {/* Note */}
         <div>
           <label className="block text-sm mb-2">Note</label>
-          <InputText
-            type="text"
+          <InputTextarea
             placeholder="Enter a note (Optional)"
             onChange={(e) => setNote(e.target.value)}
             className="component-style"
+            rows={4}
+            autoResize
           />
         </div>
 

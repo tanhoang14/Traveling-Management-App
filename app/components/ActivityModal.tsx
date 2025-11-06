@@ -29,18 +29,16 @@ export default function ActivityModal({
   const [categoryOptions, setCategoryOptions] = useState<CategoryOption[]>([]);
   const toast = useRef<Toast>(null);
 
-  // ✅ Load category options from Supabase
+  // ✅ Load categories
   useEffect(() => {
     const fetchCategories = async () => {
       const { data, error } = await supabase
         .from("activity_category")
         .select("activity_category_id, category_name");
-
       if (error) {
         console.error("Error fetching categories:", error.message);
         return;
       }
-
       if (data) {
         const mapped: CategoryOption[] = data.map((x: CategoryRow) => ({
           label: x.category_name,
@@ -49,10 +47,10 @@ export default function ActivityModal({
         setCategoryOptions(mapped);
       }
     };
-
     fetchCategories();
   }, []);
 
+  // Sync form data when opening modal
   useEffect(() => {
     setFormData(initialData);
   }, [initialData]);
@@ -62,13 +60,15 @@ export default function ActivityModal({
 
     if (!formData.startTime) {
       toast.current?.show({
-        detail: "Please enter start times.",
+        severity: "warn",
+        summary: "Missing Field",
+        detail: "Please enter start time.",
         life: 2500,
       });
       return;
     }
 
-      if (!formData.name || formData.name.trim().length === 0) {
+    if (!formData.name?.trim()) {
       toast.current?.show({
         severity: "warn",
         summary: "Missing Field",
@@ -96,16 +96,13 @@ export default function ActivityModal({
   return (
     <div className="fixed inset-0 bg-black/20 backdrop-blur-sm z-50 flex justify-center items-center p-4">
       <Toast ref={toast} position="top-right" />
-      <div className="bg-brown-700 backdrop-blur-md p-6 rounded-xl shadow-2xl w-full max-w-md border border-gray-700/50">
+      <div className="bg-brown-700 p-6 rounded-xl shadow-2xl w-full max-w-md border border-gray-700/50">
         {/* Header */}
         <div className="flex justify-between items-center mb-4 border-b border-gray-700 pb-3">
           <h3 className="text-xl font-bold">
             {isEdit ? "Edit Activity" : "Add New Activity"}
           </h3>
-          <button
-            onClick={onClose}
-            className="p-1 -400 hover:"
-          >
+          <button onClick={onClose} className="p-1 hover:bg-gray-600 rounded-full">
             <X className="w-5 h-5" />
           </button>
         </div>
@@ -113,30 +110,21 @@ export default function ActivityModal({
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-5">
           {/* Start Time */}
-          <div className="flex gap-4">
-            <div className="flex-1">
-              <label className="block text-sm font-medium -300 mb-1">
-                Start Time
-              </label>
-              <input
-                type="time"
-                value={formData.startTime || ""}
-                onChange={(e) =>
-                  setFormData((prev) => ({
-                    ...prev,
-                    startTime: e.target.value,
-                  }))
-                }
-                className="w-full p-2 rounded"
-              />
-            </div>
+          <div>
+            <label className="block text-sm font-medium mb-1">Start Time</label>
+            <input
+              type="time"
+              value={formData.startTime || ""}
+              onChange={(e) =>
+                setFormData((prev) => ({ ...prev, startTime: e.target.value }))
+              }
+              className="w-full p-2 rounded"
+            />
           </div>
 
           {/* Activity Name */}
           <div>
-            <label className="block text-sm font-medium -300 mb-1">
-              Activity Name
-            </label>
+            <label className="block text-sm font-medium mb-1">Activity Name</label>
             <InputText
               value={formData.name}
               onChange={(e) =>
@@ -146,47 +134,52 @@ export default function ActivityModal({
             />
           </div>
 
-          {/* Cost & Category */}
-          <div className="flex gap-4">
-            <div className="flex-1">
-              <label className="block text-sm font-medium -300 mb-1">
-                Cost
-              </label>
-              <InputNumber
-                value={Number(formData.cost) || 0}
-                onValueChange={(e) =>
-                  setFormData((prev) => ({ ...prev, cost: e.value ?? "" }))
-                }
-                mode="currency"
-                currency="USD"
-                locale="en-US"
-                className="w-full"
-              />
-            </div>
+          {/* 🔗 Link Field */}
+          <div>
+            <label className="block text-sm font-medium mb-1">Reference Link (Optional)</label>
+            <InputText
+              value={formData.link ?? ""}
+              onChange={(e) =>
+                setFormData((prev) => ({ ...prev, link: e.target.value }))
+              }
+              className="w-full"
+            />
           </div>
 
-          <div className="flex gap-4">
-            <div className="flex-1">
-              <label className="block text-sm font-medium -300 mb-1">
-                Category
-              </label>
-              <Dropdown
-                value={formData.category_id}
-                onChange={(e) =>
-                  setFormData((prev) => ({ ...prev, category_id: e.value }))
-                }
-                options={categoryOptions}
-                placeholder="Select Category"
-                className="w-full text-base"
-                panelClassName="bg-brown-700 border border-gray-700 shadow-lg"
-              />
-            </div>
+          {/* Cost */}
+          <div>
+            <label className="block text-sm font-medium mb-1">Cost</label>
+            <InputNumber
+              value={Number(formData.cost) || 0}
+              onValueChange={(e) =>
+                setFormData((prev) => ({ ...prev, cost: e.value ?? "" }))
+              }
+              mode="currency"
+              currency="USD"
+              locale="en-US"
+              className="w-full"
+            />
           </div>
 
-          {/* Submit Button */}
+          {/* Category */}
+          <div>
+            <label className="block text-sm font-medium mb-1">Category</label>
+            <Dropdown
+              value={formData.category_id}
+              onChange={(e) =>
+                setFormData((prev) => ({ ...prev, category_id: e.value }))
+              }
+              options={categoryOptions}
+              placeholder="Select Category"
+              className="w-full text-base"
+              panelClassName="bg-brown-700 border border-gray-700 shadow-lg"
+            />
+          </div>
+
+          {/* Submit */}
           <button
             type="submit"
-            className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-neo-moss hover:bg-blue-500 rounded-lg font-semibold transition-colors mt-6 text-white font-bold"
+            className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-neo-moss hover:bg-blue-500 rounded-lg font-semibold transition-colors mt-6 text-white"
           >
             <Save className="w-5 h-5" />
             {isEdit ? "Update Activity" : "Add Activity"}

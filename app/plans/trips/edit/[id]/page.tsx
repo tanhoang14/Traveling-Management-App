@@ -4,6 +4,7 @@ import { ArrowLeft } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { Calendar } from "primereact/calendar";
 import { InputText } from "primereact/inputtext";
+import { InputTextarea } from "primereact/inputtextarea";
 import { InputNumber } from "primereact/inputnumber";
 import { Toast } from "primereact/toast";
 import { supabase } from "../../../../../lib/supbabaseClient";
@@ -189,11 +190,13 @@ export default function EditTripPage() {
 
         <div>
           <label className="block text-sm mb-2">Note</label>
-          <InputText
+          <InputTextarea
             value={note ?? ""}
             onChange={(e) => setNote(e.target.value)}
             placeholder="Enter a note (Optional)"
             className="component-style"
+            rows={4}
+            autoResize
           />
         </div>
 

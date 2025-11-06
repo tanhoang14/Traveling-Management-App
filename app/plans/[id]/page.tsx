@@ -542,7 +542,7 @@ export default function TripOverview() {
             <button
               onClick={() => router.push(`/plans/trips/activities/${tripId}`)}
             >
-              <Pencil className="w-4 h-4 " />
+              <a className="italic text-brown-moss">View Details</a>
             </button>
           </div>
           <div className="text-sm -300">

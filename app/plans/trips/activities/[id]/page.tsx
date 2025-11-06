@@ -1,7 +1,15 @@
 "use client";
 import { useEffect, useState, useMemo, useRef } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { ArrowLeft, ArrowRight, Plus, Save, X, Edit2 } from "lucide-react";
+import {
+  ArrowLeft,
+  ArrowRight,
+  Plus,
+  Save,
+  X,
+  Edit2,
+  Link,
+} from "lucide-react";
 import { ProgressSpinner } from "primereact/progressspinner";
 import { Toast } from "primereact/toast";
 import { supabase } from "@/lib/supbabaseClient";
@@ -113,6 +121,7 @@ export default function ActivityPage() {
             cost: a.cost,
             category_id: a.activity_category_id,
             user_id: a.user_id,
+            link: a.link,
           }));
         }
       });
@@ -168,6 +177,7 @@ export default function ActivityPage() {
             activity_name: formatted.name,
             cost: formatted.cost,
             activity_category_id: formatted.category_id,
+            link: formatted.link,
           })
           // CRITICAL: Filter by the ID from the submitted data
           .eq("activity_id", formatted.activity_id);
@@ -234,6 +244,7 @@ export default function ActivityPage() {
               start_time: formatted.startTime,
               activity_name: formatted.name,
               cost: formatted.cost,
+              link: formatted.link,
               activity_category_id: formatted.category_id,
               user_id: userId,
             },
@@ -401,7 +412,19 @@ export default function ActivityPage() {
                 <div>{formatTime(act.startTime)}</div>
 
                 {/* Activity */}
-                <div className="break-words">{act.name}</div>
+                <div className="break-words flex items-center gap-2">
+                  <span>{act.name}</span>
+                  {act.link && (
+                    <a
+                      href={act.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-400 hover:text-blue-300 transition"
+                    >
+                      <Link color="#36454F" className="w-4 h-4 sm:w-5 sm:h-5" />
+                    </a>
+                  )}
+                </div>
 
                 {/* Cost */}
                 <div className="text-green-600">
