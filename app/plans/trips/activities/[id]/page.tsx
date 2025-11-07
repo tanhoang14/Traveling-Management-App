@@ -5,12 +5,13 @@ import {
   ArrowLeft,
   ArrowRight,
   Plus,
-  Save,
+  NotepadText,
   X,
   Edit2,
   Link,
 } from "lucide-react";
 import { ProgressSpinner } from "primereact/progressspinner";
+import { Dialog } from "primereact/dialog";
 import { Toast } from "primereact/toast";
 import { supabase } from "@/lib/supbabaseClient";
 import { useUserId, useUserName } from "../../../../../lib/userUtils";
@@ -32,6 +33,8 @@ export default function ActivityPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [editIndex, setEditIndex] = useState<number | null>(null);
+  const [isNoteDialogOpen, setIsNoteDialogOpen] = useState(false);
+  const [selectedNote, setSelectedNote] = useState<string | null>(null);
   const [categories, setCategories] = useState<Record<string, string>>({});
   const [modalInitialData, setModalInitialData] =
     useState<Activity>(initialActivityState);
@@ -122,6 +125,7 @@ export default function ActivityPage() {
             category_id: a.activity_category_id,
             user_id: a.user_id,
             link: a.link,
+            note: a.note,
           }));
         }
       });
@@ -151,6 +155,38 @@ export default function ActivityPage() {
     // You can remove setIsEditing(true) and setEditIndex(index) entirely
   };
 
+  const handleOpenNoteDialog = async (activityId: string) => {
+    try {
+      const { data, error } = await supabase
+        .from("activities")
+        .select("note")
+        .eq("activity_id", activityId)
+        .single();
+
+      if (error) throw error;
+
+      if (data?.note) {
+        setSelectedNote(data.note);
+        setIsNoteDialogOpen(true);
+      } else {
+        toast.current?.show({
+          severity: "info",
+          summary: "No Note Found",
+          detail: "This activity has no note yet.",
+          life: 3000,
+        });
+      }
+    } catch (err: any) {
+      console.error("Error fetching note:", err.message);
+      toast.current?.show({
+        severity: "error",
+        summary: "Error",
+        detail: "Could not load note.",
+        life: 3000,
+      });
+    }
+  };
+
   const handleCloseModal = () => setIsModalOpen(false);
 
   // --- SAVE / ADD ACTIVITY ---
@@ -178,6 +214,7 @@ export default function ActivityPage() {
             cost: formatted.cost,
             activity_category_id: formatted.category_id,
             link: formatted.link,
+            note: formatted.note,
           })
           // CRITICAL: Filter by the ID from the submitted data
           .eq("activity_id", formatted.activity_id);
@@ -247,6 +284,7 @@ export default function ActivityPage() {
               link: formatted.link,
               activity_category_id: formatted.category_id,
               user_id: userId,
+              note: formatted.note,
             },
           ])
           .select("activity_id")
@@ -411,23 +449,39 @@ export default function ActivityPage() {
                 {/* Time */}
                 <div>{formatTime(act.startTime)}</div>
 
-                {/* Activity */}
-                <div className="break-words flex items-center gap-2">
+                {/* Activity && Link */}
+                <div className="break-words flex items-center gap-2 flex-wrap">
                   <span>{act.name}</span>
-                  {act.link && (
-                    <a
-                      href={act.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-blue-400 hover:text-blue-300 transition"
-                    >
-                      <Link color="#36454F" className="w-4 h-4 sm:w-5 sm:h-5" />
-                    </a>
-                  )}
+                  <div className="flex items-center">
+                    {act.note && (
+                      <button
+                        onClick={() => handleOpenNoteDialog(act.activity_id)}
+                        className="text-blue-400 hover:text-blue-300 transition mr-2"
+                      >
+                        <NotepadText
+                          color="#36454F"
+                          className="w-4 h-4 sm:w-5 sm:h-5"
+                        />
+                      </button>
+                    )}
+                    {act.link && (
+                      <a
+                        href={act.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-400 hover:text-blue-300 transition mr-2"
+                      >
+                        <Link
+                          color="#36454F"
+                          className="w-4 h-4 sm:w-5 sm:h-5"
+                        />
+                      </a>
+                    )}
+                  </div>
                 </div>
 
                 {/* Cost */}
-                <div className="text-green-600">
+                <div className="text-green-700">
                   ${Number(act.cost || 0).toFixed(2)}
                 </div>
 
@@ -478,6 +532,29 @@ export default function ActivityPage() {
         isEdit={isEditing}
         editIndex={editIndex}
       />
+
+      {/* Note Dialog */}
+      <Dialog
+        header={
+          <span className="text-lg font-bold text-white">Activity Note</span>
+        }
+        visible={isNoteDialogOpen}
+        style={{ width: "90%", maxWidth: "500px" , padding:"10px", bottom:"5rem",backgroundColor:"#5C4033"}}
+        modal
+        className="rounded-xl overflow-hidden"
+        contentClassName="bg-brown-1000 text-white p-5 rounded-b-xl"
+        onHide={() => setIsNoteDialogOpen(false)}
+      >
+        <div>
+          {selectedNote ? (
+            <p className="whitespace-pre-wrap text-base leading-relaxed">
+              {selectedNote}
+            </p>
+          ) : (
+            <p className="italic text-gray-400">No note available.</p>
+          )}
+        </div>
+      </Dialog>
     </main>
   );
 }

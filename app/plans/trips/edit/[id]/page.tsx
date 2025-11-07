@@ -87,8 +87,6 @@ export default function EditTripPage() {
       })
       .eq("trip_id", tripId).select(); 
 
-    console.log("Update result:", { data, error, status });
-
     if (error) {
       toast.current?.show({
         severity: "error",

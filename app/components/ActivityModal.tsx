@@ -3,6 +3,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { InputText } from "primereact/inputtext";
 import { InputNumber } from "primereact/inputnumber";
 import { Dropdown } from "primereact/dropdown";
+import { InputTextarea } from "primereact/inputtextarea";
 import { Save, X } from "lucide-react";
 import { Toast } from "primereact/toast";
 import { supabase } from "@/lib/supbabaseClient";
@@ -130,7 +131,7 @@ export default function ActivityModal({
               onChange={(e) =>
                 setFormData((prev) => ({ ...prev, name: e.target.value }))
               }
-              className="w-full"
+              className="w-full border border-gray-600 focus:outline-none"
             />
           </div>
 
@@ -142,7 +143,7 @@ export default function ActivityModal({
               onChange={(e) =>
                 setFormData((prev) => ({ ...prev, link: e.target.value }))
               }
-              className="w-full"
+              className="w-full border border-gray-600 focus:outline-none"
             />
           </div>
 
@@ -157,7 +158,7 @@ export default function ActivityModal({
               mode="currency"
               currency="USD"
               locale="en-US"
-              className="w-full"
+              className="w-full border border-gray-600 focus:outline-none"
             />
           </div>
 
@@ -173,6 +174,21 @@ export default function ActivityModal({
               placeholder="Select Category"
               className="w-full text-base"
               panelClassName="bg-brown-700 border border-gray-700 shadow-lg"
+            />
+          </div>
+
+              {/* 📝 Note Field */}
+          <div>
+            <label className="block text-sm font-medium mb-1">Note (Optional)</label>
+            <InputTextarea
+              value={formData.note ?? ""}
+              onChange={(e) =>
+                setFormData((prev) => ({ ...prev, note: e.target.value }))
+              }
+              rows={4}
+              autoResize
+              placeholder="Add additional details or reminders..."
+              className="w-full p-2 rounded border border-gray-600 focus:outline-none"
             />
           </div>
 

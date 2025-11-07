@@ -8,6 +8,7 @@ export interface Activity {
   category_id: string;
   user_id: string;
   link?: string;
+  note: string;
 }
 
 export interface CategoryOption {
@@ -29,6 +30,7 @@ export const initialActivityState: Activity = {
   category_id: "",
   user_id: "",
   link: "",
+  note: "",
 };
 
 export interface Trip {

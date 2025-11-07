@@ -560,7 +560,7 @@ export default function TripOverview() {
                     </span>
                     <span className="-300">
                       Total Cost:{" "}
-                      <span className="font-semibold text-green-600">
+                      <span className="font-semibold text-green-700">
                         ${Number(act.totalAmount || 0).toFixed(2)}
                       </span>
                     </span>
