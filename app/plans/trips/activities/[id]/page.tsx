@@ -369,6 +369,19 @@ const handleOpenEditModal = (activityId: string) => {
   };
 
   const handleEditTitleClick = () => {
+    // Check if there is at least one activity for the current day
+  const dayActivities = activities[currentDay] || [];
+  if (dayActivities.length === 0) {
+    toast.current?.show({
+      severity: "warn",
+      summary: "No Activities",
+      detail: "Please add at least one activity before editing the day title.",
+      life: 3000,
+    });
+    return; // stop opening the title dialog
+  }
+  
+  // If there is at least one activity, allow editing
     setTitleInput(dayTitles[currentDay] || "");
     setIsTitleDialogOpen(true);
   };
