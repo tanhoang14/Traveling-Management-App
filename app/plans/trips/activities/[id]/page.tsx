@@ -7,8 +7,10 @@ import {
   Plus,
   NotepadText,
   X,
+  Check,
   Edit2,
   Link,
+  Pencil,
 } from "lucide-react";
 import { ProgressSpinner } from "primereact/progressspinner";
 import { Dialog } from "primereact/dialog";
@@ -26,12 +28,15 @@ export default function ActivityPage() {
 
   const [trip, setTrip] = useState<any>(null);
   const [currentDay, setCurrentDay] = useState(1);
+  const [dayTitles, setDayTitles] = useState<Record<number, string>>({});
   const [activities, setActivities] = useState<Record<number, Activity[]>>({});
   const [loading, setLoading] = useState(true);
 
   // Modal & Misc State
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
+  const [isTitleDialogOpen, setIsTitleDialogOpen] = useState(false);
+  const [titleInput, setTitleInput] = useState<string>("");
   const [editIndex, setEditIndex] = useState<number | null>(null);
   const [isNoteDialogOpen, setIsNoteDialogOpen] = useState(false);
   const [selectedNote, setSelectedNote] = useState<string | null>(null);
@@ -97,7 +102,7 @@ export default function ActivityPage() {
 
       const { data, error } = await supabase
         .from("days")
-        .select("day_id, day_number, activities(*)")
+        .select("day_id, day_number, title, activities(*)")
         .eq("trip_id", tripId);
 
       if (error) {
@@ -112,6 +117,8 @@ export default function ActivityPage() {
       }
 
       const grouped: Record<number, Activity[]> = {};
+      const titles: Record<number, string> = {};
+
       for (let i = 1; i <= (trip.trip_duration || 1); i++) grouped[i] = [];
 
       data.forEach((day) => {
@@ -128,8 +135,10 @@ export default function ActivityPage() {
             note: a.note,
           }));
         }
+        titles[day.day_number] = day.title || "";
       });
 
+      setDayTitles(titles);
       setActivities(grouped);
     };
 
@@ -359,6 +368,48 @@ export default function ActivityPage() {
     }
   };
 
+  const handleEditTitleClick = () => {
+    setTitleInput(dayTitles[currentDay] || "");
+    setIsTitleDialogOpen(true);
+  };
+
+  const handleSaveTitle = async () => {
+    try {
+      // Update in Supabase
+      const { data, error } = await supabase
+        .from("days")
+        .update({ title: titleInput })
+        .eq("trip_id", tripId)
+        .eq("day_number", currentDay)
+        .select()
+        .single();
+
+      if (error) throw error;
+
+      // Update local state
+      setDayTitles((prev) => ({
+        ...prev,
+        [currentDay]: titleInput,
+      }));
+
+      setIsTitleDialogOpen(false);
+      toast.current?.show({
+        severity: "success",
+        summary: "Title Updated",
+        detail: "Day title successfully saved!",
+        life: 3000,
+      });
+    } catch (err: any) {
+      console.error("Error updating day title:", err.message);
+      toast.current?.show({
+        severity: "error",
+        summary: "Update Failed",
+        detail: err.message || "Could not save title.",
+        life: 4000,
+      });
+    }
+  };
+
   // --- Sort Activities by Start Time ---
   const sortedActivities = useMemo(() => {
     const list = activities[currentDay] || [];
@@ -416,6 +467,15 @@ export default function ActivityPage() {
               ).toLocaleDateString("en-US", { timeZone: "UTC" })}
             </p>
           )}
+          <div className="mt-1 flex justify-center items-center gap-1">
+            <p className="font-bold text-lg sm:text-xl mr-1">
+              Activity Title: {dayTitles[currentDay]}
+            </p>
+            <Pencil
+              className="w-3.5 h-3.5 sm:w-4 sm:h-4 cursor-pointer"
+              onClick={handleEditTitleClick}
+            />
+          </div>
         </div>
 
         <button
@@ -539,7 +599,13 @@ export default function ActivityPage() {
           <span className="text-lg font-bold text-white">Activity Note</span>
         }
         visible={isNoteDialogOpen}
-        style={{ width: "90%", maxWidth: "500px" , padding:"10px", bottom:"5rem",backgroundColor:"#5C4033"}}
+        style={{
+          width: "90%",
+          maxWidth: "500px",
+          padding: "10px",
+          bottom: "5rem",
+          backgroundColor: "#5C4033",
+        }}
         modal
         className="rounded-xl overflow-hidden"
         contentClassName="bg-brown-1000 text-white p-5 rounded-b-xl"
@@ -553,6 +619,47 @@ export default function ActivityPage() {
           ) : (
             <p className="italic text-gray-400">No note available.</p>
           )}
+        </div>
+      </Dialog>
+      <Dialog
+        header={
+          <span className="text-lg font-bold text-white">Edit Day Title</span>
+        }
+        visible={isTitleDialogOpen}
+        style={{
+          width: "90%",
+          maxWidth: "400px",
+          padding: "10px",
+          backgroundColor: "#5C4033",
+        }}
+        modal
+        className="rounded-xl overflow-hidden"
+        contentClassName="bg-brown-1000 text-white p-5 rounded-b-xl"
+        onHide={() => setIsTitleDialogOpen(false)}
+      >
+        <div className="flex flex-col gap-3">
+          <input
+            type="text"
+            value={titleInput}
+            onChange={(e) => setTitleInput(e.target.value)}
+            className="border border-gray-400 rounded px-2 py-1 text-base sm:text-lg w-full"
+            placeholder="Enter day title"
+            autoFocus
+          />
+          <div className="flex justify-end gap-2 mt-2">
+            <button
+              onClick={() => setIsTitleDialogOpen(false)}
+              className="px-4 py-2 bg-red-500 hover:bg-red-600 rounded-lg text-white"
+            >
+              Cancel
+            </button>
+            <button
+              onClick={handleSaveTitle}
+              className="px-4 py-2 bg-green-600 hover:bg-green-700 rounded-lg text-white"
+            >
+              Save
+            </button>
+          </div>
         </div>
       </Dialog>
     </main>

@@ -22,7 +22,7 @@ export default function TripOverview() {
   const [activities, setActivities] = useState<
     {
       day_number: number;
-      firstActivityName: string;
+      displayName: string;
       totalAmount: number;
       dayDate: string;
     }[]
@@ -83,6 +83,7 @@ export default function TripOverview() {
         .select(
           `
           day_id,
+          title,
           day_number,
           trip_id,
           activities (
@@ -106,8 +107,6 @@ export default function TripOverview() {
         return;
       }
 
-      const startDate = new Date(trip?.trip_start_date);
-
       const grouped = data.map((day: any) => {
         const acts = Array.isArray(day.activities)
           ? day.activities
@@ -124,7 +123,7 @@ export default function TripOverview() {
         const dayDate = getTripDayUTC(trip.trip_start_date, day.day_number);
         return {
           day_number: day.day_number,
-          firstActivityName,
+          displayName: day.title?.trim() || firstActivityName,
           totalAmount,
           dayDate, // store formatted date
         };
@@ -555,7 +554,7 @@ export default function TripOverview() {
                         Day {act.day_number} ({act.dayDate})
                       </span>{" "}
                       <span className="-300 sm:inline block">
-                        {act.firstActivityName}
+                        {act.displayName}
                       </span>
                     </span>
                     <span className="-300">
