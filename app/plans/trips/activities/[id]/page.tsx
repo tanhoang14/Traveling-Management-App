@@ -148,21 +148,21 @@ export default function ActivityPage() {
   const totalDays = trip?.trip_duration || 1;
 
   // --- Modal Handlers ---
-  const handleOpenAddModal = () => {
-    // Always start with a clean slate for new activity
-    setModalInitialData(initialActivityState);
-    setIsModalOpen(true);
-  };
+const handleOpenAddModal = () => {
+  setModalInitialData(initialActivityState);
+  setIsEditing(false); // <--- reset editing mode
+  setIsModalOpen(true);
+};
 
-  const handleOpenEditModal = (index: number) => {
-    const act = activities[currentDay]?.[index];
-    if (act) {
-      // Pass the full activity data, including the necessary activity_id
-      setModalInitialData({ ...act, cost: act.cost || "" });
-      setIsModalOpen(true);
-    }
-    // You can remove setIsEditing(true) and setEditIndex(index) entirely
-  };
+
+const handleOpenEditModal = (activityId: string) => {
+  const act = activities[currentDay]?.find((a) => a.activity_id === activityId);
+  if (act) {
+    setModalInitialData({ ...act, cost: act.cost || "" });
+    setIsEditing(true); // <--- set editing mode
+    setIsModalOpen(true);
+  }
+};
 
   const handleOpenNoteDialog = async (activityId: string) => {
     try {
@@ -553,7 +553,7 @@ export default function ActivityPage() {
                 {/* Actions */}
                 <div className="flex gap-2 sm:gap-3 sm:justify-end mt-2 sm:mt-0">
                   <button
-                    onClick={() => handleOpenEditModal(i)}
+                    onClick={() => handleOpenEditModal(act.activity_id)}
                     className="p-2 bg-neo-moss hover:bg-blue-500 rounded-lg transition active:scale-95"
                   >
                     <Edit2 className="w-4 h-4 sm:w-5 sm:h-5" />
