@@ -380,7 +380,7 @@ const handleOpenEditModal = (activityId: string) => {
     });
     return; // stop opening the title dialog
   }
-  
+
   // If there is at least one activity, allow editing
     setTitleInput(dayTitles[currentDay] || "");
     setIsTitleDialogOpen(true);
@@ -559,7 +559,7 @@ const handleOpenEditModal = (activityId: string) => {
                 </div>
 
                 {/* Category */}
-                <div className="-300 break-words">
+                <div className="-300 text-no-wrap">
                   {categories[act.category_id] || "N/A"}
                 </div>
 
