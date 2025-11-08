@@ -30,8 +30,7 @@ export default function TripsPage() {
       setLoading(true);
       const { data, error } = await supabase
         .from("trip_users")
-        .select(
-          `
+        .select(`
           trip_id,
           trips (
             trip_id,
@@ -42,16 +41,20 @@ export default function TripsPage() {
             trip_duration,
             budget
           )
-        `
-        )
+        `)
         .eq("user_id", session.user.id)
         .order("created_at", { ascending: false });
 
       if (error) {
         console.error("Error fetching trips:", error.message);
       } else {
-        // Flatten trips from relation
-        const formatted = (data || []).map((row) => row.trips).filter(Boolean);
+        const now = new Date();
+        // ✅ Only include trips that are ongoing or upcoming
+        const formatted = (data || [])
+          .map((row) => row.trips as any)
+          .filter(
+            (trip) => trip && new Date(trip.trip_end_date) >= now
+          );
         setTrips(formatted);
       }
       setLoading(false);
@@ -60,8 +63,8 @@ export default function TripsPage() {
     fetchTrips();
   }, [session]);
 
-  //Fetch flight booking
-    useEffect(() => {
+  // Fetch flight booking
+  useEffect(() => {
     const fetchFlightBookings = async () => {
       const { data, error } = await supabase
         .from("flight_bookings")
@@ -69,7 +72,7 @@ export default function TripsPage() {
         .order("created_at", { ascending: true });
 
       if (error) {
-        console.error("Error fetching stay bookings:", error.message);
+        console.error("Error fetching flight bookings:", error.message);
       } else {
         setFlights(data || []);
       }
@@ -97,43 +100,43 @@ export default function TripsPage() {
   }, []);
 
   const recommendedDestinations = [
-  {
-    name: "Paris, France",
-    image: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34",
-    description:
-      "The city of lights and love — explore art, cuisine, and history around every corner.",
-  },
-  {
-    name: "Bali, Indonesia",
-    image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e",
-    description:
-      "Relax on the beaches, dive into turquoise waters, or explore lush rice terraces and temples.",
-  },
-  {
-    name: "Kyoto, Japan",
-    image: "https://images.unsplash.com/photo-1549693578-d683be217e58",
-    description:
-      "Step into Japan’s ancient past with serene temples, cherry blossoms, and traditional tea houses.",
-  },
-  {
-    name: "Santorini, Greece",
-    image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e",
-    description:
-      "Marvel at whitewashed houses with blue domes, breathtaking sunsets, and Aegean Sea views.",
-  },
-  {
-    name: "Reykjavik, Iceland",
-    image: "https://images.unsplash.com/photo-1501785888041-af3ef285b470",
-    description:
-      "Discover glaciers, waterfalls, and the mesmerizing Northern Lights under Arctic skies.",
-  },
-  {
-    name: "Machu Picchu, Peru",
-    image: "https://images.unsplash.com/photo-1503437313881-503a91226402",
-    description:
-      "Explore the ancient Incan citadel hidden high in the Andes — a wonder of the world shrouded in mist.",
-  },
-];
+    {
+      name: "Paris, France",
+      image: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34",
+      description:
+        "The city of lights and love — explore art, cuisine, and history around every corner.",
+    },
+    {
+      name: "Bali, Indonesia",
+      image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e",
+      description:
+        "Relax on the beaches, dive into turquoise waters, or explore lush rice terraces and temples.",
+    },
+    {
+      name: "Kyoto, Japan",
+      image: "https://images.unsplash.com/photo-1549693578-d683be217e58",
+      description:
+        "Step into Japan’s ancient past with serene temples, cherry blossoms, and traditional tea houses.",
+    },
+    {
+      name: "Santorini, Greece",
+      image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e",
+      description:
+        "Marvel at whitewashed houses with blue domes, breathtaking sunsets, and Aegean Sea views.",
+    },
+    {
+      name: "Reykjavik, Iceland",
+      image: "https://images.unsplash.com/photo-1501785888041-af3ef285b470",
+      description:
+        "Discover glaciers, waterfalls, and the mesmerizing Northern Lights under Arctic skies.",
+    },
+    {
+      name: "Machu Picchu, Peru",
+      image: "https://images.unsplash.com/photo-1503437313881-503a91226402",
+      description:
+        "Explore the ancient Incan citadel hidden high in the Andes — a wonder of the world shrouded in mist.",
+    },
+  ];
 
   const handleJoinTrip = async () => {
     if (!tripCode || !session?.user) {
@@ -141,7 +144,6 @@ export default function TripsPage() {
       return;
     }
 
-    // 1️⃣ Find trip by code
     const { data: tripData, error: tripError } = await supabase
       .from("trips")
       .select("trip_id")
@@ -155,7 +157,6 @@ export default function TripsPage() {
 
     const tripId = tripData.trip_id;
 
-    // 2️⃣ Check if user is already part of trip
     const { data: existing, error: checkError } = await supabase
       .from("trip_users")
       .select("trip_user_id")
@@ -173,7 +174,6 @@ export default function TripsPage() {
       return;
     }
 
-    // 3️⃣ Add user to trip
     const { error: insertError } = await supabase
       .from("trip_users")
       .insert([{ trip_id: tripId, user_id: session.user.id }]);
@@ -187,7 +187,6 @@ export default function TripsPage() {
       });
       setJoinVisible(false);
       setTripCode("");
-      // Refresh trips list
       setTimeout(() => window.location.reload(), 1000);
     }
   };
@@ -218,14 +217,14 @@ export default function TripsPage() {
         ) : trips.length === 0 ? (
           <div className="text-center">
             <p className="text-lg text-gray-700 mb-4">
-              You don’t have any trips yet.
+              You don’t have any upcoming trips.
             </p>
             <Card
               onClick={() => router.push("/plans/trips/create")}
               className="flex flex-col items-center justify-center cursor-pointer 
-            border-2 border-dashed border-gray-500 
-            px-6 py-10 rounded-lg font-semibold 
-            hover:bg-brown-700 transition w-full sm:w-96"
+                          border-2 border-dashed border-gray-500 
+                          px-6 py-10 rounded-lg font-semibold 
+                          hover:bg-brown-700 transition w-full sm:w-96"
             >
               <p>Create New Trip</p>
             </Card>
@@ -234,10 +233,10 @@ export default function TripsPage() {
           <section className="w-full max-w-5xl">
             {/* Trip Cards Grid */}
             <div className="flex items-center justify-between mb-3">
-              <h2 className="text-xl font-semibold">⭐Current Trips</h2>
+              <h2 className="text-xl font-semibold">⭐ Current Trips</h2>
               <a
-                href="#traveled-trips"
-                className="text-blue-600 hover:underline text-sm"
+                onClick={() => router.push("/plans/trips/traveled")}
+                className="text-blue-600 hover:underline text-sm cursor-pointer"
               >
                 View Traveled Trips →
               </a>
@@ -257,10 +256,14 @@ export default function TripsPage() {
                   <div className="p-4 text-black">
                     <h3 className="text-lg font-bold mb-1">{trip.location}</h3>
                     <p className="text-sm mb-1">
-                      📅 {new Date(trip.trip_start_date).toLocaleDateString()} -{new Date(trip.trip_end_date).toLocaleDateString()}
+                      📅 {new Date(trip.trip_start_date).toLocaleDateString()} -{" "}
+                      {new Date(trip.trip_end_date).toLocaleDateString()}
                     </p>
                     <p className="text-sm mb-1">⏱ {trip.trip_duration} days</p>
-                    <p className="text-sm">💰 Budget: <span className="text-green-800">${trip.budget}</span></p>
+                    <p className="text-sm">
+                      💰 Budget:{" "}
+                      <span className="text-green-800">${trip.budget}</span>
+                    </p>
                   </div>
                 </Card>
               ))}
@@ -280,10 +283,10 @@ export default function TripsPage() {
         )}
 
         {/* Travel Recommendations Section */}
-     <section className="mt-10 mb-10 w-full max-w-5xl mx-auto">
+        <section className="mt-10 mb-10 w-full max-w-5xl mx-auto">
           <h2 className="text-xl font-semibold mb-4">🌍 Recommended Destinations</h2>
           <StackedCards recommendedDestinations={recommendedDestinations} />
-      </section>
+        </section>
 
         {/* Flight Booking Section */}
         <section className="mt-10 w-full max-w-5xl">
@@ -314,7 +317,7 @@ export default function TripsPage() {
                 </a>
               ))
             ) : (
-              <p className="text-gray-500">No stay booking data available.</p>
+              <p className="text-gray-500">No flight booking data available.</p>
             )}
           </div>
         </section>
@@ -353,6 +356,7 @@ export default function TripsPage() {
           </div>
         </section>
 
+        {/* Floating Join Trip Button */}
         <button
           className="fixed bottom-6 right-6 flex items-center gap-2 px-5 py-3 rounded-full bg-neo-moss hover:bg-blue-500 shadow-lg transition-colors"
           aria-label="Add an existing trip"

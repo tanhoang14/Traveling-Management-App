@@ -42,6 +42,7 @@ export interface Trip {
   budget: number;
   note?: string;
   trip_code: string;
+  image_url?: string;
 }
 
 export interface Traveler {

@@ -64,7 +64,7 @@ export default function StackedCards({ recommendedDestinations }: Props) {
           {activeDestination.name}
         </h2>
 
-        <p className="text-sm leading-relaxed flex justify-center ">
+        <p className="leading-relaxed flex justify-center text-xl line-clamp-4 p-4  ">
           {activeDestination.description
             ? activeDestination.description.length > 450
               ? activeDestination.description.slice(0, 450) + "..."

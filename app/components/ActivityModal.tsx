@@ -95,7 +95,7 @@ export default function ActivityModal({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/20 backdrop-blur-sm z-50 flex justify-center items-center p-4">
+    <div className="fixed inset-0 bg-black/20 z-50 flex justify-center items-center p-4">
       <Toast ref={toast} position="top-right" />
       <div className="bg-brown-700 p-6 rounded-xl shadow-2xl w-full max-w-md border border-gray-700/50">
         {/* Header */}
