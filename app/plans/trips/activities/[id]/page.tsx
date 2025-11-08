@@ -148,21 +148,22 @@ export default function ActivityPage() {
   const totalDays = trip?.trip_duration || 1;
 
   // --- Modal Handlers ---
-const handleOpenAddModal = () => {
-  setModalInitialData(initialActivityState);
-  setIsEditing(false); // <--- reset editing mode
-  setIsModalOpen(true);
-};
-
-
-const handleOpenEditModal = (activityId: string) => {
-  const act = activities[currentDay]?.find((a) => a.activity_id === activityId);
-  if (act) {
-    setModalInitialData({ ...act, cost: act.cost || "" });
-    setIsEditing(true); // <--- set editing mode
+  const handleOpenAddModal = () => {
+    setModalInitialData(initialActivityState);
+    setIsEditing(false); // <--- reset editing mode
     setIsModalOpen(true);
-  }
-};
+  };
+
+  const handleOpenEditModal = (activityId: string) => {
+    const act = activities[currentDay]?.find(
+      (a) => a.activity_id === activityId
+    );
+    if (act) {
+      setModalInitialData({ ...act, cost: act.cost || "" });
+      setIsEditing(true); // <--- set editing mode
+      setIsModalOpen(true);
+    }
+  };
 
   const handleOpenNoteDialog = async (activityId: string) => {
     try {
@@ -370,18 +371,19 @@ const handleOpenEditModal = (activityId: string) => {
 
   const handleEditTitleClick = () => {
     // Check if there is at least one activity for the current day
-  const dayActivities = activities[currentDay] || [];
-  if (dayActivities.length === 0) {
-    toast.current?.show({
-      severity: "warn",
-      summary: "No Activities",
-      detail: "Please add at least one activity before editing the day title.",
-      life: 3000,
-    });
-    return; // stop opening the title dialog
-  }
+    const dayActivities = activities[currentDay] || [];
+    if (dayActivities.length === 0) {
+      toast.current?.show({
+        severity: "warn",
+        summary: "No Activities",
+        detail:
+          "Please add at least one activity before editing the day title.",
+        life: 3000,
+      });
+      return; // stop opening the title dialog
+    }
 
-  // If there is at least one activity, allow editing
+    // If there is at least one activity, allow editing
     setTitleInput(dayTitles[currentDay] || "");
     setIsTitleDialogOpen(true);
   };

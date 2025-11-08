@@ -55,3 +55,26 @@ export interface CategoryData {
   value: number;
   [key: string]: any;
 }
+
+export type StayBooking = {
+  id: string;
+  name: string;
+  logo_url: string;
+  color: string;
+  website_url: string;
+};
+
+export type FlightBooking = {
+  id: string;
+  name: string;
+  logo_url: string;
+  color: string;
+  website_url: string;
+};
+
+export interface Destination {
+  name: string;
+  description?: string;
+  image: string;
+  articles?: string;
+}
