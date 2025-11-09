@@ -4,7 +4,7 @@ import { EffectCards, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/effect-cards";
 import { useState } from "react";
-import { Destination } from "../types/activity";
+import { Destination } from "../types/types";
 
 interface Props {
   recommendedDestinations: Destination[];

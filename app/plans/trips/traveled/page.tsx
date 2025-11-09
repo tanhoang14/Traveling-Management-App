@@ -5,7 +5,7 @@ import { ArrowLeft } from "lucide-react";
 import { ProgressSpinner } from "primereact/progressspinner";
 import { supabase } from "@/lib/supbabaseClient";
 import { useSupabaseSession } from "@/app/components/SupabaseProvider";
-import { Trip } from "@/app/types/activity";
+import { Trip } from "@/app/types/types";
 
 export default function TraveledTripsPage() {
   const router = useRouter();

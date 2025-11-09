@@ -8,7 +8,7 @@ import { Avatar } from "primereact/avatar";
 import { ExternalLink } from "lucide-react";
 import { Toast } from "primereact/toast";
 import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
-import { Trip, Traveler, Activity } from "@/app/types/activity";
+import { Trip, Traveler, Activity } from "@/app/types/types";
 import { getTripDayUTC, formatUTCDate } from "@/lib/converterMethod";
 
 export default function TripOverview() {

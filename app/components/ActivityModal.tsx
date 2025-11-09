@@ -7,7 +7,7 @@ import { InputTextarea } from "primereact/inputtextarea";
 import { Save, X } from "lucide-react";
 import { Toast } from "primereact/toast";
 import { supabase } from "@/lib/supbabaseClient";
-import { Activity, CategoryOption, CategoryRow } from "../types/activity";
+import { Activity, CategoryOption, CategoryRow } from "../types/types";
 
 interface ActivityModalProps {
   isOpen: boolean;

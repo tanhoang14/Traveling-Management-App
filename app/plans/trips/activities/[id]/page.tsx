@@ -18,7 +18,7 @@ import { Toast } from "primereact/toast";
 import { supabase } from "@/lib/supbabaseClient";
 import { useUserId, useUserName } from "../../../../../lib/userUtils";
 import ActivityModal from "../../../../components/ActivityModal";
-import { Activity, initialActivityState } from "../../../../types/activity";
+import { Activity, initialActivityState } from "../../../../types/types";
 import { formatTime } from "@/lib/converterMethod";
 
 export default function ActivityPage() {

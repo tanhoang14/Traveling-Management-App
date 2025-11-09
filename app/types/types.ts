@@ -1,4 +1,4 @@
-// types/activity.ts
+// types
 
 export interface Activity {
   activity_id: string;
@@ -77,5 +77,4 @@ export interface Destination {
   name: string;
   description?: string;
   image: string;
-  articles?: string;
 }

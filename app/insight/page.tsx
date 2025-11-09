@@ -5,10 +5,10 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supbabaseClient";
 import { Dropdown } from "primereact/dropdown";
 import { ArrowLeft } from "lucide-react";
-import { Trip } from "../types/activity";
+import { Trip } from "../types/types";
 import { ProgressSpinner } from "primereact/progressspinner";
 import { useUserId } from "@/lib/userUtils";
-import { CategoryData } from "../types/activity";
+import { CategoryData } from "../types/types";
 
 const COLORS = ["#00C9A7", "#FF6B6B", "#4D96FF", "#F6BE00", "#9B5DE5"];
 

@@ -9,7 +9,7 @@ import { Dialog } from "primereact/dialog";
 import { InputText } from "primereact/inputtext";
 import { Toast } from "primereact/toast";
 import { useSupabaseSession } from "../components/SupabaseProvider";
-import { StayBooking, FlightBooking } from "../types/activity";
+import { StayBooking, FlightBooking } from "../types/types";
 import StackedCards from "../components/StackedCards";
 
 export default function TripsPage() {
