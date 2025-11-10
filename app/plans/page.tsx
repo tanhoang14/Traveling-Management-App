@@ -30,7 +30,8 @@ export default function TripsPage() {
       setLoading(true);
       const { data, error } = await supabase
         .from("trip_users")
-        .select(`
+        .select(
+          `
           trip_id,
           trips (
             trip_id,
@@ -41,7 +42,8 @@ export default function TripsPage() {
             trip_duration,
             budget
           )
-        `)
+        `
+        )
         .eq("user_id", session.user.id)
         .order("created_at", { ascending: false });
 
@@ -52,9 +54,7 @@ export default function TripsPage() {
         // ✅ Only include trips that are ongoing or upcoming
         const formatted = (data || [])
           .map((row) => row.trips as any)
-          .filter(
-            (trip) => trip && new Date(trip.trip_end_date) >= now
-          );
+          .filter((trip) => trip && new Date(trip.trip_end_date) >= now);
         setTrips(formatted);
       }
       setLoading(false);
@@ -132,7 +132,8 @@ export default function TripsPage() {
     },
     {
       name: "Machu Picchu, Peru",
-      image: "https://plus.unsplash.com/premium_photo-1694542947673-9e1c61387343?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=774",
+      image:
+        "https://plus.unsplash.com/premium_photo-1694542947673-9e1c61387343?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=774",
       description:
         "Explore the ancient Incan citadel hidden high in the Andes — a wonder of the world shrouded in mist.",
     },
@@ -249,10 +250,18 @@ export default function TripsPage() {
                   className="rounded-xl overflow-hidden bg-brown-700 cursor-pointer hover:shadow-lg transition"
                 >
                   <img
-                    src={trip.image_url}
+                    src={
+                      trip.image_url ||
+                      "https://img.freepik.com/free-vector/illustration-gallery-icon_53876-27002.jpg"
+                    }
                     alt={trip.location}
                     className="w-full h-40 object-cover"
+                    onError={(e) =>
+                      ((e.currentTarget as HTMLImageElement).src =
+                        "https://img.freepik.com/free-vector/illustration-gallery-icon_53876-27002.jpg")
+                    }
                   />
+
                   <div className="p-4 text-black">
                     <h3 className="text-lg font-bold mb-1">{trip.location}</h3>
                     <p className="text-sm mb-1">
@@ -284,7 +293,9 @@ export default function TripsPage() {
 
         {/* Travel Recommendations Section */}
         <section className="mt-10 mb-10 w-full max-w-5xl mx-auto">
-          <h2 className="text-xl font-semibold mb-4">🌍 Recommended Destinations</h2>
+          <h2 className="text-xl font-semibold mb-4">
+            🌍 Recommended Destinations
+          </h2>
           <StackedCards recommendedDestinations={recommendedDestinations} />
         </section>
 
