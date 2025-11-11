@@ -542,7 +542,7 @@ export default function TripOverview() {
           {/* Right Column: Notes */}
           <div className="border border-gray-600 rounded-lg p-4">
             <h3 className="font-semibold text-base mb-2">Notes</h3>
-            <p className="text-sm -300">{trip.note || "No notes yet."}</p>
+            <p className="text-sm -300 whitespace-pre-wrap">{trip.note || "No notes yet."}</p>
           </div>
         </div>
 
