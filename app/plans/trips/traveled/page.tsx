@@ -59,7 +59,7 @@ export default function TraveledTripsPage() {
           onClick={() => router.back()}
           className="p-2 rounded-full bg-brown-700 hover:bg-gray-700 transition-colors"
         >
-          <ArrowLeft className="w-6 h-6 text-white" />
+          <ArrowLeft className="w-6 h-6 text-black" />
         </button>
         <h1 className="text-2xl sm:text-3xl font-bold ml-4 text-center flex-1">
           Traveled Trips

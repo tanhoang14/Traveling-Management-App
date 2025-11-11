@@ -65,6 +65,8 @@ export default function EditTicketPage() {
         setAirline(data.airline);
         setPassenger(data.passenger);
         setFromLocation(data.from_location);
+        setFromAirport(data.from_airport);
+        setToAirport(data.to_airport);
         setToLocation(data.to_location);
         setFlightNumber(data.flight_number);
         setGate(data.gate);
