@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState, useRef } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { ArrowLeft, Pencil, Plus } from "lucide-react";
+import { ArrowLeft, Pencil, Plus, Tickets } from "lucide-react";
 import { supabase } from "@/lib/supbabaseClient";
 import { ProgressSpinner } from "primereact/progressspinner";
 import { Avatar } from "primereact/avatar";
@@ -412,30 +412,42 @@ export default function TripOverview() {
       <div className="bg-brown-700  rounded-xl shadow-lg p-6">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-xl font-semibold">Overview</h2>
-          <div className="relative">
-            <button
-              onClick={() => setShowTripCodePopup((prev) => !prev)}
-              className="rounded-full transition"
-              title="Show Trip Code"
-            >
-              <ExternalLink className="w-5 h-5 text-black" />
-            </button>
+          <div className="flex items-center gap-2">
+            {/* Show Trip Code */}
+            <div className="relative">
+              {/* 🎟️ Tickets */}
+              <button
+                onClick={() => router.push(`/plans/${trip?.trip_id}/tickets`)}
+                className="rounded-full transition"
+                title="View Tickets"
+                style={{ marginRight: "8px" }}
+              >
+                <Tickets className="w-5 h-5 text-black" />
+              </button>
+              <button
+                onClick={() => setShowTripCodePopup((prev) => !prev)}
+                className="rounded-full transition"
+                title="Show Trip Code"
+              >
+                <ExternalLink className="w-5 h-5 text-black" />
+              </button>
 
-            {showTripCodePopup && (
-              <div className="absolute right-0 mt-2 w-48 p-3 bg-white border border-gray-300 rounded shadow-lg z-50">
-                <div className="flex justify-between items-center">
-                  <span className="font-semibold break-all">
-                    {trip?.trip_code}
-                  </span>
-                  <button
-                    onClick={handleCopyTripCode}
-                    className="ml-2 px-2 py-1 bg-gray-700 text-white rounded hover:bg-gray-600 transition"
-                  >
-                    Copy
-                  </button>
+              {showTripCodePopup && (
+                <div className="absolute right-0 mt-2 w-48 p-3 bg-white border border-gray-300 rounded shadow-lg z-50">
+                  <div className="flex justify-between items-center">
+                    <span className="font-semibold break-all">
+                      {trip?.trip_code}
+                    </span>
+                    <button
+                      onClick={handleCopyTripCode}
+                      className="ml-2 px-2 py-1 bg-gray-700 text-white rounded hover:bg-gray-600 transition"
+                    >
+                      Copy
+                    </button>
+                  </div>
                 </div>
-              </div>
-            )}
+              )}
+            </div>
           </div>
         </div>
 

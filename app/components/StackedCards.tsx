@@ -58,7 +58,7 @@ export default function StackedCards({ recommendedDestinations }: Props) {
         </Swiper>
       </div>
       {/* --- Right: Article Section --- */}
-        <div className="w-[100%] md:w-[100%] h-[420px]">
+        <div className="w-[100%] md:w-[100%] h-[220px]">
                   <article className="w-full space-y-4 ml-2 flex justify-center flex-col">
         <h2 className="text-2xl font-bold text-brown-700 dark:text-dark flex justify-center italic">
           {activeDestination.name}
