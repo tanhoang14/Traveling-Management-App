@@ -49,18 +49,6 @@ const FinancialPage: React.FC = () => {
       <h1 className="text-3xl font-bold mb-8 text-center">💰 Financial Planner</h1>
 
       <div className="max-w-md mx-auto space-y-4">
-        {/* Budget Set */}
-        <div>
-          <label className="block mb-1">Budget Set</label>
-          <InputNumber className="component-style"
-                       inputId="currency-us" 
-                       value={budget} 
-                       onValueChange={(e) => setBudget(e.value as number)} 
-                       mode="currency" 
-                       currency="USD" 
-                       locale="en-US" />
-        </div>
-
         {/* Daily Amount */}
         <div>
           <label className="block mb-1">Daily Amount</label>
