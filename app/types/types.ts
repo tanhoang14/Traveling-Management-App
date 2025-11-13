@@ -78,3 +78,8 @@ export interface Destination {
   description?: string;
   image: string;
 }
+
+export interface NoteAppEditorProps {
+  content: string;
+  onUpdate: (content: string) => void;
+}

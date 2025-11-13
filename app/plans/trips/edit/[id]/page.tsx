@@ -4,13 +4,13 @@ import { ArrowLeft, ImageUp } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { Calendar } from "primereact/calendar";
 import { InputText } from "primereact/inputtext";
-import { InputTextarea } from "primereact/inputtextarea";
 import { InputNumber } from "primereact/inputnumber";
 import { Toast } from "primereact/toast";
 import { Image } from "primereact/image";
 import { supabase } from "@/lib/supbabaseClient";
 import { useUserName, useUserId } from "@/lib/userUtils";
 import { v4 as uuidv4 } from "uuid";
+import NoteAppEditor from "@/app/components/NoteAppEditor";
 
 export default function EditTripPage() {
   const router = useRouter();
@@ -266,14 +266,10 @@ export default function EditTripPage() {
         {/* Note */}
         <div>
           <label className="block text-sm mb-2 font-bold">Note</label>
-          <InputTextarea
-            value={note ?? ""}
-            onChange={(e) => setNote(e.target.value)}
-            placeholder="Enter a note (Optional)"
-            className="component-style"
-            rows={4}
-            autoResize
-          />
+          <NoteAppEditor
+              content={note ?? ""}
+              onUpdate={(htmlContent) => setNote(htmlContent)}
+            />
         </div>
 
         {/* Image Upload */}

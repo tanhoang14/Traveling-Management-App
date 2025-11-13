@@ -628,14 +628,16 @@ export default function ActivityPage() {
       >
         <div>
           {selectedNote ? (
-            <p className="whitespace-pre-wrap text-base leading-relaxed">
-              {selectedNote}
-            </p>
+            <div
+              className="rich-text-content prose prose-sm max-w-none text-white"
+              dangerouslySetInnerHTML={{ __html: selectedNote }}
+            />
           ) : (
             <p className="italic text-gray-400">No note available.</p>
           )}
         </div>
       </Dialog>
+
       <Dialog
         header={
           <span className="text-lg font-bold text-white">Edit Day Title</span>

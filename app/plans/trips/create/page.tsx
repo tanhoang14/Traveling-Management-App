@@ -11,6 +11,7 @@ import { Toast } from "primereact/toast";
 import { supabase } from "../../../../lib/supbabaseClient";
 import { useUserName, useUserId } from "../../../../lib/userUtils";
 import {v4 as uuidv4} from 'uuid';
+import NoteAppEditor from "@/app/components/NoteAppEditor";
 
 export default function TripPage() {
   const router = useRouter();
@@ -236,13 +237,7 @@ if (imageFile) {
         {/* Note */}
         <div>
           <label className="block text-sm mb-2 font-bold">Note</label>
-          <InputTextarea
-            placeholder="Enter a note (Optional)"
-            onChange={(e) => setNote(e.target.value)}
-            className="component-style"
-            rows={4}
-            autoResize
-          />
+           <NoteAppEditor content={note || ""} onUpdate={(val) => setNote(val)} />
         </div>
 
         {/* 🖼 Image Upload */}

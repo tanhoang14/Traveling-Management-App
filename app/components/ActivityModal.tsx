@@ -3,11 +3,11 @@ import React, { useEffect, useState, useRef } from "react";
 import { InputText } from "primereact/inputtext";
 import { InputNumber } from "primereact/inputnumber";
 import { Dropdown } from "primereact/dropdown";
-import { InputTextarea } from "primereact/inputtextarea";
 import { Save, X } from "lucide-react";
 import { Toast } from "primereact/toast";
 import { supabase } from "@/lib/supbabaseClient";
 import { Activity, CategoryOption, CategoryRow } from "../types/types";
+import NoteAppEditor from "./NoteAppEditor";
 
 interface ActivityModalProps {
   isOpen: boolean;
@@ -179,17 +179,13 @@ export default function ActivityModal({
 
               {/* 📝 Note Field */}
           <div>
-            <label className="block text-sm font-medium mb-1">Note (Optional)</label>
-            <InputTextarea
-              value={formData.note ?? ""}
-              onChange={(e) =>
-                setFormData((prev) => ({ ...prev, note: e.target.value }))
-              }
-              rows={4}
-              autoResize
-              placeholder="Add additional details or reminders..."
-              className="w-full p-2 rounded border border-gray-600 focus:outline-none"
-            />
+              <label className="block text-sm font-medium mb-1">Note (Optional)</label>
+              <NoteAppEditor
+                content={formData.note ?? ""}
+                onUpdate={(htmlContent) =>
+                  setFormData((prev) => ({ ...prev, note: htmlContent }))
+                }
+              />
           </div>
 
           {/* Submit */}

@@ -601,3 +601,69 @@
 .airlineslip{
   left: 455px;
 }
+
+/* TipTap Editor Styles */
+.ProseMirror {
+  outline: none;
+  padding: 8px;
+}
+
+.ProseMirror ul {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+}
+
+.ProseMirror ol {
+  list-style-type: decimal;
+  padding-left: 1.5rem;
+}
+
+.ProseMirror li {
+  margin: 0.25rem 0;
+}
+
+.ProseMirror mark {
+  background-color: #FFFB00;
+  padding: 0.1em 0.2em;
+  border-radius: 0.2em;
+}
+
+.ProseMirror p {
+  margin: 0.5rem 0;
+}
+
+.ProseMirror p:first-child {
+  margin-top: 0;
+}
+
+.ProseMirror p:last-child {
+  margin-bottom: 0;
+}
+
+/* TipTap Editor Heading Styles */
+.ProseMirror {
+  h1 {
+    @apply text-2xl font-bold mt-4 mb-2;
+  }
+
+  h2 {
+    @apply text-xl font-bold mt-3 mb-2;
+  }
+
+  h3 {
+    @apply text-lg font-bold mt-2 mb-1;
+  }
+
+  p {
+    @apply my-2;
+  }
+
+  /* Ensure proper spacing */
+  & > *:first-child {
+    margin-top: 0;
+  }
+
+  & > *:last-child {
+    margin-bottom: 0;
+  }
+}

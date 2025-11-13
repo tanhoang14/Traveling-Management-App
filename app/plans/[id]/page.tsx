@@ -542,7 +542,12 @@ export default function TripOverview() {
           {/* Right Column: Notes */}
           <div className="border border-gray-600 rounded-lg p-4">
             <h3 className="font-semibold text-base mb-2">Notes</h3>
-            <p className="text-sm -300 whitespace-pre-wrap">{trip.note || "No notes yet."}</p>
+            <div 
+              className="notes-content text-sm whitespace-pre-wrap prose prose-sm max-w-none min-h-[100px]"
+              dangerouslySetInnerHTML={{ 
+                __html: trip.note || "<p class='text-gray-500 italic'>No notes yet.</p>" 
+              }}
+            />
           </div>
         </div>
 
@@ -560,16 +565,18 @@ export default function TripOverview() {
             {activities.length ? (
               <ul className="space-y-1">
                 {activities.map((act) => (
-                  <li key={act.day_number} className="flex justify-between">
-                    <span className="">
-                      <span className="font-medium font-semibold text-nowrap sm:inline block">
+                  <li
+                    key={act.day_number}
+                    className="flex justify-between items-center"
+                  >
+                    <span>
+                      <span className="font-semibold text-nowrap">
                         Day {act.day_number} ({act.dayDate})
                       </span>{" "}
-                      <span className="-300 sm:inline block">
-                        {act.displayName}
-                      </span>
+                      <span className="text-black">{act.displayName}</span>
                     </span>
-                    <span className="-300">
+
+                    <span className="text-gray-700 text-right w-40">
                       Total Cost:{" "}
                       <span className="font-semibold text-green-700">
                         ${Number(act.totalAmount || 0).toFixed(2)}
