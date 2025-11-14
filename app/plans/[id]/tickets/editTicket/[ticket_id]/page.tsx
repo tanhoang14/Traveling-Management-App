@@ -58,6 +58,7 @@ export default function EditTicketPage() {
         console.error("Error fetching ticket:", error);
         toast.current?.show({
           severity: "error",
+          className:'bg-brown-600',
           summary: "Error",
           detail: "Could not fetch ticket data",
         });
@@ -88,6 +89,7 @@ export default function EditTicketPage() {
     if (!airline || !fromLocation || !toLocation || !flightNumber || !date) {
       toast.current?.show({
         severity: "warn",
+        className:'bg-brown-600',
         summary: "Missing required fields",
         detail: "Please fill in all required fields.",
       });
@@ -119,11 +121,13 @@ export default function EditTicketPage() {
       console.error("Error updating ticket:", error);
       toast.current?.show({
         severity: "error",
+        className:'bg-brown-600',
         summary: "Failed to update ticket",
       });
     } else {
       toast.current?.show({
         severity: "success",
+        className:'bg-brown-600',
         summary: "Ticket updated!",
       });
       setTimeout(() => router.push(`/plans/${id}/tickets`), 1000);

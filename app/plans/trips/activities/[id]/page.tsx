@@ -19,6 +19,7 @@ import { supabase } from "@/lib/supbabaseClient";
 import { useUserId, useUserName } from "../../../../../lib/userUtils";
 import ActivityModal from "../../../../components/ActivityModal";
 import { Activity, initialActivityState } from "../../../../types/types";
+import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
 import { formatTime } from "@/lib/converterMethod";
 
 export default function ActivityPage() {
@@ -61,6 +62,7 @@ export default function ActivityPage() {
         console.error("Error fetching trip:", error.message);
         toast.current?.show({
           severity: "error",
+          className:'bg-brown-600',
           summary: "Error",
           detail: "Failed to load trip details.",
           life: 3000,
@@ -109,6 +111,7 @@ export default function ActivityPage() {
         console.error("Error fetching activities:", error.message);
         toast.current?.show({
           severity: "error",
+          className:'bg-brown-600',
           summary: "Error",
           detail: "Failed to load activities.",
           life: 3000,
@@ -181,6 +184,7 @@ export default function ActivityPage() {
       } else {
         toast.current?.show({
           severity: "info",
+          className:'bg-brown-600',
           summary: "No Note Found",
           detail: "This activity has no note yet.",
           life: 3000,
@@ -190,6 +194,7 @@ export default function ActivityPage() {
       console.error("Error fetching note:", err.message);
       toast.current?.show({
         severity: "error",
+        className:'bg-brown-600',
         summary: "Error",
         detail: "Could not load note.",
         life: 3000,
@@ -248,6 +253,7 @@ export default function ActivityPage() {
 
         toast.current?.show({
           severity: "success",
+          className:'bg-brown-600',
           summary: "Activity Updated",
           detail: "Activity successfully modified!",
           life: 3000,
@@ -313,6 +319,7 @@ export default function ActivityPage() {
 
         toast.current?.show({
           severity: "success",
+          className:'bg-brown-600',
           summary: "Activity Added",
           detail: "Activity successfully saved!",
           life: 3000,
@@ -328,6 +335,7 @@ export default function ActivityPage() {
       );
       toast.current?.show({
         severity: "error",
+        className:'bg-brown-600',
         summary: `${isUpdating ? "Update" : "Save"} Failed`,
         detail: err.message || "Could not save activity.",
         life: 4000,
@@ -336,7 +344,7 @@ export default function ActivityPage() {
   };
 
   // --- DELETE ACTIVITY ---
-  const handleRemoveActivity = async (day: number, index: number) => {
+  const confirmedDelete = async (day: number, index: number) => {
     try {
       const act = activities[day]?.[index];
       if (!act) return;
@@ -345,6 +353,7 @@ export default function ActivityPage() {
         .from("activities")
         .delete()
         .eq("activity_id", act.activity_id);
+
       if (error) throw error;
 
       setActivities((prev) => ({
@@ -354,6 +363,7 @@ export default function ActivityPage() {
 
       toast.current?.show({
         severity: "success",
+        className:'bg-brown-600',
         summary: "Activity Removed",
         detail: "Activity successfully deleted!",
         life: 3000,
@@ -362,6 +372,7 @@ export default function ActivityPage() {
       console.error("Error deleting activity:", err.message);
       toast.current?.show({
         severity: "error",
+        className:'bg-brown-600',
         summary: "Delete Failed",
         detail: err.message || "Could not delete activity.",
         life: 4000,
@@ -369,12 +380,24 @@ export default function ActivityPage() {
     }
   };
 
+  const handleRemoveActivity = (day: number, index: number) => {
+    confirmDialog({
+      message: "Are you sure you want to delete this activity?",
+      header: "Confirm Delete",
+      icon: "pi pi-exclamation-triangle",
+      acceptClassName: "p-button-danger",
+      accept: () => confirmedDelete(day, index),
+    });
+  };
+
+  // --- EDIT DAY TITLE ---
   const handleEditTitleClick = () => {
     // Check if there is at least one activity for the current day
     const dayActivities = activities[currentDay] || [];
     if (dayActivities.length === 0) {
       toast.current?.show({
         severity: "warn",
+        className:'bg-brown-600',
         summary: "No Activities",
         detail:
           "Please add at least one activity before editing the day title.",
@@ -410,6 +433,7 @@ export default function ActivityPage() {
       setIsTitleDialogOpen(false);
       toast.current?.show({
         severity: "success",
+        className:'bg-brown-600',
         summary: "Title Updated",
         detail: "Day title successfully saved!",
         life: 3000,
@@ -418,6 +442,7 @@ export default function ActivityPage() {
       console.error("Error updating day title:", err.message);
       toast.current?.show({
         severity: "error",
+        className:'bg-brown-600',
         summary: "Update Failed",
         detail: err.message || "Could not save title.",
         life: 4000,
@@ -679,6 +704,25 @@ export default function ActivityPage() {
           </div>
         </div>
       </Dialog>
+      <ConfirmDialog className="bg-brown-600 p-4"  footer={(options) => (
+    <div className="flex justify-center gap-4 mt-4">
+      
+      <button
+        className="px-4 py-2 bg-gray-500 hover:bg-gray-600 rounded-lg text-white font-medium"
+        onClick={options.reject}
+      >
+        No
+      </button>
+
+      <button
+        className="px-4 py-2 bg-red-600 hover:bg-red-700 rounded-lg text-white font-medium"
+        onClick={options.accept}
+      >
+        Yes, Delete
+      </button>
+
+    </div>
+  )} />
     </main>
   );
 }

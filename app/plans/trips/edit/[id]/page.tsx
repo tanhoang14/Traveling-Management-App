@@ -38,6 +38,7 @@ export default function EditTripPage() {
       if (!tripId) {
         toast.current?.show({
           severity: "error",
+          className:'bg-brown-600',
           summary: "Invalid Trip",
           detail: "Trip ID missing from URL.",
           life: 4000,
@@ -56,6 +57,7 @@ export default function EditTripPage() {
         console.error("Error fetching trip:", error?.message);
         toast.current?.show({
           severity: "error",
+          className:'bg-brown-600',
           summary: "Error",
           detail: "Failed to fetch trip data.",
           life: 4000,
@@ -103,6 +105,7 @@ export default function EditTripPage() {
     if (!location || !startDate || !endDate) {
       toast.current?.show({
         severity: "warn",
+        className:'bg-brown-600',
         summary: "Missing Info",
         detail: "Please fill in all required fields.",
         life: 3000,
@@ -113,6 +116,7 @@ export default function EditTripPage() {
     if (duration === null || duration <= 0) {
       toast.current?.show({
         severity: "warn",
+        className:'bg-brown-600',
         summary: "Invalid Dates",
         detail: "End Date must be after Start Date.",
         life: 3000,
@@ -133,6 +137,7 @@ export default function EditTripPage() {
         console.error("Upload error:", uploadError.message);
         toast.current?.show({
           severity: "error",
+          className:'bg-brown-600',
           summary: "Upload Failed",
           detail: "Could not upload image.",
           life: 4000,
@@ -166,6 +171,7 @@ export default function EditTripPage() {
       console.error("Update error:", error.message);
       toast.current?.show({
         severity: "error",
+        className:'bg-brown-600',
         summary: "Error",
         detail: "Failed to update trip.",
         life: 4000,
@@ -175,6 +181,7 @@ export default function EditTripPage() {
 
     toast.current?.show({
       severity: "success",
+      className:'bg-brown-600',
       summary: "Success",
       detail: "Trip updated successfully!",
       life: 2000,

@@ -40,6 +40,7 @@ export default function TripOverview() {
       toast.current?.show({
         severity: "success",
         summary: "Copied!",
+        className:'bg-brown-600',
         detail: `Trip code "${trip.trip_code}" copied to clipboard.`,
         life: 2000,
       });
@@ -60,6 +61,7 @@ export default function TripOverview() {
         console.error("Error fetching trip:", error.message);
         toast.current?.show({
           severity: "error",
+          className:'bg-brown-600',
           summary: "Error",
           detail: "Failed to fetch trip.",
           life: 3000,
@@ -100,6 +102,7 @@ export default function TripOverview() {
         console.error("Error fetching activities:", error.message);
         toast.current?.show({
           severity: "error",
+          className:'bg-brown-600',
           summary: "Error",
           detail: "Failed to fetch activities.",
           life: 3000,
@@ -158,6 +161,7 @@ export default function TripOverview() {
         console.error("Error fetching travelers:", error.message);
         toast.current?.show({
           severity: "error",
+          className:'bg-brown-600',
           summary: "Error",
           detail: "Failed to fetch travelers.",
           life: 3000,
@@ -196,6 +200,7 @@ export default function TripOverview() {
         console.error("User not found:", fetchUserError.message);
         toast.current?.show({
           severity: "warn",
+          className:'bg-brown-600',
           summary: "User Not Found",
           detail: "Make sure the user has an account.",
           life: 3000,
@@ -214,6 +219,7 @@ export default function TripOverview() {
       if (existingLink) {
         toast.current?.show({
           severity: "info",
+          className:'bg-brown-600',
           summary: "Already Added",
           detail: "This user is already a traveler.",
           life: 3000,
@@ -231,6 +237,7 @@ export default function TripOverview() {
         console.error("Error adding traveler:", insertError.message);
         toast.current?.show({
           severity: "error",
+          className:'bg-brown-600',
           summary: "Error",
           detail: "Failed to add traveler.",
           life: 3000,
@@ -253,6 +260,7 @@ export default function TripOverview() {
 
       toast.current?.show({
         severity: "success",
+        className:'bg-brown-600',
         summary: "Traveler Added",
         detail: `${user.name} has been added to the trip!`,
         life: 3000,
@@ -310,6 +318,7 @@ export default function TripOverview() {
           // ✅ Show success message
           toast.current?.show({
             severity: "success",
+            className:'bg-brown-600',
             summary: "Traveler Removed",
             detail: `${travelerName} has been removed from the trip.`,
             life: 3000,
@@ -319,6 +328,7 @@ export default function TripOverview() {
 
           toast.current?.show({
             severity: "error",
+            className:'bg-brown-600',
             summary: "Error Removing Traveler",
             detail: err.message?.includes("permission denied")
               ? "You don’t have permission to remove this traveler. Check your RLS policy."
@@ -361,6 +371,7 @@ export default function TripOverview() {
       .then(() => {
         toast.current?.show({
           severity: "success",
+          className:'bg-brown-600',
           summary: "Copied!",
           detail: `Trip code "${trip.trip_code}" copied to clipboard.`,
           life: 2000,
@@ -370,6 +381,7 @@ export default function TripOverview() {
         console.error("Failed to copy trip code:", err);
         toast.current?.show({
           severity: "error",
+          className:'bg-brown-600',
           summary: "Error",
           detail: "Failed to copy trip code.",
           life: 2000,

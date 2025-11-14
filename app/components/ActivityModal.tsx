@@ -64,6 +64,7 @@ export default function ActivityModal({
         severity: "warn",
         summary: "Missing Field",
         detail: "Please enter start time.",
+        className:'bg-brown-600',
         life: 2500,
       });
       return;
@@ -73,6 +74,7 @@ export default function ActivityModal({
       toast.current?.show({
         severity: "warn",
         summary: "Missing Field",
+        className:'bg-brown-600',
         detail: "Please enter an activity name.",
         life: 2500,
       });
@@ -83,6 +85,7 @@ export default function ActivityModal({
       toast.current?.show({
         severity: "warn",
         summary: "Missing Field",
+        className:'bg-brown-600',
         detail: "Please select a category.",
         life: 2500,
       });
@@ -96,7 +99,7 @@ export default function ActivityModal({
 
   return (
     <div className="fixed inset-0 bg-black/20 z-50 flex justify-center items-center p-4">
-      <Toast ref={toast} position="top-right" />
+      <Toast ref={toast} className="p-4" position="top-right" />
       <div className="bg-brown-700 p-6 rounded-xl shadow-2xl w-full max-w-md border border-gray-700/50">
         {/* Header */}
         <div className="flex justify-between items-center mb-4 border-b border-gray-700 pb-3">
@@ -119,7 +122,7 @@ export default function ActivityModal({
               onChange={(e) =>
                 setFormData((prev) => ({ ...prev, startTime: e.target.value }))
               }
-              className="w-full p-2 rounded"
+              className="w-full p-2 border border-gray-600 rounded"
             />
           </div>
 
@@ -172,7 +175,7 @@ export default function ActivityModal({
               }
               options={categoryOptions}
               placeholder="Select Category"
-              className="w-full text-base"
+              className="w-full text-base border border-gray-600"
               panelClassName="bg-brown-700 border border-gray-700 shadow-lg"
             />
           </div>

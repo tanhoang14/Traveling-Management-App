@@ -141,7 +141,11 @@ export default function TripsPage() {
 
   const handleJoinTrip = async () => {
     if (!tripCode || !session?.user) {
-      toast.current?.show({ severity: "warn", summary: "Enter a valid code" });
+      toast.current?.show({ 
+        severity: "warn", 
+        summary: "Enter a valid code",
+        className:'bg-brown-600',
+      });
       return;
     }
 
@@ -152,7 +156,11 @@ export default function TripsPage() {
       .single();
 
     if (tripError || !tripData) {
-      toast.current?.show({ severity: "error", summary: "Trip not found" });
+      toast.current?.show({ 
+        severity: "error", 
+        summary: "Trip not found",
+        className:'bg-brown-600', 
+      });
       return;
     }
 
@@ -184,6 +192,7 @@ export default function TripsPage() {
     } else {
       toast.current?.show({
         severity: "success",
+        className:'bg-brown-600',
         summary: "Joined trip successfully!",
       });
       setJoinVisible(false);

@@ -55,6 +55,7 @@ export default function TripPage() {
     if (!location || !startDate || !endDate) {
       toast.current?.show({
         severity: "warn",
+        className:'bg-brown-600',
         summary: "Missing Info",
         detail: "Please fill in all required fields.",
         life: 3000,
@@ -65,6 +66,7 @@ export default function TripPage() {
     if (duration === null || duration <= 0) {
       toast.current?.show({
         severity: "warn",
+        className:'bg-brown-600',
         summary: "Invalid Dates",
         detail: "End Date must be after Start Date.",
         life: 3000,
@@ -87,6 +89,7 @@ if (imageFile) {
     console.error("Upload error:", uploadError.message);
     toast.current?.show({
       severity: "error",
+      className:'bg-brown-600',
       summary: "Upload Failed",
       detail: "Could not upload image to database.",
       life: 4000,
@@ -123,6 +126,7 @@ if (imageFile) {
       console.error("Error creating trip:", tripError.message);
       toast.current?.show({
         severity: "error",
+        className:'bg-brown-600',
         summary: "Error",
         detail: "Failed to create trip. Try again.",
         life: 4000,
@@ -140,6 +144,7 @@ if (imageFile) {
       console.error("Error linking user:", tripUserError.message);
       toast.current?.show({
         severity: "error",
+        className:'bg-brown-600',
         summary: "Error",
         detail: "Failed to link user to trip.",
         life: 4000,
@@ -149,6 +154,7 @@ if (imageFile) {
 
     toast.current?.show({
       severity: "success",
+      className:'bg-brown-600',
       summary: "Success",
       detail: "Trip created successfully!",
       life: 2000,

@@ -169,6 +169,10 @@ body {
             hue-rotate(180deg)
 } */
 
+.bg-brown-600{
+  background-color: #f1dec9;
+}
+
 .bg-brown-700{
   background-color: #ebcbae;
 }
