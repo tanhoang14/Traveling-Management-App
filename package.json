@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@auth/supabase-adapter": "^1.10.0",
+    "@supabase/ssr": "^0.7.0",
     "@supabase/supabase-js": "^2.58.0",
     "@tiptap/extension-color": "^3.10.5",
     "@tiptap/extension-highlight": "^3.10.5",

@@ -9,16 +9,25 @@ import { Trip } from "../types/types";
 import { ProgressSpinner } from "primereact/progressspinner";
 import { useUserId } from "@/lib/userUtils";
 import { CategoryData } from "../types/types";
+import { useSupabaseSession } from "../components/SupabaseProvider";
 
 const COLORS = ["#00C9A7", "#FF6B6B", "#4D96FF", "#F6BE00", "#9B5DE5"];
 
 export default function InsightPage() {
   const router = useRouter();
+  const { session } = useSupabaseSession();
   const [trips, setTrips] = useState<Trip[]>([]);
   const [selectedTrip, setSelectedTrip] = useState<string | null>(null);
   const [chartData, setChartData] = useState<CategoryData[]>([]);
   const [loading, setLoading] = useState(false);
   const userId = useUserId();
+
+  // 1️⃣ Redirect if user is not logged in
+  useEffect(() => {
+    if (session === null) {
+      router.replace("/login");
+    }
+  }, [session]);
 
   // Fetch trips for this user
   useEffect(() => {

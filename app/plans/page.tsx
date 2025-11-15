@@ -23,6 +23,13 @@ export default function TripsPage() {
   const [flights, setFlights] = useState<FlightBooking[]>([]);
   const toast = useRef<Toast>(null);
 
+  // 1️⃣ Redirect if user is not logged in
+  useEffect(() => {
+    if (session === null) {
+      router.replace("/login");
+    }
+  }, [session, router]);
+
   useEffect(() => {
     const fetchTrips = async () => {
       if (!session?.user) return;

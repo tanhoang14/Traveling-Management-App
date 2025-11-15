@@ -7,8 +7,7 @@ import { useRef,useEffect } from "react";
 
 export default function MainPage() {
   const { session } = useSupabaseSession();
-  const ranOnce = useRef(false);
-
+  
   // When user logs in, ensure they exist in the users table
   useEffect(() => {
     const ensureUserExists = async () => {

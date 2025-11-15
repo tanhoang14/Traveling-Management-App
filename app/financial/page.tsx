@@ -5,15 +5,23 @@ import { useRouter } from "next/navigation";
 import { InputNumber } from 'primereact/inputnumber';
 import { Calendar } from 'primereact/calendar';
 import { ArrowLeft } from "lucide-react";
+import { useSupabaseSession } from "../components/SupabaseProvider";
 
 const FinancialPage: React.FC = () => {
   const router = useRouter();
+  const { session } = useSupabaseSession();
 
   const [dailyAmount, setDailyAmount] = useState<number>(10);
   const [startDate, setStartDate] = useState<Date | null>(new Date());
   const [endDate, setEndDate] = useState<Date | null>(new Date());
   const [totalSaved, setTotalSaved] = useState<number>(0);
-  const [budget, setBudget] = useState<number>(0); 
+
+  // 1️⃣ Redirect if user is not logged in
+  useEffect(() => {
+    if (session === null) {
+      router.replace("/login");
+    }
+  }, [session, router]);
 
   // Calculate total saved whenever startDate, endDate, or dailyAmount changes
   useEffect(() => {
