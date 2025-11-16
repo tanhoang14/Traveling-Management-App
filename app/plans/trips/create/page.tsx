@@ -141,7 +141,6 @@ if (imageFile) {
     });
 
     if (tripUserError) {
-      console.error("Error linking user:", tripUserError.message);
       toast.current?.show({
         severity: "error",
         className:'bg-brown-600',

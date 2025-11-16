@@ -560,7 +560,7 @@ export default function ActivityPage() {
                       >
                         <NotepadText
                           color="#36454F"
-                          className="w-4 h-4 sm:w-5 sm:h-5"
+                          className="w-6 h-6 sm:w-5 sm:h-5"
                         />
                       </button>
                     )}
@@ -573,7 +573,7 @@ export default function ActivityPage() {
                       >
                         <Link
                           color="#36454F"
-                          className="w-4 h-4 sm:w-5 sm:h-5"
+                          className="w-6 h-6 sm:w-5 sm:h-5"
                         />
                       </a>
                     )}
@@ -647,6 +647,8 @@ export default function ActivityPage() {
           backgroundColor: "#5C4033",
         }}
         modal
+        dismissableMask
+        closeIcon={<X className="text-white" />} 
         className="rounded-xl overflow-hidden"
         contentClassName="bg-brown-1000 text-white p-5 rounded-b-xl"
         onHide={() => setIsNoteDialogOpen(false)}

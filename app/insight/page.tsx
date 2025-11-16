@@ -139,7 +139,8 @@ export default function InsightPage() {
           }))}
           onChange={(e) => setSelectedTrip(e.value)}
           placeholder="Select a trip"
-          className="w-72 text-black"
+          className="w-72 text-black border-2 border-gray-700"
+          panelClassName="text-black border-2 border-gray-700"
         />
       </div>
 
