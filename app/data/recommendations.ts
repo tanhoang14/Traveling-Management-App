@@ -466,7 +466,8 @@ export const allDestinations = [
   },
   {
     name: "Scottish Highlands, Scotland",
-    image: "https://images.unsplash.com/photo-1534274867514-d5b47ef89e98",
+    image:
+      "https://images.unsplash.com/photo-1589489873423-d1745278a8f4?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8aGlnaGxhbmRzJTIwc2NvdGxhbmR8ZW58MHx8MHx8fDA%3D&fm=jpg&q=60&w=3000",
     description:
       "Wild landscapes of misty glens, ancient castles, and serene lochs create Scotland's romantic and rugged northern beauty.",
   },
