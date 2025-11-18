@@ -93,7 +93,8 @@ export const allDestinations = [
   },
   {
     name: "Bangkok, Thailand",
-    image: "https://images.unsplash.com/photo-1552733407-5d5c46c3bb3b",
+    image:
+      "https://images.unsplash.com/photo-1508009603885-50cf7c579365?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YmFuZ2tva3xlbnwwfHwwfHx8MA%3D%3D",
     description:
       "A sensory overload of golden temples, floating markets, vibrant street food scenes, and bustling nightlife in Thailand's dynamic capital.",
   },
@@ -407,7 +408,8 @@ export const allDestinations = [
   },
   {
     name: "Seychelles",
-    image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4",
+    image:
+      "https://images.unsplash.com/photo-1617362985992-d0b6814cacef?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8c2V5Y2hlbGxlc3xlbnwwfHwwfHx8MA%3D%3D",
     description:
       "Granite boulders, rare wildlife, and powder-soft beaches define this exotic island nation in the Indian Ocean.",
   },
@@ -454,13 +456,15 @@ export const allDestinations = [
   },
   {
     name: "Swiss Alps, Switzerland",
-    image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4",
+    image:
+      "https://images.unsplash.com/photo-1527668752968-14dc70a27c95?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c3dpc3MlMjBhbHBzJTJDJTIwc3dpdHplcmxhbmR8ZW58MHx8MHx8fDA%3D&fm=jpg&q=60&w=3000",
     description:
       "Majestic peaks, charming villages, and world-class skiing in Europe's most spectacular mountain range across Switzerland.",
   },
   {
     name: "Norwegian Fjords, Norway",
-    image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4",
+    image:
+      "https://plus.unsplash.com/premium_photo-1668017178979-9e341bfaa464?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bm9yd2VnaWFuJTIwZmpvcmRzfGVufDB8fDB8fHww",
     description:
       "Dramatic glacial valleys, cascading waterfalls, and picturesque villages along Norway's breathtaking western coastline.",
   },
@@ -535,402 +539,440 @@ export const allDestinations = [
       "Dramatic mountains, hidden beaches, and Gothic architecture create the diverse beauty of Spain's largest Balearic island.",
   },
   //   // NEW US CITIES
-  //   {
-  //     name: "Seattle, Washington",
-  //     image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4",
-  //     description:
-  //       "The Emerald City offers the Space Needle, Pike Place Market, and coffee culture surrounded by water, mountains, and evergreen forests.",
-  //   },
-  //   {
-  //     name: "Portland, Oregon",
-  //     image: "https://images.unsplash.com/photo-1545389336-386b5beb7d7f",
-  //     description:
-  //       "Keep Portland weird in this eco-friendly city known for food trucks, craft beer, beautiful gardens, and outdoor adventures.",
-  //   },
-  //   {
-  //     name: "Austin, Texas",
-  //     image: "https://images.unsplash.com/photo-1518638150340-f706e86654de",
-  //     description:
-  //       "The Live Music Capital of the World combines vibrant nightlife, amazing food scene, and outdoor activities along the Colorado River.",
-  //   },
-  //   {
-  //     name: "San Antonio, Texas",
-  //     image: "https://images.unsplash.com/photo-1580651315532-41a3b9ff6c57",
-  //     description:
-  //       "Explore the historic Alamo, stroll the romantic River Walk, and experience rich Tex-Mex culture in this charming southern city.",
-  //   },
-  //   {
-  //     name: "Boston, Massachusetts",
-  //     image: "https://images.unsplash.com/photo-1570212851236-8de7d6f2ce6a",
-  //     description:
-  //       "Walk the Freedom Trail through American Revolution history, enjoy world-class universities, and savor fresh seafood in New England's hub.",
-  //   },
-  //   {
-  //     name: "Philadelphia, Pennsylvania",
-  //     image: "https://images.unsplash.com/photo-1555854830-1b4d56e444b1",
-  //     description:
-  //       "See the Liberty Bell and Independence Hall, run the Rocky Steps, and indulge in Philly's famous cheesesteaks in this historic city.",
-  //   },
-  //   {
-  //     name: "Washington, D.C.",
-  //     image: "https://images.unsplash.com/photo-1506976785301-8db2dea5d6d7",
-  //     description:
-  //       "The nation's capital offers free Smithsonian museums, iconic monuments, and political history amid beautiful cherry blossom landscapes.",
-  //   },
-  //   {
-  //     name: "Nashville, Tennessee",
-  //     image: "https://images.unsplash.com/photo-1580651315532-41a3b9ff6c57",
-  //     description:
-  //       "Music City pulses with country music heritage, honky-tonk bars on Broadway, and the Grand Ole Opry's legendary performances.",
-  //   },
-  //   {
-  //     name: "Memphis, Tennessee",
-  //     image: "https://images.unsplash.com/photo-1518638150340-f706e86654de",
-  //     description:
-  //       "Home of blues, soul and rock 'n' roll - visit Graceland, Beale Street, and where Martin Luther King Jr. changed history.",
-  //   },
-  //   {
-  //     name: "Atlanta, Georgia",
-  //     image: "https://images.unsplash.com/photo-1545389336-386b5beb7d7f",
-  //     description:
-  //       "The capital of the New South offers CNN Center, World of Coca-Cola, and vibrant cultural scene amid beautiful green spaces.",
-  //   },
-  //   {
-  //     name: "Savannah, Georgia",
-  //     image: "https://images.unsplash.com/photo-1570212851236-8de7d6f2ce6a",
-  //     description:
-  //       "Spanish moss drapes over historic squares in this charming southern belle of a city with romantic architecture and ghost stories.",
-  //   },
-  //   {
-  //     name: "Charleston, South Carolina",
-  //     image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4",
-  //     description:
-  //       "Colorful historic homes, cobblestone streets, and award-winning restaurants make this one of America's most beautiful cities.",
-  //   },
-  //   {
-  //     name: "New Orleans, Louisiana",
-  //     image: "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9",
-  //     description:
-  //       "The Big Easy's French Quarter, jazz clubs, and Mardi Gras celebrations create an unforgettable cultural experience.",
-  //   },
-  //   {
-  //     name: "Denver, Colorado",
-  //     image: "https://images.unsplash.com/photo-1464822759843-929b5c6c832f",
-  //     description:
-  //       "The Mile High City combines urban sophistication with outdoor adventure, serving as gateway to Rocky Mountain adventures.",
-  //   },
-  //   {
-  //     name: "Phoenix, Arizona",
-  //     image: "https://images.unsplash.com/photo-1443632864897-14973fa006cf",
-  //     description:
-  //       "Sun-drenched desert city offering luxury resorts, golf courses, and access to stunning Sonoran Desert landscapes.",
-  //   },
-  //   {
-  //     name: "Sedona, Arizona",
-  //     image: "https://images.unsplash.com/photo-1509316785289-025f5b846b35",
-  //     description:
-  //       "Majestic red rock formations, spiritual energy, and outdoor adventures make this desert town a breathtaking destination.",
-  //   },
-  //   {
-  //     name: "Salt Lake City, Utah",
-  //     image: "https://images.unsplash.com/photo-1501594907352-04cda38ebc29",
-  //     description:
-  //       "Stunning mountain backdrop, Temple Square, and world-class skiing nearby in this clean, organized city.",
-  //   },
-  //   {
-  //     name: "Las Vegas, Nevada",
-  //     image: "https://images.unsplash.com/photo-1485738422979-f5c462d49f74",
-  //     description:
-  //       "Entertainment capital with dazzling casinos, spectacular shows, and luxury experiences in the Nevada desert.",
-  //   },
-  //   {
-  //     name: "San Diego, California",
-  //     image: "https://images.unsplash.com/photo-1515904824485-0c7d70ad9ec1",
-  //     description:
-  //       "Perfect weather, beautiful beaches, world-class zoo, and laid-back California vibe in America's Finest City.",
-  //   },
-  //   {
-  //     name: "Santa Barbara, California",
-  //     image: "https://images.unsplash.com/photo-1549887552-cb450a6d7f8c",
-  //     description:
-  //       "The American Riviera features Spanish architecture, wine country, and stunning coastal views along the Pacific.",
-  //   },
-  //   {
-  //     name: "Monterey, California",
-  //     image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4",
-  //     description:
-  //       "Famous Cannery Row, incredible aquarium, and dramatic coastline along one of California's most scenic drives.",
-  //   },
-  //   {
-  //     name: "Portland, Maine",
-  //     image: "https://images.unsplash.com/photo-1570212851236-8de7d6f2ce6a",
-  //     description:
-  //       "Charming New England port city with historic lighthouses, fresh lobster, and beautiful Casco Bay islands.",
-  //   },
-  //   {
-  //     name: "Burlington, Vermont",
-  //     image: "https://images.unsplash.com/photo-1545389336-386b5beb7d7f",
-  //     description:
-  //       "Vibrant college town on Lake Champlain with farm-to-table dining, craft beer, and access to Green Mountain adventures.",
-  //   },
-  //   {
-  //     name: "Anchorage, Alaska",
-  //     image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4",
-  //     description:
-  //       "Gateway to Alaska's wilderness with glaciers, wildlife viewing, and northern lights just beyond the city limits.",
-  //   },
-  //   {
-  //     name: "Honolulu, Hawaii",
-  //     image: "https://images.unsplash.com/photo-1502920917128-1aa500764cbd",
-  //     description:
-  //       "Waikiki Beach, Diamond Head, and Polynesian culture create paradise in Hawaii's vibrant capital city.",
-  //   },
-  //   {
-  //     name: "Santa Fe, New Mexico",
-  //     image: "https://images.unsplash.com/photo-1509316785289-025f5b846b35",
-  //     description:
-  //       "Adobe architecture, art galleries, and Southwestern cuisine in America's oldest capital city at high desert elevation.",
-  //   },
-  //   {
-  //     name: "Albuquerque, New Mexico",
-  //     image: "https://images.unsplash.com/photo-1443632864897-14973fa006cf",
-  //     description:
-  //       "Hot air balloon festivals, Old Town charm, and Breaking Bad landmarks in this high-desert city along the Rio Grande.",
-  //   },
-  //   {
-  //     name: "Asheville, North Carolina",
-  //     image: "https://images.unsplash.com/photo-1464822759843-929b5c6c832f",
-  //     description:
-  //       "Artsy mountain town with craft breweries, the Biltmore Estate, and Blue Ridge Parkway scenic drives.",
-  //   },
-  //   {
-  //     name: "Raleigh, North Carolina",
-  //     image: "https://images.unsplash.com/photo-1570212851236-8de7d6f2ce6a",
-  //     description:
-  //       "The City of Oaks offers research triangle innovation, southern hospitality, and beautiful green spaces.",
-  //   },
-  //   {
-  //     name: "Charlottesville, Virginia",
-  //     image: "https://images.unsplash.com/photo-1545389336-386b5beb7d7f",
-  //     description:
-  //       "Historic Monticello, University of Virginia campus, and scenic wine country in the foothills of the Blue Ridge Mountains.",
-  //   },
-  //   {
-  //     name: "Richmond, Virginia",
-  //     image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4",
-  //     description:
-  //       "American history meets vibrant arts scene along the James River in Virginia's charming capital city.",
-  //   },
-  //   {
-  //     name: "Baltimore, Maryland",
-  //     image: "https://images.unsplash.com/photo-1555854830-1b4d56e444b1",
-  //     description:
-  //       "Inner Harbor attractions, fresh crab cakes, and historic Fell's Point in this charming Chesapeake Bay city.",
-  //   },
-  //   {
-  //     name: "Annapolis, Maryland",
-  //     image: "https://images.unsplash.com/photo-1570212851236-8de7d6f2ce6a",
-  //     description:
-  //       "Chesapeake Bay sailing capital with Naval Academy, colonial history, and charming brick-paved streets.",
-  //   },
-  //   {
-  //     name: "Detroit, Michigan",
-  //     image: "https://images.unsplash.com/photo-1518638150340-f706e86654de",
-  //     description:
-  //       "Motown music legacy, automotive history, and dramatic renaissance along the Detroit River waterfront.",
-  //   },
-  //   {
-  //     name: "Grand Rapids, Michigan",
-  //     image: "https://images.unsplash.com/photo-1545389336-386b5beb7d7f",
-  //     description:
-  //       "America's Beer City with craft breweries, art installations, and beautiful Lake Michigan beaches nearby.",
-  //   },
-  //   {
-  //     name: "Minneapolis, Minnesota",
-  //     image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4",
-  //     description:
-  //       "Lakes, parks, and vibrant arts scene in the Twin Cities, with Walker Art Center and Guthrie Theater.",
-  //   },
-  //   {
-  //     name: "St. Paul, Minnesota",
-  //     image: "https://images.unsplash.com/photo-1570212851236-8de7d6f2ce6a",
-  //     description:
-  //       "Historic capital city with cathedral, Victorian neighborhoods, and Mississippi River bluffs in the Twin Cities.",
-  //   },
-  //   {
-  //     name: "Milwaukee, Wisconsin",
-  //     image: "https://images.unsplash.com/photo-1555854830-1b4d56e444b1",
-  //     description:
-  //       "Brewing heritage, Lake Michigan shoreline, and Harley-Davidson Museum in this friendly Midwestern city.",
-  //   },
-  //   {
-  //     name: "Madison, Wisconsin",
-  //     image: "https://images.unsplash.com/photo-1545389336-386b5beb7d7f",
-  //     description:
-  //       "State capital built between two lakes, featuring university culture, farmers markets, and progressive vibe.",
-  //   },
-  //   {
-  //     name: "Indianapolis, Indiana",
-  //     image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4",
-  //     description:
-  //       "Racing capital with Indianapolis Motor Speedway, vibrant downtown, and world's largest children's museum.",
-  //   },
-  //   {
-  //     name: "Louisville, Kentucky",
-  //     image: "https://images.unsplash.com/photo-1570212851236-8de7d6f2ce6a",
-  //     description:
-  //       "Kentucky Derby excitement, bourbon distilleries, and Muhammad Ali Center in this Ohio River city.",
-  //   },
-  //   {
-  //     name: "Lexington, Kentucky",
-  //     image: "https://images.unsplash.com/photo-1464822759843-929b5c6c832f",
-  //     description:
-  //       "Horse capital of the world with bluegrass farms, bourbon trails, and charming southern atmosphere.",
-  //   },
-  //   {
-  //     name: "Cincinnati, Ohio",
-  //     image: "https://images.unsplash.com/photo-1555854830-1b4d56e444b1",
-  //     description:
-  //       "Historic Over-the-Rhine district, riverfront parks, and unique chili restaurants in this Queen City.",
-  //   },
-  //   {
-  //     name: "Cleveland, Ohio",
-  //     image: "https://images.unsplash.com/photo-1570212851236-8de7d6f2ce6a",
-  //     description:
-  //       "Rock & Roll Hall of Fame, revitalized waterfront, and world-class healthcare in this Great Lakes comeback city.",
-  //   },
-  //   {
-  //     name: "Columbus, Ohio",
-  //     image: "https://images.unsplash.com/photo-1545389336-386b5beb7d7f",
-  //     description:
-  //       "State capital with innovative food scene, Ohio State University, and diverse neighborhoods in the heart of Ohio.",
-  //   },
-  //   {
-  //     name: "Kansas City, Missouri",
-  //     image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4",
-  //     description:
-  //       "World-famous barbecue, jazz heritage, and beautiful fountains in this city straddling two states.",
-  //   },
-  //   {
-  //     name: "St. Louis, Missouri",
-  //     image: "https://images.unsplash.com/photo-1570212851236-8de7d6f2ce6a",
-  //     description:
-  //       "Gateway Arch monument, Forest Park attractions, and baseball history along the mighty Mississippi River.",
-  //   },
-  //   {
-  //     name: "Omaha, Nebraska",
-  //     image: "https://images.unsplash.com/photo-1555854830-1b4d56e444b1",
-  //     description:
-  //       "Henry Doorly Zoo, Warren Buffett's hometown, and vibrant Old Market district in this Missouri River city.",
-  //   },
-  //   {
-  //     name: "Oklahoma City, Oklahoma",
-  //     image: "https://images.unsplash.com/photo-1545389336-386b5beb7d7f",
-  //     description:
-  //       "Western heritage, bombing memorial, and revitalized Bricktown entertainment district in the state capital.",
-  //   },
-  //   {
-  //     name: "Tulsa, Oklahoma",
-  //     image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4",
-  //     description:
-  //       "Art Deco architecture, Gathering Place park, and oil history in this beautiful city on the Arkansas River.",
-  //   },
-  //   {
-  //     name: "Little Rock, Arkansas",
-  //     image: "https://images.unsplash.com/photo-1570212851236-8de7d6f2ce6a",
-  //     description:
-  //       "Clinton Presidential Library, River Market District, and access to Arkansas's beautiful natural areas.",
-  //   },
-  //   {
-  //     name: "Jackson Hole, Wyoming",
-  //     image: "https://images.unsplash.com/photo-1464822759843-929b5c6c832f",
-  //     description:
-  //       "Luxury mountain resort town serving as gateway to Grand Teton and Yellowstone national parks.",
-  //   },
-  //   {
-  //     name: "Boise, Idaho",
-  //     image: "https://images.unsplash.com/photo-1545389336-386b5beb7d7f",
-  //     description:
-  //       "Outdoor adventures, growing tech scene, and Basque culture in this surprisingly vibrant capital city.",
-  //   },
-  //   {
-  //     name: "Cheyenne, Wyoming",
-  //     image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4",
-  //     description:
-  //       "Frontier Days rodeo, western history, and state capital charm in this authentic cowboy town.",
-  //   },
-  //   {
-  //     name: "Reno, Nevada",
-  //     image: "https://images.unsplash.com/photo-1570212851236-8de7d6f2ce6a",
-  //     description:
-  //       "The Biggest Little City in the World offers casinos, outdoor recreation, and proximity to Lake Tahoe.",
-  //   },
-  //   {
-  //     name: "Birmingham, Alabama",
-  //     image: "https://images.unsplash.com/photo-1555854830-1b4d56e444b1",
-  //     description:
-  //       "Civil Rights history, southern food, and medical research in this revitalized Appalachian foothills city.",
-  //   },
-  //   {
-  //     name: "Mobile, Alabama",
-  //     image: "https://images.unsplash.com/photo-1545389336-386b5beb7d7f",
-  //     description:
-  //       "Mardi Gras birthplace, historic architecture, and Gulf Coast cuisine in this charming port city.",
-  //   },
-  //   {
-  //     name: "Jackson, Mississippi",
-  //     image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4",
-  //     description:
-  //       "Blues music heritage, civil rights history, and southern hospitality in Mississippi's capital city.",
-  //   },
-  //   {
-  //     name: "Des Moines, Iowa",
-  //     image: "https://images.unsplash.com/photo-1570212851236-8de7d6f2ce6a",
-  //     description:
-  //       "State fair excitement, insurance industry hub, and beautiful capitol building in this Midwestern capital.",
-  //   },
-  //   {
-  //     name: "Fargo, North Dakota",
-  //     image: "https://images.unsplash.com/photo-1555854830-1b4d56e444b1",
-  //     description:
-  //       "Friendly prairie city with college culture, historic downtown, and that famous Minnesota nice attitude.",
-  //   },
-  //   {
-  //     name: "Sioux Falls, South Dakota",
-  //     image: "https://images.unsplash.com/photo-1545389336-386b5beb7d7f",
-  //     description:
-  //       "Beautiful waterfalls park, growing economy, and gateway to South Dakota's natural attractions.",
-  //   },
-  //   {
-  //     name: "Billings, Montana",
-  //     image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4",
-  //     description:
-  //       "Western history, rimrock cliffs, and gateway to Yellowstone in Montana's largest city.",
-  //   },
-  //   {
-  //     name: "Portland, Oregon",
-  //     image: "https://images.unsplash.com/photo-1570212851236-8de7d6f2ce6a",
-  //     description:
-  //       "Keep Portland weird in this eco-friendly city known for food trucks, craft beer, and beautiful gardens.",
-  //   },
-  //   {
-  //     name: "Spokane, Washington",
-  //     image: "https://images.unsplash.com/photo-1555854830-1b4d56e444b1",
-  //     description:
-  //       "Riverfront park, historic architecture, and outdoor recreation in Eastern Washington's largest city.",
-  //   },
-  //   {
-  //     name: "Juneau, Alaska",
-  //     image: "https://images.unsplash.com/photo-1545389336-386b5beb7d7f",
-  //     description:
-  //       "Stunning capital city accessible only by air or sea, surrounded by glaciers and Tongass National Forest.",
-  //   },
-  //   {
-  //     name: "Honolulu, Hawaii",
-  //     image: "https://images.unsplash.com/photo-1502920917128-1aa500764cbd",
-  //     description:
-  //       "Waikiki Beach, Diamond Head, and Polynesian culture create paradise in Hawaii's vibrant capital city.",
-  //   },
+  {
+    name: "Seattle, Washington",
+    image:
+      "https://images.unsplash.com/photo-1542223616-9de9adb5e3e8?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8c2VhdHRsZXxlbnwwfHwwfHx8MA%3D%3D",
+    description:
+      "The Emerald City offers the Space Needle, Pike Place Market, and coffee culture surrounded by water, mountains, and evergreen forests.",
+  },
+  {
+    name: "Portland, Oregon",
+    image:
+      "https://images.unsplash.com/photo-1635209896150-ef275dbd52a2?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cG9ydGxhbmR8ZW58MHx8MHx8fDA%3D&fm=jpg&q=60&w=3000",
+    description:
+      "Keep Portland weird in this eco-friendly city known for food trucks, craft beer, beautiful gardens, and outdoor adventures.",
+  },
+  {
+    name: "Austin, Texas",
+    image:
+      "https://images.unsplash.com/photo-1588993608283-7f0eda4438be?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8YXVzdGluJTIwdGV4YXN8ZW58MHx8MHx8fDA%3D",
+    description:
+      "The Live Music Capital of the World combines vibrant nightlife, amazing food scene, and outdoor activities along the Colorado River.",
+  },
+  {
+    name: "San Antonio, Texas",
+    image:
+      "https://images.unsplash.com/photo-1514510249063-e0faf6c6ec0c?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c2FuJTIwYW50b25pb3xlbnwwfHwwfHx8MA%3D%3D",
+    description:
+      "Explore the historic Alamo, stroll the romantic River Walk, and experience rich Tex-Mex culture in this charming southern city.",
+  },
+  {
+    name: "Boston, Massachusetts",
+    image:
+      "https://images.unsplash.com/photo-1606373664971-bf9b25eb508d?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8Ym9zdG9ufGVufDB8fDB8fHww",
+    description:
+      "Walk the Freedom Trail through American Revolution history, enjoy world-class universities, and savor fresh seafood in New England's hub.",
+  },
+  {
+    name: "Philadelphia, Pennsylvania",
+    image:
+      "https://images.unsplash.com/photo-1569761316261-9a8696fa2ca3?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGhpbGFkZWxwaGlhfGVufDB8fDB8fHww&fm=jpg&q=60&w=3000",
+    description:
+      "See the Liberty Bell and Independence Hall, run the Rocky Steps, and indulge in Philly's famous cheesesteaks in this historic city.",
+  },
+  {
+    name: "Washington, D.C.",
+    image:
+      "https://images.unsplash.com/photo-1569328922596-4c04460c91a2?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHdhc2hpbmd0b24lMjBkLmMufGVufDB8fDB8fHww",
+    description:
+      "The nation's capital offers free Smithsonian museums, iconic monuments, and political history amid beautiful cherry blossom landscapes.",
+  },
+  {
+    name: "Nashville, Tennessee",
+    image:
+      "https://plus.unsplash.com/premium_photo-1733349621935-3e5c827bc946?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bmFzaHZpbGxlJTIwdGVubmVzc2VlfGVufDB8fDB8fHww",
+    description:
+      "Music City pulses with country music heritage, honky-tonk bars on Broadway, and the Grand Ole Opry's legendary performances.",
+  },
+  {
+    name: "Memphis, Tennessee",
+    image: "https://images.unsplash.com/photo-1518638150340-f706e86654de",
+    description:
+      "Home of blues, soul and rock 'n' roll - visit Graceland, Beale Street, and where Martin Luther King Jr. changed history.",
+  },
+  {
+    name: "Atlanta, Georgia",
+    image:
+      "https://images.unsplash.com/photo-1575917649705-5b59aaa12e6b?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8YXRsYW50YXxlbnwwfHwwfHx8MA%3D%3D",
+    description:
+      "The capital of the New South offers CNN Center, World of Coca-Cola, and vibrant cultural scene amid beautiful green spaces.",
+  },
+  {
+    name: "Savannah, Georgia",
+    image:
+      "https://images.unsplash.com/photo-1592663283246-c843227611ce?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c2F2YW5uYWglMjBnZW9yZ2lhfGVufDB8fDB8fHww&fm=jpg&q=60&w=3000",
+    description:
+      "Spanish moss drapes over historic squares in this charming southern belle of a city with romantic architecture and ghost stories.",
+  },
+  {
+    name: "Charleston, South Carolina",
+    image:
+      "https://images.unsplash.com/photo-1600450805219-e675d21afd5d?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8Y2hhcmxlc3RvbnxlbnwwfHwwfHx8MA%3D%3D&fm=jpg&q=60&w=3000",
+    description:
+      "Colorful historic homes, cobblestone streets, and award-winning restaurants make this one of America's most beautiful cities.",
+  },
+  {
+    name: "New Orleans, Louisiana",
+    image: "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9",
+    description:
+      "The Big Easy's French Quarter, jazz clubs, and Mardi Gras celebrations create an unforgettable cultural experience.",
+  },
+  {
+    name: "Denver, Colorado",
+    image:
+      "https://images.unsplash.com/photo-1617246405400-462cb1ab98ab?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZGVudmVyJTIwY29sb3JhZG98ZW58MHx8MHx8fDA%3D&fm=jpg&q=60&w=3000",
+    description:
+      "The Mile High City combines urban sophistication with outdoor adventure, serving as gateway to Rocky Mountain adventures.",
+  },
+  {
+    name: "Phoenix, Arizona",
+    image:
+      "https://images.unsplash.com/photo-1706403222567-06fe8d8dc93e?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGhvZW5peCUyMGFyaXpvbmF8ZW58MHx8MHx8fDA%3D&fm=jpg&q=60&w=3000",
+    description:
+      "Sun-drenched desert city offering luxury resorts, golf courses, and access to stunning Sonoran Desert landscapes.",
+  },
+  {
+    name: "Sedona, Arizona",
+    image: "https://images.unsplash.com/photo-1509316785289-025f5b846b35",
+    description:
+      "Majestic red rock formations, spiritual energy, and outdoor adventures make this desert town a breathtaking destination.",
+  },
+  {
+    name: "Salt Lake City, Utah",
+    image: "https://images.unsplash.com/photo-1501594907352-04cda38ebc29",
+    description:
+      "Stunning mountain backdrop, Temple Square, and world-class skiing nearby in this clean, organized city.",
+  },
+  {
+    name: "San Diego, California",
+    image:
+      "https://plus.unsplash.com/premium_photo-1697730053017-3110659431c7?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8c2FuJTIwZGllZ298ZW58MHx8MHx8fDA%3D&fm=jpg&q=60&w=3000",
+    description:
+      "Perfect weather, beautiful beaches, world-class zoo, and laid-back California vibe in America's Finest City.",
+  },
+  {
+    name: "Santa Barbara, California",
+    image:
+      "https://images.unsplash.com/photo-1540840430747-71880eb5b5ba?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8c2FudGElMjBiYXJiYXJhfGVufDB8fDB8fHww&fm=jpg&q=60&w=3000",
+    description:
+      "The American Riviera features Spanish architecture, wine country, and stunning coastal views along the Pacific.",
+  },
+  {
+    name: "Monterey, California",
+    image:
+      "https://images.unsplash.com/photo-1518138945951-647273bf05aa?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bW9udGVyZXl8ZW58MHx8MHx8fDA%3D&fm=jpg&q=60&w=3000",
+    description:
+      "Famous Cannery Row, incredible aquarium, and dramatic coastline along one of California's most scenic drives.",
+  },
+  {
+    name: "Portland, Maine",
+    image:
+      "https://images.unsplash.com/photo-1530123985359-4fd0cce1ea8b?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cG9ydGxhbmQlMjBtYWluZXxlbnwwfHwwfHx8MA%3D%3D&fm=jpg&q=60&w=3000",
+    description:
+      "Charming New England port city with historic lighthouses, fresh lobster, and beautiful Casco Bay islands.",
+  },
+  {
+    name: "Burlington, Vermont",
+    image:
+      "https://images.unsplash.com/photo-1737038934032-027964b14a0d?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8YnVybGluZ3RvbiUyMHZlcm1vbnR8ZW58MHx8MHx8fDA%3D&fm=jpg&q=60&w=3000",
+    description:
+      "Vibrant college town on Lake Champlain with farm-to-table dining, craft beer, and access to Green Mountain adventures.",
+  },
+  {
+    name: "Anchorage, Alaska",
+    image:
+      "https://images.unsplash.com/photo-1515885267349-1fcef6e00fd1?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8YW5jaG9yYWdlJTIwYWxhc2thfGVufDB8fDB8fHww",
+    description:
+      "Gateway to Alaska's wilderness with glaciers, wildlife viewing, and northern lights just beyond the city limits.",
+  },
+  {
+    name: "Santa Fe, New Mexico",
+    image: "https://images.unsplash.com/photo-1509316785289-025f5b846b35",
+    description:
+      "Adobe architecture, art galleries, and Southwestern cuisine in America's oldest capital city at high desert elevation.",
+  },
+  {
+    name: "Albuquerque, New Mexico",
+    image: "https://images.unsplash.com/photo-1443632864897-14973fa006cf",
+    description:
+      "Hot air balloon festivals, Old Town charm, and Breaking Bad landmarks in this high-desert city along the Rio Grande.",
+  },
+  {
+    name: "Asheville, North Carolina",
+    image:
+      "https://images.unsplash.com/photo-1617912172807-ceaf08ba7bf6?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YXNoZXZpbGxlJTIwbmN8ZW58MHx8MHx8fDA%3D&fm=jpg&q=60&w=3000",
+    description:
+      "Artsy mountain town with craft breweries, the Biltmore Estate, and Blue Ridge Parkway scenic drives.",
+  },
+  {
+    name: "Raleigh, North Carolina",
+    image:
+      "https://images.unsplash.com/photo-1684170382677-1c7d04a5effa?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cmFsZWlnaCUyMG5jfGVufDB8fDB8fHww",
+    description:
+      "The City of Oaks offers research triangle innovation, southern hospitality, and beautiful green spaces.",
+  },
+  {
+    name: "Charlottesville, Virginia",
+    image:
+      "https://images.unsplash.com/photo-1604699084509-734846a3806f?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Y2hhcmxvdHRlc3ZpbGxlfGVufDB8fDB8fHww",
+    description:
+      "Historic Monticello, University of Virginia campus, and scenic wine country in the foothills of the Blue Ridge Mountains.",
+  },
+  {
+    name: "Richmond, Virginia",
+    image:
+      "https://images.unsplash.com/photo-1583586604855-62f0cec351d9?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cmljaG1vbmQlMjB2YXxlbnwwfHwwfHx8MA%3D%3D",
+    description:
+      "American history meets vibrant arts scene along the James River in Virginia's charming capital city.",
+  },
+  {
+    name: "Baltimore, Maryland",
+    image:
+      "https://images.unsplash.com/photo-1611316491868-a683302aa917?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YmFsdGltb3JlJTIwY2l0eXxlbnwwfHwwfHx8MA%3D%3D",
+    description:
+      "Inner Harbor attractions, fresh crab cakes, and historic Fell's Point in this charming Chesapeake Bay city.",
+  },
+  {
+    name: "Annapolis, Maryland",
+    image:
+      "https://images.unsplash.com/photo-1704292049752-e48052468a38?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YW5uYXBvbGlzJTIwbWFyeWxhbmR8ZW58MHx8MHx8fDA%3D",
+    description:
+      "Chesapeake Bay sailing capital with Naval Academy, colonial history, and charming brick-paved streets.",
+  },
+  {
+    name: "Detroit, Michigan",
+    image: "https://images.unsplash.com/photo-1518638150340-f706e86654de",
+    description:
+      "Motown music legacy, automotive history, and dramatic renaissance along the Detroit River waterfront.",
+  },
+  {
+    name: "Grand Rapids, Michigan",
+    image:
+      "https://images.unsplash.com/photo-1601240623019-d80ac703b186?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Z3JhbmQlMjByYXBpZHN8ZW58MHx8MHx8fDA%3D",
+    description:
+      "America's Beer City with craft breweries, art installations, and beautiful Lake Michigan beaches nearby.",
+  },
+  {
+    name: "Minneapolis, Minnesota",
+    image:
+      "https://images.unsplash.com/photo-1528991191763-275f9418709f?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8bWlubmVhcG9saXN8ZW58MHx8MHx8fDA%3D&fm=jpg&q=60&w=3000",
+    description:
+      "Lakes, parks, and vibrant arts scene in the Twin Cities, with Walker Art Center and Guthrie Theater.",
+  },
+  {
+    name: "St. Paul, Minnesota",
+    image:
+      "https://images.unsplash.com/photo-1574807628013-1b7d14113d8a?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c3QlMjBwYXVsfGVufDB8fDB8fHww",
+    description:
+      "Historic capital city with cathedral, Victorian neighborhoods, and Mississippi River bluffs in the Twin Cities.",
+  },
+  {
+    name: "Milwaukee, Wisconsin",
+    image:
+      "https://images.unsplash.com/photo-1572854385804-33937a570b24?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bWlsd2F1a2VlfGVufDB8fDB8fHww&fm=jpg&q=60&w=3000",
+    description:
+      "Brewing heritage, Lake Michigan shoreline, and Harley-Davidson Museum in this friendly Midwestern city.",
+  },
+  {
+    name: "Madison, Wisconsin",
+    image:
+      "https://images.unsplash.com/photo-1687285363668-2bec13abad5a?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bWFkaXNvbiUyMHdpc2NvbnNpbnxlbnwwfHwwfHx8MA%3D%3D",
+    description:
+      "State capital built between two lakes, featuring university culture, farmers markets, and progressive vibe.",
+  },
+  {
+    name: "Indianapolis, Indiana",
+    image:
+      "https://images.unsplash.com/photo-1651035157347-e92d6a3cd958?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8aW5kaWFuYXBvbGlzfGVufDB8fDB8fHww",
+    description:
+      "Racing capital with Indianapolis Motor Speedway, vibrant downtown, and world's largest children's museum.",
+  },
+  {
+    name: "Louisville, Kentucky",
+    image:
+      "https://plus.unsplash.com/premium_photo-1697730057630-6a96cdda4144?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bG91aXN2aWxsZXxlbnwwfHwwfHx8MA%3D%3D&fm=jpg&q=60&w=3000",
+    description:
+      "Kentucky Derby excitement, bourbon distilleries, and Muhammad Ali Center in this Ohio River city.",
+  },
+  {
+    name: "Lexington, Kentucky",
+    image:
+      "https://plus.unsplash.com/premium_photo-1694475206309-d201a616ffa3?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bGV4aW5ndG9ufGVufDB8fDB8fHww",
+    description:
+      "Horse capital of the world with bluegrass farms, bourbon trails, and charming southern atmosphere.",
+  },
+  {
+    name: "Cincinnati, Ohio",
+    image:
+      "https://images.unsplash.com/photo-1584247740248-d728497a6f8c?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Y2luY2lubmF0aXxlbnwwfHwwfHx8MA%3D%3D&fm=jpg&q=60&w=3000",
+    description:
+      "Historic Over-the-Rhine district, riverfront parks, and unique chili restaurants in this Queen City.",
+  },
+  {
+    name: "Cleveland, Ohio",
+    image:
+      "https://images.unsplash.com/photo-1610300767236-da52b625326c?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y2xldmVsYW5kJTIwb2hpb3xlbnwwfHwwfHx8MA%3D%3D",
+    description:
+      "Rock & Roll Hall of Fame, revitalized waterfront, and world-class healthcare in this Great Lakes comeback city.",
+  },
+  {
+    name: "Columbus, Ohio",
+    image:
+      "https://images.unsplash.com/photo-1654115480554-e1a1b24cfd63?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Y29sdW1idXMlMjBvaGlvfGVufDB8fDB8fHww&fm=jpg&q=60&w=3000",
+    description:
+      "State capital with innovative food scene, Ohio State University, and diverse neighborhoods in the heart of Ohio.",
+  },
+  {
+    name: "Kansas City, Missouri",
+    image:
+      "https://plus.unsplash.com/premium_photo-1697729864667-57f5f29e946b?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8a2Fuc2FzJTIwY2l0eXxlbnwwfHwwfHx8MA%3D%3D&fm=jpg&q=60&w=3000",
+    description:
+      "World-famous barbecue, jazz heritage, and beautiful fountains in this city straddling two states.",
+  },
+  {
+    name: "St. Louis, Missouri",
+    image:
+      "https://images.unsplash.com/photo-1514893011-72dfa15bd29c?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8c3QlMjBsb3Vpc3xlbnwwfHwwfHx8MA%3D%3D&fm=jpg&q=60&w=3000",
+    description:
+      "Gateway Arch monument, Forest Park attractions, and baseball history along the mighty Mississippi River.",
+  },
+  {
+    name: "Omaha, Nebraska",
+    image:
+      "https://images.unsplash.com/photo-1690902931404-161eab201d95?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8b21haGF8ZW58MHx8MHx8fDA%3D",
+    description:
+      "Henry Doorly Zoo, Warren Buffett's hometown, and vibrant Old Market district in this Missouri River city.",
+  },
+  {
+    name: "Oklahoma City, Oklahoma",
+    image:
+      "https://images.unsplash.com/photo-1509910513818-4d13fdaf89c9?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8b2tsYWhvbWElMjBjaXR5fGVufDB8fDB8fHww&fm=jpg&q=60&w=3000",
+    description:
+      "Western heritage, bombing memorial, and revitalized Bricktown entertainment district in the state capital.",
+  },
+  {
+    name: "Tulsa, Oklahoma",
+    image:
+      "https://images.unsplash.com/photo-1474573892045-721452c3d98c?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8dHVsc2F8ZW58MHx8MHx8fDA%3D",
+    description:
+      "Art Deco architecture, Gathering Place park, and oil history in this beautiful city on the Arkansas River.",
+  },
+  {
+    name: "Little Rock, Arkansas",
+    image:
+      "https://images.unsplash.com/photo-1605212297995-dd77a9f4d509?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bGl0dGxlJTIwcm9ja3xlbnwwfHwwfHx8MA%3D%3D&fm=jpg&q=60&w=3000",
+    description:
+      "Clinton Presidential Library, River Market District, and access to Arkansas's beautiful natural areas.",
+  },
+  {
+    name: "Jackson Hole, Wyoming",
+    image:
+      "https://images.unsplash.com/photo-1550444274-411f55d39af4?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8amFja3NvbiUyMGhvbGV8ZW58MHx8MHx8fDA%3D&fm=jpg&q=60&w=3000",
+    description:
+      "Luxury mountain resort town serving as gateway to Grand Teton and Yellowstone national parks.",
+  },
+  {
+    name: "Boise, Idaho",
+    image:
+      "https://images.unsplash.com/photo-1622748917434-46d05e8087c5?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Ym9pc2UlMjBpZGFob3xlbnwwfHwwfHx8MA%3D%3D&fm=jpg&q=60&w=3000",
+    description:
+      "Outdoor adventures, growing tech scene, and Basque culture in this surprisingly vibrant capital city.",
+  },
+  {
+    name: "Cheyenne, Wyoming",
+    image:
+      "https://images.unsplash.com/photo-1684789145247-2da6f63e9f40?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGNoZXllbm5lfGVufDB8fDB8fHww&fm=jpg&q=60&w=3000",
+    description:
+      "Frontier Days rodeo, western history, and state capital charm in this authentic cowboy town.",
+  },
+  {
+    name: "Reno, Nevada",
+    image:
+      "https://images.unsplash.com/photo-1673144962130-d104d60776fa?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cmVubyUyMG5ldmFkYXxlbnwwfHwwfHx8MA%3D%3D&fm=jpg&q=60&w=3000",
+    description:
+      "The Biggest Little City in the World offers casinos, outdoor recreation, and proximity to Lake Tahoe.",
+  },
+  {
+    name: "Birmingham, Alabama",
+    image:
+      "https://images.unsplash.com/photo-1440582096070-fa5961d9d682?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YmlybWluZ2hhbSUyMGFsYWJhbWF8ZW58MHx8MHx8fDA%3D&fm=jpg&q=60&w=3000",
+    description:
+      "Civil Rights history, southern food, and medical research in this revitalized Appalachian foothills city.",
+  },
+  {
+    name: "Mobile, Alabama",
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPzhEo3Rv_vfEe5OuwzMSVyewUk7KSNzFr_Q&s",
+    description:
+      "Mardi Gras birthplace, historic architecture, and Gulf Coast cuisine in this charming port city.",
+  },
+  {
+    name: "Jackson, Mississippi",
+    image:
+      "https://images.unsplash.com/photo-1571559933328-d9b516af5bed?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE3fHx8ZW58MHx8fHx8",
+    description:
+      "Blues music heritage, civil rights history, and southern hospitality in Mississippi's capital city.",
+  },
+  {
+    name: "Des Moines, Iowa",
+    image:
+      "https://images.unsplash.com/photo-1635259865345-97b47c6f5274?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8ZGVzJTIwbW9pbmVzfGVufDB8fDB8fHww",
+    description:
+      "State fair excitement, insurance industry hub, and beautiful capitol building in this Midwestern capital.",
+  },
+  {
+    name: "Fargo, North Dakota",
+    image:
+      "https://images.unsplash.com/photo-1579202371987-1fa7ab65d0e1?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZmFyZ298ZW58MHx8MHx8fDA%3D",
+    description:
+      "Friendly prairie city with college culture, historic downtown, and that famous Minnesota nice attitude.",
+  },
+  {
+    name: "Sioux Falls, South Dakota",
+    image:
+      "https://plus.unsplash.com/premium_photo-1742457766293-854f2e359bb9?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fHNpb3V4JTIwZmFsbHN8ZW58MHx8MHx8fDA%3D",
+    description:
+      "Beautiful waterfalls park, growing economy, and gateway to South Dakota's natural attractions.",
+  },
+  {
+    name: "Billings, Montana",
+    image:
+      "https://images.unsplash.com/photo-1672941375895-7d6c67f87091?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8YmlsbGluZ3MlMjBtb250YW5hfGVufDB8fDB8fHww",
+    description:
+      "Western history, rimrock cliffs, and gateway to Yellowstone in Montana's largest city.",
+  },
+  {
+    name: "Spokane, Washington",
+    image:
+      "https://images.unsplash.com/photo-1558971696-284b78e3015d?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c3Bva2FuZSUyMHdhc2hpbmd0b258ZW58MHx8MHx8fDA%3D&fm=jpg&q=60&w=3000",
+    description:
+      "Riverfront park, historic architecture, and outdoor recreation in Eastern Washington's largest city.",
+  },
+  {
+    name: "Juneau, Alaska",
+    image:
+      "https://images.unsplash.com/photo-1654835608149-7605e13b3f66?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8anVuZWF1JTIwYWxhc2thfGVufDB8fDB8fHww",
+    description:
+      "Stunning capital city accessible only by air or sea, surrounded by glaciers and Tongass National Forest.",
+  },
+  {
+    name: "Honolulu, Hawaii",
+    image:
+      "https://images.unsplash.com/photo-1573992554018-83e7853bd45f?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8aG9ub2x1bHV8ZW58MHx8MHx8fDA%3D",
+    description:
+      "Waikiki Beach, Diamond Head, and Polynesian culture create paradise in Hawaii's vibrant capital city.",
+  },
 ];
 
 // Utility: Randomly return X destinations (default = 10)
