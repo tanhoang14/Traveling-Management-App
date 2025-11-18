@@ -7,7 +7,6 @@ import {
   Plus,
   NotepadText,
   X,
-  Check,
   Edit2,
   Link,
   Pencil,
