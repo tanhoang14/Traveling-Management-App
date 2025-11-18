@@ -9,8 +9,9 @@ import { Dialog } from "primereact/dialog";
 import { InputText } from "primereact/inputtext";
 import { Toast } from "primereact/toast";
 import { useSupabaseSession } from "../components/SupabaseProvider";
-import { StayBooking, FlightBooking } from "../types/types";
+import { StayBooking, FlightBooking, Destination } from "../types/types";
 import StackedCards from "../components/StackedCards";
+import { getRandomDestinations } from "../data/recommendations";
 
 export default function TripsPage() {
   const router = useRouter();
@@ -20,6 +21,7 @@ export default function TripsPage() {
   const [joinVisible, setJoinVisible] = useState(false);
   const [tripCode, setTripCode] = useState("");
   const [stays, setStays] = useState<StayBooking[]>([]);
+  const [recommendedDestinations, setRecommendedDestinations] = useState<Destination[]>([]);
   const [flights, setFlights] = useState<FlightBooking[]>([]);
   const toast = useRef<Toast>(null);
 
@@ -106,45 +108,9 @@ export default function TripsPage() {
     fetchStayBookings();
   }, []);
 
-  const recommendedDestinations = [
-    {
-      name: "Paris, France",
-      image: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34",
-      description:
-        "The city of lights and love — explore art, cuisine, and history around every corner.",
-    },
-    {
-      name: "Bali, Indonesia",
-      image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e",
-      description:
-        "Relax on the beaches, dive into turquoise waters, or explore lush rice terraces and temples.",
-    },
-    {
-      name: "Kyoto, Japan",
-      image: "https://images.unsplash.com/photo-1549693578-d683be217e58",
-      description:
-        "Step into Japan’s ancient past with serene temples, cherry blossoms, and traditional tea houses.",
-    },
-    {
-      name: "Santorini, Greece",
-      image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e",
-      description:
-        "Marvel at whitewashed houses with blue domes, breathtaking sunsets, and Aegean Sea views.",
-    },
-    {
-      name: "Reykjavik, Iceland",
-      image: "https://images.unsplash.com/photo-1501785888041-af3ef285b470",
-      description:
-        "Discover glaciers, waterfalls, and the mesmerizing Northern Lights under Arctic skies.",
-    },
-    {
-      name: "Machu Picchu, Peru",
-      image:
-        "https://plus.unsplash.com/premium_photo-1694542947673-9e1c61387343?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=774",
-      description:
-        "Explore the ancient Incan citadel hidden high in the Andes — a wonder of the world shrouded in mist.",
-    },
-  ];
+useEffect(() => {
+  setRecommendedDestinations(getRandomDestinations());
+}, []);
 
   const handleJoinTrip = async () => {
     if (!tripCode || !session?.user) {
