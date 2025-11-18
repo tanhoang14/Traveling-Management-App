@@ -473,7 +473,8 @@ export const allDestinations = [
   },
   {
     name: "Hallstatt, Austria",
-    image: "https://images.unsplash.com/photo-1566073771259-6a8506099945",
+    image:
+      "https://images.unsplash.com/photo-1601801017546-1dd109433165?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aGFsbHN0YXR0fGVufDB8fDB8fHww&fm=jpg&q=60&w=3000",
     description:
       "A fairytale village nestled between mountain and lake, offering picture-perfect alpine charm in Austria's Salzkammergut region.",
   },
@@ -486,13 +487,15 @@ export const allDestinations = [
   },
   {
     name: "Amalfi Coast, Italy",
-    image: "https://images.unsplash.com/photo-1533676802871-eca1ae998cd5",
+    image:
+      "https://images.unsplash.com/photo-1612698093158-e07ac200d44e?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8YW1hbGZpJTIwY29hc3R8ZW58MHx8MHx8fDA%3D&fm=jpg&q=60&w=3000",
     description:
       "A breathtaking coastline of pastel villages, lemon groves, and winding roads above the sparkling Tyrrhenian Sea.",
   },
   {
     name: "Swiss Riviera, Switzerland",
-    image: "https://images.unsplash.com/photo-1566073771259-6a8506099945",
+    image:
+      "https://images.unsplash.com/photo-1634920967431-b46ec552bef1?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDEzfHx8ZW58MHx8fHx8",
     description:
       "Lavaux vineyards, Belle Époque hotels, and Alpine views meet Lake Geneva's shores in this sophisticated region around Montreux.",
   },
