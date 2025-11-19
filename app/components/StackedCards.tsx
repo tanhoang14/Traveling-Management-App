@@ -58,21 +58,21 @@ export default function StackedCards({ recommendedDestinations }: Props) {
         </Swiper>
       </div>
       {/* --- Right: Article Section --- */}
-        <div className="w-[100%] md:w-[100%] h-[220px]">
-                  <article className="w-full space-y-4 ml-2 flex justify-center flex-col">
-        <h2 className="text-2xl font-bold text-brown-700 dark:text-dark flex justify-center italic">
-          {activeDestination.name}
-        </h2>
+      <div className="w-[100%] md:w-[100%] h-auto min-h-[220px]">
+        <article className="w-full space-y-4 ml-2 flex justify-center flex-col">
+          <h2 className="text-2xl font-bold text-brown-700 dark:text-dark flex justify-center italic">
+            {activeDestination.name}
+          </h2>
 
-        <p className="leading-relaxed flex justify-center text-xl line-clamp-4 p-4  ">
-          {activeDestination.description
-            ? activeDestination.description.length > 450
-              ? activeDestination.description.slice(0, 450) + "..."
-              : activeDestination.description
-            : "No description available."}
-        </p>
-      </article>
-        </div>
+          <p className="leading-relaxed flex justify-center text-xl p-4 h-auto">
+            {activeDestination.description
+              ? activeDestination.description.length > 450
+                ? activeDestination.description.slice(0, 450) + "..."
+                : activeDestination.description
+              : "No description available."}
+          </p>
+        </article>
+      </div>
     </section>
   );
 }
