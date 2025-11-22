@@ -21,10 +21,13 @@ A **Next.js** application for managing trips, itineraries, and activities. This 
 
 ## Demo Images
 <img width="1438" height="717" alt="Screenshot 2025-11-03 at 8 32 37 PM" src="https://github.com/user-attachments/assets/a4cfad62-edd0-472c-b71b-6199a2b31535" />
-<img width="1440" height="719" alt="Screenshot 2025-11-03 at 8 34 24 PM" src="https://github.com/user-attachments/assets/a79c9cf0-246a-43e7-a967-5dbdc9a37810" />
-<img width="1434" height="722" alt="Screenshot 2025-11-03 at 8 33 42 PM" src="https://github.com/user-attachments/assets/928efa2f-5527-4c65-8e39-bc3f5e30baaa" />
-<img width="1440" height="724" alt="Screenshot 2025-11-03 at 8 37 05 PM" src="https://github.com/user-attachments/assets/e5264fdd-605b-47dd-98da-692612aaa82b" />
-<img width="1440" height="726" alt="Screenshot 2025-11-03 at 8 39 54 PM" src="https://github.com/user-attachments/assets/14a1ed89-29dd-4d72-8461-448f3602a712" />
+<img width="2592" height="1075" alt="image" src="https://github.com/user-attachments/assets/20baaddd-cca1-41ef-a456-231c6d07ef96" />
+<img width="2595" height="1277" alt="image" src="https://github.com/user-attachments/assets/7e85a47b-044b-40ab-bc5b-45a82bd89af4" />
+<img width="2585" height="1527" alt="image" src="https://github.com/user-attachments/assets/4a342d87-d7f2-46e6-83d6-44948ab46f15" />
+<img width="3575" height="1430" alt="image" src="https://github.com/user-attachments/assets/65740e64-cf04-4b5c-851e-7de50759513f" />
+<img width="1205" height="1062" alt="image" src="https://github.com/user-attachments/assets/6c4c2410-ed65-48a0-a798-8363e479cb77" />
+<img width="2285" height="1232" alt="image" src="https://github.com/user-attachments/assets/f671266c-923d-4d25-a060-5cea5b8aaac7" />
+<img width="1165" height="1982" alt="image" src="https://github.com/user-attachments/assets/5539ade0-6afd-4053-9880-f6ca8ca89cb4" />
 <img width="1440" height="720" alt="Screenshot 2025-11-03 at 8 37 35 PM" src="https://github.com/user-attachments/assets/536ec5ce-ead5-43cc-9e88-68edcf3f621a" />
 <img width="1440" height="718" alt="Screenshot 2025-11-03 at 8 39 21 PM" src="https://github.com/user-attachments/assets/5e368706-2341-42c2-98be-5c6d7e2b38f5" />
 
