@@ -669,6 +669,13 @@ export const allDestinations = [
       "The American Riviera features Spanish architecture, wine country, and stunning coastal views along the Pacific.",
   },
   {
+    name: "Da Nang, Vietnam",
+    image:
+      "https://images.unsplash.com/photo-1582473788468-d25f5f398cce?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Z29sZGVuJTIwYnJpZGdlfGVufDB8fDB8fHww",
+    description:
+      "A beautiful coastal city known for its sandy beaches, the iconic Dragon Bridge, and proximity to ancient Hoi An.",
+  },
+  {
     name: "Monterey, California",
     image:
       "https://images.unsplash.com/photo-1518138945951-647273bf05aa?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bW9udGVyZXl8ZW58MHx8MHx8fDA%3D&fm=jpg&q=60&w=3000",
