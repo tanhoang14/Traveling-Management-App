@@ -552,17 +552,17 @@ export default function ActivityPage() {
                 <div className="break-words flex items-center gap-2 flex-wrap">
                   <span>{act.name}</span>
                   <div className="flex items-center">
-                    {act.note && (
-                      <button
-                        onClick={() => handleOpenNoteDialog(act.activity_id)}
-                        className="text-blue-400 hover:text-blue-300 transition mr-2"
-                      >
-                        <NotepadText
-                          color="#36454F"
-                          className="w-6 h-6 sm:w-5 sm:h-5"
-                        />
-                      </button>
-                    )}
+                      {act.note && act.note.replace(/<[^>]*>/g, '').trim() !== "" && (
+                        <button
+                          onClick={() => handleOpenNoteDialog(act.activity_id)}
+                          className="text-blue-400 hover:text-blue-300 transition mr-2"
+                        >
+                          <NotepadText
+                            color="#36454F"
+                            className="w-6 h-6 sm:w-5 sm:h-5"
+                          />
+                        </button>
+                      )}
                     {act.link && (
                       <a
                         href={act.link}

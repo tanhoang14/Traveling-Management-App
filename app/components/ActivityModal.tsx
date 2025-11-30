@@ -29,6 +29,31 @@ export default function ActivityModal({
   const [formData, setFormData] = useState<Activity>(initialData);
   const [categoryOptions, setCategoryOptions] = useState<CategoryOption[]>([]);
   const toast = useRef<Toast>(null);
+  const modalRef = useRef<HTMLDivElement>(null);
+
+ useEffect(() => {
+  const handleClickOutside = (event: MouseEvent) => {
+    const target = event.target as HTMLElement;
+
+    // Ignore PrimeReact overlay portal elements
+    const isPrimeReactOverlay =
+      target.closest(".p-dropdown-panel") ||
+      target.closest(".p-overlaypanel") ||
+      target.closest(".p-datepicker") ||
+      target.closest(".p-autocomplete-panel");
+
+    if (isPrimeReactOverlay) return;
+
+    if (modalRef.current && !modalRef.current.contains(target)) {
+      onClose();
+    }
+  };
+
+  document.addEventListener("mousedown", handleClickOutside);
+  return () => {
+    document.removeEventListener("mousedown", handleClickOutside);
+  };
+}, [onClose]);
 
   // ✅ Load categories
   useEffect(() => {
@@ -51,11 +76,14 @@ export default function ActivityModal({
     fetchCategories();
   }, []);
 
-  // Sync form data when opening modal
+  // ✅ Reset form when modal opens or initialData changes
   useEffect(() => {
-    setFormData(initialData);
-  }, [initialData]);
+    if (isOpen) {
+      setFormData(initialData);
+    }
+  }, [isOpen, initialData]); // Add isOpen to dependencies
 
+  
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -98,15 +126,19 @@ export default function ActivityModal({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/20 z-50 flex justify-center items-center p-4">
+    <div className="fixed inset-0 bg-black/20 z-50 flex justify-center items-start p-4 overflow-y-auto">
       <Toast ref={toast} className="p-4" position="top-right" />
-      <div className="bg-brown-700 p-6 rounded-xl shadow-2xl w-full max-w-md border border-gray-700/50">
+      <div ref={modalRef} className="bg-brown-700 p-6 rounded-xl shadow-2xl w-full max-w-md border border-gray-700/50">
         {/* Header */}
         <div className="flex justify-between items-center mb-4 border-b border-gray-700 pb-3">
           <h3 className="text-xl font-bold">
             {isEdit ? "Edit Activity" : "Add New Activity"}
           </h3>
-          <button onClick={onClose} className="p-1 hover:bg-gray-600 rounded-full">
+          <button 
+            onClick={onClose} 
+            className="p-1 hover:bg-gray-600 rounded-full"
+            type="button"
+          >
             <X className="w-5 h-5" />
           </button>
         </div>
@@ -180,15 +212,15 @@ export default function ActivityModal({
             />
           </div>
 
-              {/* 📝 Note Field */}
+          {/* 📝 Note Field */}
           <div>
-              <label className="block text-sm font-medium mb-1">Note (Optional)</label>
-              <NoteAppEditor
-                content={formData.note ?? ""}
-                onUpdate={(htmlContent) =>
-                  setFormData((prev) => ({ ...prev, note: htmlContent }))
-                }
-              />
+            <label className="block text-sm font-medium mb-1">Note (Optional)</label>
+            <NoteAppEditor
+              content={formData.note ?? ""}
+              onUpdate={(htmlContent) =>
+                setFormData((prev) => ({ ...prev, note: htmlContent }))
+              }
+            />
           </div>
 
           {/* Submit */}

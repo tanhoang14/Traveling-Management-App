@@ -673,7 +673,7 @@ export const allDestinations = [
     image:
       "https://images.unsplash.com/photo-1582473788468-d25f5f398cce?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Z29sZGVuJTIwYnJpZGdlfGVufDB8fDB8fHww",
     description:
-      "A beautiful coastal city known for its sandy beaches, the iconic Dragon Bridge, and proximity to ancient Hoi An.",
+      "A beautiful coastal city known for its sandy beaches, the iconic Dragon Bridge, and proximity to ancient Hoi An. ",
   },
   {
     name: "Monterey, California",
