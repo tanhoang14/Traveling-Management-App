@@ -676,6 +676,13 @@ export const allDestinations = [
       "A beautiful coastal city known for its sandy beaches, the iconic Dragon Bridge, and proximity to ancient Hoi An. ",
   },
   {
+    name: "Sapa, Vietnam",
+    image:
+      "https://images.unsplash.com/photo-1665905905591-fb66b0496481?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c2FwYSUyMHZpZXRuYW18ZW58MHx8MHx8fDA%3D",
+    description:
+      "Terraced rice fields, the only snowy peaks in Vietnam, and vibrant hill tribe cultures in the northern highlands.",
+  },
+  {
     name: "Monterey, California",
     image:
       "https://images.unsplash.com/photo-1518138945951-647273bf05aa?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bW9udGVyZXl8ZW58MHx8MHx8fDA%3D&fm=jpg&q=60&w=3000",
