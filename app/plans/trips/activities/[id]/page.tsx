@@ -20,6 +20,7 @@ import ActivityModal from "../../../../components/ActivityModal";
 import { Activity, initialActivityState } from "../../../../types/types";
 import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
 import { formatTime } from "@/lib/converterMethod";
+import { useSupabaseSession } from "../../../../components/SupabaseProvider";
 
 export default function ActivityPage() {
   const router = useRouter();
@@ -41,11 +42,18 @@ export default function ActivityPage() {
   const [isNoteDialogOpen, setIsNoteDialogOpen] = useState(false);
   const [selectedNote, setSelectedNote] = useState<string | null>(null);
   const [categories, setCategories] = useState<Record<string, string>>({});
-  const [modalInitialData, setModalInitialData] =
-    useState<Activity>(initialActivityState);
+  const [modalInitialData, setModalInitialData] = useState<Activity>(initialActivityState);
   const toast = useRef<Toast>(null);
   const userId = useUserId();
   const userName = useUserName();
+  const { session } = useSupabaseSession();
+
+  // 1️⃣ Redirect if user is not logged in
+  useEffect(() => {
+    if (session === null) {
+      router.replace("/login");
+    }
+  }, [session, router]);
 
   // 🔹 Fetch Trip Info
   useEffect(() => {
