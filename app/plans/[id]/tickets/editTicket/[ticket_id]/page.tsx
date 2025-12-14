@@ -9,11 +9,19 @@ import { Calendar } from "primereact/calendar";
 import { Dropdown } from "primereact/dropdown";
 import { Toast } from "primereact/toast";
 import { ProgressSpinner } from "primereact/progressspinner";
+import { useSupabaseSession } from "../../../../../components/SupabaseProvider";
 
 export default function EditTicketPage() {
   const { id, ticket_id } = useParams(); // id = trip id
   const router = useRouter();
   const toast = useRef<Toast>(null);
+  const { session } = useSupabaseSession();
+  
+    useEffect(() => {
+      if (session === null) {
+        router.push("/login");
+      }
+    }, [session, router]);
 
   // Time zones
   const timeZones = useMemo(

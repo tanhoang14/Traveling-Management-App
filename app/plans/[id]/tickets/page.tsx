@@ -6,6 +6,7 @@ import { supabase } from "@/lib/supbabaseClient";
 import { ProgressSpinner } from "primereact/progressspinner";
 import { ArrowLeft, FileEditIcon, Plus, ChevronLeft, ChevronRight } from "lucide-react";
 import { formatUTCDate } from "@/lib/converterMethod";
+import { useSupabaseSession } from "../../../components/SupabaseProvider";
 
 export default function TripTicketsPage() {
   const { id } = useParams();
@@ -15,6 +16,13 @@ export default function TripTicketsPage() {
   const [flightGroups, setFlightGroups] = useState<any[]>([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [loading, setLoading] = useState(false);
+  const { session } = useSupabaseSession();
+    
+    useEffect(() => {
+      if (session === null) {
+        router.push("/login");
+      }
+    }, [session, router]);
 
   useEffect(() => {
     const fetchTickets = async () => {

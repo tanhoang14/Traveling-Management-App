@@ -8,12 +8,21 @@ import { Avatar } from "primereact/avatar";
 import { ExternalLink } from "lucide-react";
 import { Toast } from "primereact/toast";
 import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
+import { useSupabaseSession } from "../../components/SupabaseProvider";
 import { Trip, Traveler, Activity } from "@/app/types/types";
 import { getTripDayUTC, formatUTCDate } from "@/lib/converterMethod";
 
 export default function TripOverview() {
   const router = useRouter();
   const params = useParams();
+
+  const { session } = useSupabaseSession();
+  
+    useEffect(() => {
+      if (session === null) {
+        router.push("/login");
+      }
+    }, [session, router]);
 
   const tripId = params?.id as string;
   const toast = useRef<Toast>(null);

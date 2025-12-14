@@ -8,11 +8,20 @@ import { InputText } from "primereact/inputtext";
 import { Calendar } from "primereact/calendar";
 import { Dropdown } from "primereact/dropdown";
 import { Toast } from "primereact/toast";
+import { useEffect } from "react";
+import { useSupabaseSession } from "../../../components/SupabaseProvider";
 
 export default function NewTicketPage() {
   const { id } = useParams();
   const router = useRouter();
   const toast = useRef<Toast>(null);
+    const { session } = useSupabaseSession();
+    
+      useEffect(() => {
+        if (session === null) {
+          router.push("/login");
+        }
+      }, [session, router]);
 
   // Get all available time zones
   const timeZones = useMemo(
