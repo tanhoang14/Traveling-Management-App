@@ -199,6 +199,14 @@ useEffect(() => {
           />
         ) : trips.length === 0 ? (
           <div className="text-center">
+              <div className="flex items-center justify-end mb-3">
+              <a
+                onClick={() => router.push("/plans/trips/traveled")}
+                className="text-blue-600 hover:underline text-sm cursor-pointer"
+              >
+                View Traveled Trips →
+              </a>
+            </div>
             <p className="text-lg text-gray-700 mb-4">
               You don’t have any upcoming trips.
             </p>
