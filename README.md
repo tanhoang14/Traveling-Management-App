@@ -1,6 +1,6 @@
 # Traveling Mangement App
 
-A **Next.js** application for managing trips, itineraries, and activities. This project integrates **Supabase** for backend services and **Google OAuth** for authentication. It’s designed to be containerized using Docker for easy deployment
+A **Next.js** application for managing trips, itineraries, and activities. This project integrates **Supabase** for backend services and **Google OAuth** for authentication. It’s designed to be containerized using Docker for easy deployment.
 
 ---
 
